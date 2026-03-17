@@ -33,24 +33,41 @@ class AiAgent:
         self.moveWeight = baseMoveWeight
 
         self.currLoc = startLocation
+        self.incriminatingItem1Loc = None
+        self.incriminatingItem2Loc = None
+        self.incriminatingItem3Loc = None
 
-        # FIX ME: Uncomment get functions as templates are fleshed out.
-        # self.NpcsInRoom = startLocation.getNpcs()
-        self.NpcsInRoom = getNpcs(startLocation)
+       
+        self.NpcsInRoom = []
         self.NpcsSpokenTo = []
 
-        #self.furnitureInRoom = startLocation.getFurniture()
-        self.furnitureInRoom = getFurniture(startLocation)
+        self.furnitureInRoom = []
         self.furnitureSearched = []
 
         self.unblockedExits = []
         self.blockedExits = []
-        #total exits = startLocation.getExits()
-        totalExits = getExits(startLocation)
+        self.updateRoomKnowledge()
+        
 
-        for i in totalExits.keys():
-            if totalExits[i] == 1:
-                self.unblockedExits.append(i)
+    def moveSelf(self, newLoc):
+        self.currLoc = newLoc
+        self.updateRoomKnowledge()
+
+    def updateRoomKnowledge(self):
+        # FIX ME: Uncomment get functions as templates are fleshed out.
+        # self.NpcsInRoom = self.currLoc.getNpcs()
+        self.NpcsInRoom = getNpcs(self.currLoc)
+        #self.furnitureInRoom = self.currLoc.getFurniture()
+        self.furnitureInRoom = getFurniture(self.currLoc)
+        #total exits = self.currLoc.getExits()
+        roomExits = getExits(self.currLoc)
+
+        for i in roomExits.keys():
+            if roomExits[i] == 1:
+                if i in self.blockedExits:
+                    self.blockedExits.remove(i)
+                if i not in self.unblockedExits:
+                    self.unblockedExits.append(i)
             else:
                 self.blockedExits.append(i)
          
