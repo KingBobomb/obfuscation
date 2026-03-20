@@ -3,7 +3,8 @@ class Location:
         self.name = name
         self.items = []
         self.npcs = []
-        self.blocked = False
+        self.furniture = []
+        self.exits = {}
 
     def show_items(self):
         if not self.items:
@@ -20,3 +21,20 @@ class Location:
             print("NPCs here:")
             for idx, npc in enumerate(self.npcs, 1):
                 print(f"{idx}. {npc.name}")
+    
+    def show_furniture(self):
+        if not self.furniture:
+            print("No furniture here.")
+        else:
+            print("Furniture here:")
+            for idx, furn in enumerate(self.furniture, 1):
+                print(f"{idx}. {furn}")
+
+    def show_exits(self):
+        if not self.exits:
+            print("No exits.")
+        else:
+            print("Exits:")
+            for loc, status in self.exits.items():
+                state = "open" if status == 1 else "blocked"
+                print(f"- {loc.name} ({state})")
