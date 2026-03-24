@@ -1,77 +1,6 @@
 import random
 import collections
-
-def getNpcs(loc):
-    """Temporary Function to simulate getting the list of NPCs at a location"""
-    if loc == "kitchen":
-        return ["Chef"]
-    elif loc == "living room":
-        return ["Maid", "Butler", "Guest1", "Guest2"]
-    elif loc == "foyer":
-        return["Guest3", "Guest4"]
-    
-def getFurniture(loc):
-    """Temporary Function to simulate getting the list of places to search at a location"""
-    if loc == "kitchen":
-        return ["Cabinet", "Oven", "Pantry"]
-    elif loc == "living room":
-        return ["Shelf", "Cabinet", "Under Couch"]
-    elif loc == "foyer":
-        return["Drawer"]
-    
-def getExits(loc):
-    """Temporary Function to simulate getting a dict of exits at a location"""
-    if loc == "kitchen":
-        return {"living room": 1}
-    elif loc == "living room":
-        return {"kitchen": 1, "foyer": 1, "basement":0}
-    elif loc == "foyer":
-        return {"living room": 1, "outside":1}
-    elif loc == "basement":
-        return{"living room":0}
-    elif loc == "outside":
-        return{"foyer":1}
-    elif loc == "Room 1":
-        return{"Room 2":1,"Room 5":1,"Room 6":1,"Room 7":1,}
-    elif loc == "Room 2":
-        return{"Room 1":1,"Room 3":1,"Room 7":1,}
-    elif loc == "Room 3":
-        return{"Room 2":1,"Room 4":1,}
-    elif loc == "Room 4":
-        return{"Room 3":1,"Room 9":1,}
-    elif loc == "Room 5":
-        return{"Room 1":1,"Room 10":0,}
-    elif loc == "Room 6":
-        return{"Room 1":1,}
-    elif loc == "Room 7":
-        return{"Room 1":1,"Room 2":1,"Room 12":1,}
-    elif loc == "Room 9":
-        return{"Room 4":1,"Room 10":1,"Room 14":1,}
-    elif loc == "Room 10":
-        return{"Room 5":0,"Room 9":1,"Room 15":1,}
-    elif loc == "Room 12":
-        return{"Room 7":1,"Room 13":1,}
-    elif loc == "Room 13":
-        return{"Room 12":1, "Room 14":1,"Room 18":0,}
-    elif loc == "Room 14":
-        return{"Room 9":1,"Room 13":1,"Room 15":1,}
-    elif loc == "Room 15":
-        return{"Room 10":1,"Room 14":1,}
-    elif loc == "Room 16":
-        return{"Room 21":1,}
-    elif loc == "Room 18":
-        return{"Room 13":0, "Room 23":1,}
-    elif loc == "Room 21":
-        return{"Room 16":1,"Room 22":1,"Room 25":1,}
-    elif loc == "Room 22":
-        return{"Room 21":1,"Room 23":1,}
-    elif loc == "Room 23":
-        return{"Room 18":1,"Room 22":1,"Room 24":1,}
-    elif loc == "Room 24":
-        return{"Room 23":1,"Room 25":1,}
-    elif loc == "Room 25":
-        return{"Room 24":1,"Room 21":1,}
-    
+from location import Location
 
 class AiAgent:
     """Template class for the AI agent."""
@@ -110,23 +39,25 @@ class AiAgent:
 
     def initializeGraph(self):
         """Method to create an initial graph of the map (so the AI doesn't instantly know about unblocked doors)"""
+        # Queue for storing new nodes to visit. Note: Collection Module's deque is used to allow FIFO functionality efficiently
         nodeQueue = collections.deque([self.currLoc])
-        visitedNodes = [self.currLoc]
-        newGraph = {self.currLoc:getExits(self.currLoc)}
+        # Set of already visited Nodes. Note: Set is used as it has a faster lookup time than a list.
+        visitedNodes = {self.currLoc}
+        # Initialize the AI's graph with the first location and its exits.
+        self.graph = {self.currLoc:self.currLoc.get_exits()}
         while nodeQueue:
             currNode = nodeQueue.popleft()
 
-            for node in getExits(currNode).keys():
+            for node in currNode.get_exits.keys():
                 if node not in visitedNodes:
                     nodeQueue.append(node)
             
             visitedNodes.append(currNode)
-            newGraph[currNode] = getExits(currNode)
+            self.graph[currNode] = currNode.get_exits()
 
-        self.graph = newGraph
 
     def getPathTo(self, targetLoc):
-        """Method to test if a pathway exists to the desired location in the AI's graph using BFS"""
+        """Method to get a pathway to a desired node in the AI's graph using BFS"""
         nodeQueue = collections.deque([self.currLoc])
         visitedNodes = [self.currLoc]
         predecessorNode = {self.currLoc: None}
@@ -171,24 +102,14 @@ class AiAgent:
         self.updateRoomKnowledge()
 
     def updateRoomKnowledge(self):
-        # FIX ME: Uncomment get functions as templates are fleshed out.
-        # self.NpcsInRoom = self.currLoc.getNpcs()
-        self.NpcsInRoom = getNpcs(self.currLoc)
-        #self.furnitureInRoom = self.currLoc.getFurniture()
-        self.furnitureInRoom = getFurniture(self.currLoc)
-        #total exits = self.currLoc.getExits()
-        roomExits = getExits(self.currLoc)
+        self.NpcsInRoom = self.currLoc.get_npcs()
+        self.furnitureInRoom = self.currLoc.get_items()
+        roomExits = self.currLoc.get_exits()
 
-        for i in roomExits.keys():
-            if roomExits[i] == 1:
-                if i in self.blockedExits:
-                    self.blockedExits.remove(i)
-                    if i in self.incriminatingItemsDict.keys():
-                        self.incriminatingItemsDict[i] = 1
-                if i not in self.unblockedExits:
-                    self.unblockedExits.append(i)
-            else:
-                self.blockedExits.append(i)
+        if roomExits != self.graph[self.currLoc]:
+            for exit in roomExits.keys():
+                self.graph[self.currLoc][exit] = roomExits[exit]
+                
          
 
     def takeTurn(self):
@@ -197,7 +118,41 @@ class AiAgent:
             return True     
 
 
-testAgent = AiAgent(1,1,1,"Room 1",["knife"])
+# Small home location for testing
+kitchen = Location("Kitchen","Kitchen", ["knife","rolling pin",None], {"living room": 1}, ["Chef"])
+livingRoom = Location("Living room",None, ["car keys", "magazine", None], {"kitchen": 1, "foyer": 1, "basement":0}, ["Maid", "Butler", "Guest1", "Guest2"])
+foyer = Location("Foyer","Foyer", ["spare change","basement key",None], {"living room": 1, "outside":1}, ["Guest3", "Guest4"])
+basement = Location("Basement", "Basement", ["surveillance footage", None, None],{"living room":0},None)
+outside = Location("Outside", "Outside", ["Garden Gnome", "spare key"],{"foyer":1},None)
+
+# Large location for navigation testing
+room1 = Location(exits={"Room 2":1,"Room 5":1,"Room 6":1,"Room 7":1,})
+room2 = Location(exits={"Room 1":1,"Room 3":1,"Room 7":1,})
+room3 = Location(exits={"Room 2":1,"Room 4":1,})
+room4 = Location(exits={"Room 3":1,"Room 9":1,})
+room5 = Location(exits={"Room 1":1,"Room 10":0,})
+room6 = Location(exits={"Room 1":1,})
+room7 = Location(exits={"Room 1":1,"Room 2":1,"Room 12":1,})
+
+room9 = Location(exits={"Room 4":1,"Room 10":1,"Room 14":1,})
+room10 = Location(exits={"Room 5":0,"Room 9":1,"Room 15":1,})
+
+room12 = Location(exits={"Room 7":1,"Room 13":1,})
+room13 = Location(exits={"Room 12":1, "Room 14":1,"Room 18":0,})
+room14 = Location(exits={"Room 9":1,"Room 13":1,"Room 15":1,})
+room15 = Location(exits={"Room 10":1,"Room 14":1,})
+room16 = Location(exits={"Room 21":1,})
+
+room18 = Location(exits={"Room 13":0, "Room 23":1,})
+
+room21 = Location(exits={"Room 16":1,"Room 22":1,"Room 25":1,})
+room22 = Location(exits={"Room 21":1,"Room 23":1,})
+room23 = Location(exits={"Room 18":1,"Room 22":1,"Room 24":1,})
+room24 = Location(exits={"Room 23":1,"Room 25":1,})
+room25 = Location(exits={"Room 24":1,"Room 21":1,})
+
+
+testAgent = AiAgent(1,1,1,"Room 1",["surveillance footage"])
 print(testAgent.graph)
 print()
 print(testAgent.getPathTo("Room 15"))
