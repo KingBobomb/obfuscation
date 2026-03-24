@@ -5,8 +5,7 @@ class Location:
         self.items = items if items is not None else []
         self.exits = exits if exits is not None else {}
         self.npcs = npcs if npcs is not None else []
-        self.blocked = blocked
-        self.block_reason = block_reason
+
 
     def get_items(self):
         return self.items
