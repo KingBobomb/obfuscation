@@ -111,7 +111,7 @@ class AiAgent:
     def initializeGraph(self):
         """Method to create an initial graph of the map (so the AI doesn't instantly know about unblocked doors)"""
         nodeQueue = collections.deque([self.currLoc])
-        visitedNodes = {self.currLoc}
+        visitedNodes = [self.currLoc]
         newGraph = {self.currLoc:getExits(self.currLoc)}
         while nodeQueue:
             currNode = nodeQueue.popleft()
@@ -125,24 +125,33 @@ class AiAgent:
 
         self.graph = newGraph
 
-    def hasPathTo(self, targetLoc):
+    def getPathTo(self, targetLoc):
         """Method to test if a pathway exists to the desired location in the AI's graph using BFS"""
         nodeQueue = collections.deque([self.currLoc])
-        visitedNodes = {self.currLoc}
+        visitedNodes = [self.currLoc]
         predecessorNode = {self.currLoc: None}
 
         while nodeQueue:
             currNode = nodeQueue.popleft()
 
-            #if currNode == targetLoc:
+            if currNode == targetLoc:
+                finalPath = []
+                while predecessorNode[currNode] is not None:
+                    finalPath.append(currNode)
+                    currNode = predecessorNode[currNode]
+                finalPath = finalPath[::-1]
+                return finalPath
 
-
-            for node in getExits(currNode).keys():
-                if node not in visitedNodes:
+            currExits = self.graph[currNode]
+            for node in currExits.keys():
+                if node not in visitedNodes and currExits[node] != 0:
                     nodeQueue.append(node)
-                    predecessorNode[node] = currNode
+                    if node not in predecessorNode.keys():
+                        predecessorNode[node] = currNode
             
             visitedNodes.append(currNode)
+        
+        return None
 
 
     def talkToNPC(self, chosenNPC):
@@ -188,5 +197,12 @@ class AiAgent:
             return True     
 
 
-testAgent = AiAgent(1,1,1,"Room 16",["knife"])
+testAgent = AiAgent(1,1,1,"Room 1",["knife"])
 print(testAgent.graph)
+print()
+print(testAgent.getPathTo("Room 15"))
+# Desynchronizing AI graph from actual graph for testing purposes
+testAgent.graph["Room 5"]["Room 10"] = 1
+testAgent.graph["Room 10"]["Room 5"] = 1
+
+print(testAgent.getPathTo("Room 15"))
