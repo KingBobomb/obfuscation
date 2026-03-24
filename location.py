@@ -1,5 +1,5 @@
 class Location:
-    def __init__(self, name, description, items=None, exits=None, npcs=None, blocked=False, block_reason=""):
+    def __init__(self, name, description, items=None, exits=None, npcs=None):
         self.name = name
         self.description = description
         self.items = items if items is not None else []
