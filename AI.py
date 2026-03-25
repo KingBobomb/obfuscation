@@ -1,6 +1,7 @@
 import random
 import collections
 from location import Location
+from item import Item
 
 class AiAgent:
     """Template class for the AI agent."""
@@ -143,17 +144,37 @@ class AiAgent:
 
 
 # Small home location for testing
-kitchen = Location("Kitchen","Kitchen", ["knife","rolling pin",None], None, ["Chef"])
-livingRoom = Location("Living room",None, ["car keys", "magazine", None], None, ["Maid", "Butler", "Guest1", "Guest2"])
-foyer = Location("Foyer","Foyer", ["spare change","basement key",None], None, ["Guest3", "Guest4"])
-basement = Location("Basement", "Basement", ["surveillance footage", None, None],None,None)
-outside = Location("Outside", "Outside", ["Garden Gnome", "spare key"],None,None)
+kitchen = Location("Kitchen","Kitchen", [], None, ["Chef"])
+livingRoom = Location("Living room",None, [], None, ["Maid", "Butler", "Guest1", "Guest2"])
+foyer = Location("Foyer","Foyer", [], None, ["Guest3", "Guest4"])
+basement = Location("Basement", "Basement", [],None,None)
+outside = Location("Outside", "Outside", [],None,None)
 
 kitchen.add_exit(livingRoom, 1)
 livingRoom.add_mult_exit({kitchen: 1, foyer: 1, basement:0})
 foyer.add_mult_exit({livingRoom: 1, outside:1})
 basement.add_exit(livingRoom,0)
 outside.add_exit(foyer,1)
+
+knife = Item("Knife", "Knife", kitchen)
+rollingPin = Item("Rolling Pin", "Rolling Pin", kitchen)
+carKeys = Item("Car Keys", "Car Keys", livingRoom)
+magazine = Item("Magazine", "Magazine", livingRoom)
+spareChange = Item("Spare Change", "Spare Change", foyer)
+basementKey = Item("Basement Key", "Basement Key", foyer, required_location=livingRoom)
+surveillanceFootage = Item("Surveillance Footage", "Surveillance Footage", basement, is_evidence=True)
+gardenGnome = Item("Garden Gnome", "Garden Gnome", outside, False)
+spareKey = Item("Spare Key", "Spare Key", outside)
+
+kitchen.add_item(knife)
+kitchen.add_item(rollingPin)
+livingRoom.add_item(carKeys)
+livingRoom.add_item(magazine)
+foyer.add_item(spareChange)
+foyer.add_item(basementKey)
+basement.add_item(surveillanceFootage)
+outside.add_item(gardenGnome)
+outside.add_item(spareKey)
 
 # Large location for navigation testing
 room1 = Location("Room 1", "Room 1")
