@@ -48,11 +48,11 @@ class AiAgent:
         while nodeQueue:
             currNode = nodeQueue.popleft()
 
-            for node in currNode.get_exits.keys():
+            for node in currNode.get_exits().keys():
                 if node not in visitedNodes:
                     nodeQueue.append(node)
             
-            visitedNodes.append(currNode)
+            visitedNodes.add(currNode)
             self.graph[currNode] = currNode.get_exits()
 
 
@@ -119,45 +119,87 @@ class AiAgent:
 
 
 # Small home location for testing
-kitchen = Location("Kitchen","Kitchen", ["knife","rolling pin",None], {"living room": 1}, ["Chef"])
-livingRoom = Location("Living room",None, ["car keys", "magazine", None], {"kitchen": 1, "foyer": 1, "basement":0}, ["Maid", "Butler", "Guest1", "Guest2"])
-foyer = Location("Foyer","Foyer", ["spare change","basement key",None], {"living room": 1, "outside":1}, ["Guest3", "Guest4"])
-basement = Location("Basement", "Basement", ["surveillance footage", None, None],{"living room":0},None)
-outside = Location("Outside", "Outside", ["Garden Gnome", "spare key"],{"foyer":1},None)
+kitchen = Location("Kitchen","Kitchen", ["knife","rolling pin",None], None, ["Chef"])
+livingRoom = Location("Living room",None, ["car keys", "magazine", None], None, ["Maid", "Butler", "Guest1", "Guest2"])
+foyer = Location("Foyer","Foyer", ["spare change","basement key",None], None, ["Guest3", "Guest4"])
+basement = Location("Basement", "Basement", ["surveillance footage", None, None],None,None)
+outside = Location("Outside", "Outside", ["Garden Gnome", "spare key"],None,None)
+
+kitchen.add_exit(livingRoom, 1)
+livingRoom.add_mult_exit({"kitchen": 1, "foyer": 1, "basement":0})
+foyer.add_mult_exit({"living room": 1, "outside":1})
+basement.add_exit(livingRoom,0)
+outside.add_exit(foyer,1)
 
 # Large location for navigation testing
-room1 = Location(exits={"Room 2":1,"Room 5":1,"Room 6":1,"Room 7":1,})
-room2 = Location(exits={"Room 1":1,"Room 3":1,"Room 7":1,})
-room3 = Location(exits={"Room 2":1,"Room 4":1,})
-room4 = Location(exits={"Room 3":1,"Room 9":1,})
-room5 = Location(exits={"Room 1":1,"Room 10":0,})
-room6 = Location(exits={"Room 1":1,})
-room7 = Location(exits={"Room 1":1,"Room 2":1,"Room 12":1,})
+room1 = Location("Room 1", "Room 1")
+room2 = Location("Room 2", "Room 2")
+room3 = Location("Room 3", "Room 3")
+room4 = Location("Room 4", "Room 4")
+room5 = Location("Room 5", "Room 5")
+room6 = Location("Room 6", "Room 6")
+room7 = Location("Room 7", "Room 7")
 
-room9 = Location(exits={"Room 4":1,"Room 10":1,"Room 14":1,})
-room10 = Location(exits={"Room 5":0,"Room 9":1,"Room 15":1,})
+room9 = Location("Room 9", "Room 9")
+room10 = Location("Room 10", "Room 10")
 
-room12 = Location(exits={"Room 7":1,"Room 13":1,})
-room13 = Location(exits={"Room 12":1, "Room 14":1,"Room 18":0,})
-room14 = Location(exits={"Room 9":1,"Room 13":1,"Room 15":1,})
-room15 = Location(exits={"Room 10":1,"Room 14":1,})
-room16 = Location(exits={"Room 21":1,})
+room12 = Location("Room 12", "Room 12")
+room13 = Location("Room 13", "Room 13")
+room14 = Location("Room 14", "Room 14")
+room15 = Location("Room 15", "Room 15")
+room16 = Location("Room 16", "Room 16")
 
-room18 = Location(exits={"Room 13":0, "Room 23":1,})
+room18 = Location("Room 18", "Room 18")
 
-room21 = Location(exits={"Room 16":1,"Room 22":1,"Room 25":1,})
-room22 = Location(exits={"Room 21":1,"Room 23":1,})
-room23 = Location(exits={"Room 18":1,"Room 22":1,"Room 24":1,})
-room24 = Location(exits={"Room 23":1,"Room 25":1,})
-room25 = Location(exits={"Room 24":1,"Room 21":1,})
+room21 = Location("Room 21", "Room 21")
+room22 = Location("Room 22", "Room 22")
+room23 = Location("Room 23", "Room 23")
+room24 = Location("Room 24", "Room 24")
+room25 = Location("Room 25", "Room 25")
 
+# Add exits (added after due to circular dependency)
+room1.add_mult_exit({room2:1,room5:1,room6:1,room7:1,})
+room2.add_mult_exit({room1:1,room3:1,room7:1,})
+room3.add_mult_exit({room2:1,room4:1,})
+room4.add_mult_exit({room3:1,room9:1,})
+room5.add_mult_exit({room1:1,room10:0,})
+room6.add_mult_exit({room1:1,})
+room7.add_mult_exit({room1:1,room2:1,room12:1,})
+room9.add_mult_exit({room4:1,room10:1,room14:1,})
+room10.add_mult_exit({room5:0,room9:1,room15:1,})
+room12.add_mult_exit({room7:1,room13:1,})
+room13.add_mult_exit({room12:1, room14:1,room18:0,})
+room14.add_mult_exit({room9:1,room13:1,room15:1,})
+room15.add_mult_exit({room10:1,room14:1,})
+room16.add_mult_exit({room21:1,})
+room18.add_mult_exit({room13:0, room23:1,})
+room21.add_mult_exit({room16:1,room22:1,room25:1,})
+room22.add_mult_exit({room21:1,room23:1,})
+room23.add_mult_exit({room18:1,room22:1,room24:1,})
+room24.add_mult_exit({room23:1,room25:1,})
+room25.add_mult_exit({room24:1,room21:1,})
 
-testAgent = AiAgent(1,1,1,"Room 1",["surveillance footage"])
-print(testAgent.graph)
+testAgent = AiAgent(1,1,1,room1,["surveillance footage"])
+for i in testAgent.graph:
+    print(i)
+
 print()
-print(testAgent.getPathTo("Room 15"))
-# Desynchronizing AI graph from actual graph for testing purposes
-testAgent.graph["Room 5"]["Room 10"] = 1
-testAgent.graph["Room 10"]["Room 5"] = 1
 
-print(testAgent.getPathTo("Room 15"))
+inSyncAnswer = testAgent.getPathTo(room15)
+for i in inSyncAnswer:
+    print(i)
+
+print()
+
+# Desynchronizing AI graph from actual graph for testing purposes
+testAgent.graph[room5][room10] = 1
+testAgent.graph[room10][room5] = 1
+
+print(room25.get_exits())
+room25.set_exit(room24,0)
+print(room25.get_exits())
+print()
+
+outOfSyncAnswer = testAgent.getPathTo(room15)
+for i in outOfSyncAnswer:
+    print(i)
