@@ -31,6 +31,6 @@ class Player:
     def interact_with_npc(self, dialogue_choice):
         if dialogue_choice == "suspicious":
             self.suspicion_meter += 10
-        
+
     def manipulate_npc(self, npc):
         pass
