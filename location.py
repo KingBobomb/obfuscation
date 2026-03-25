@@ -19,7 +19,7 @@ class Location:
     def is_blocked(self, destination):
         # Check if the destination is an exit of this room, if not return false.
         if destination in self.exits:
-            # If the exit to the user's destination is blocked 
+            # If the exit to the user's destination is blocked
             # return true. Otherwise return false
             if self.exits[destination] == 0:
                 return True
@@ -47,20 +47,20 @@ class Location:
             return True
         return False
 
-    def add_exit(self, location, blockState):
-        self.exits[location] = blockState
+    def add_exit(self, location, block_state):
+        self.exits[location] = block_state
 
-    def add_mult_exit(self, exitDict={}):
+    def add_mult_exit(self, exit_dict):
         """Helper method that allows defining multiple exits simultaneously"""
-        for exit in exitDict.keys():
-            self.exits[exit] = exitDict[exit]
+        for exits in exit_dict.keys():
+            self.exits[exits] = exit_dict[exits]
 
-    def set_exit(self, exit, blockState):
-        if blockState is None:
-            blockState = 0
-        
-        if exit in self.exits:
-            self.exits[exit] = blockState
+    def set_exit(self, new_exit, block_state):
+        if block_state is None:
+            block_state = 0
+
+        if new_exit in self.exits:
+            self.exits[new_exit] = block_state
         else:
             print(f"Error: {self.name} has no exit named {exit}")
 
