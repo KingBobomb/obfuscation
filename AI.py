@@ -39,11 +39,11 @@ class AiAgent:
         # Create a variable to contain the AI's knowledge of the map state.
         self.graph = None
         # Create an initial graph of the map, which will be updated as the AI finds previously blocked doors unblocked
-        self.initializeGraph()
+        self.initialize_graph()
         # Update values with info gathered from the current room
-        self.updateRoomKnowledge()
+        self.update_room_knowledge()
 
-    def initializeGraph(self):
+    def initialize_graph(self):
         """Method to create an initial graph of the map (so the AI doesn't instantly know about unblocked doors)"""
         # Queue for storing new nodes to visit. Note: Collection Module's deque is used to allow FIFO functionality efficiently
         nodeQueue = collections.deque([self.currLoc])
@@ -62,7 +62,7 @@ class AiAgent:
             self.graph[currNode] = currNode.get_exits()
 
 
-    def getPathTo(self, targetLoc):
+    def get_path_to(self, targetLoc):
         """Method to get a pathway to a desired node in the AI's graph using BFS"""
         nodeQueue = collections.deque([self.currLoc])
         visitedNodes = [self.currLoc]
@@ -91,7 +91,7 @@ class AiAgent:
         return None
 
 
-    def talkToNPC(self, chosenNPC):
+    def talk_to_NPC(self, chosenNPC):
         # Acknowledge when the AI attempts to speak to an NPC it has already spoken to.
         if chosenNPC in self.NpcsSpokenTo:
             print("AI has attempted to speak to an AI it has already spoken to")
@@ -110,19 +110,19 @@ class AiAgent:
             
         
 
-    def searchRoom(self, chosenSearchable):
+    def search_room(self, chosenSearchable):
          pass      
 
-    def moveSelf(self, newLoc):
+    def move_self(self, newLoc):
         # Acknowledge when the AI attempts to make an invalid move
         if self.currLoc.is_blocked(newLoc):
             print(f"AI has attempted an invalid move from {self.currLoc.name} to {newLoc.name}")
         else:
             self.currLoc = newLoc
             print(f"AI has moved to {self.currLoc.name}")
-            self.updateRoomKnowledge()
+            self.update_room_knowledge()
 
-    def updateRoomKnowledge(self):
+    def update_room_knowledge(self):
         self.NpcsInRoom = self.currLoc.get_npcs()
         self.furnitureInRoom = self.currLoc.get_items()
         roomExits = self.currLoc.get_exits()
@@ -132,7 +132,7 @@ class AiAgent:
                 self.graph[self.currLoc][exit] = roomExits[exit]
                 
 
-    def takeTurn(self):
+    def take_turn(self):
         # If the suspicion meter exceeds 100, end the game and return true.
         if self.suspicionMeter >= 100:
             return True     
