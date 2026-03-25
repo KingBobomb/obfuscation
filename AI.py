@@ -35,7 +35,7 @@ class AiAgent:
         # Create an initial graph of the map, which will be updated as the AI finds previously blocked doors unblocked
         self.initializeGraph()
         # Update values with info gathered from the current room
-        #self.updateRoomKnowledge()
+        self.updateRoomKnowledge()
 
     def initializeGraph(self):
         """Method to create an initial graph of the map (so the AI doesn't instantly know about unblocked doors)"""
@@ -98,8 +98,11 @@ class AiAgent:
          pass      
 
     def moveSelf(self, newLoc):
-        self.currLoc = newLoc
-        self.updateRoomKnowledge()
+        if self.currLoc.is_blocked(newLoc):
+            print(f"AI has attempted an invalid move from {self.currLoc.name} to {newLoc.name}")
+        else:
+            self.currLoc = newLoc
+            self.updateRoomKnowledge()
 
     def updateRoomKnowledge(self):
         self.NpcsInRoom = self.currLoc.get_npcs()
@@ -126,8 +129,8 @@ basement = Location("Basement", "Basement", ["surveillance footage", None, None]
 outside = Location("Outside", "Outside", ["Garden Gnome", "spare key"],None,None)
 
 kitchen.add_exit(livingRoom, 1)
-livingRoom.add_mult_exit({"kitchen": 1, "foyer": 1, "basement":0})
-foyer.add_mult_exit({"living room": 1, "outside":1})
+livingRoom.add_mult_exit({kitchen: 1, foyer: 1, basement:0})
+foyer.add_mult_exit({livingRoom: 1, outside:1})
 basement.add_exit(livingRoom,0)
 outside.add_exit(foyer,1)
 
@@ -180,26 +183,4 @@ room24.add_mult_exit({room23:1,room25:1,})
 room25.add_mult_exit({room24:1,room21:1,})
 
 testAgent = AiAgent(1,1,1,room1,["surveillance footage"])
-for i in testAgent.graph:
-    print(i)
 
-print()
-
-inSyncAnswer = testAgent.getPathTo(room15)
-for i in inSyncAnswer:
-    print(i)
-
-print()
-
-# Desynchronizing AI graph from actual graph for testing purposes
-testAgent.graph[room5][room10] = 1
-testAgent.graph[room10][room5] = 1
-
-print(room25.get_exits())
-room25.set_exit(room24,0)
-print(room25.get_exits())
-print()
-
-outOfSyncAnswer = testAgent.getPathTo(room15)
-for i in outOfSyncAnswer:
-    print(i)
