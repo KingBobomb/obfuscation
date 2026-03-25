@@ -5,148 +5,149 @@ from item import Item
 
 class AiAgent:
     """Template class for the AI agent."""
-    def __init__(self, baseNpcWeight, baseSearchWeight, baseMoveWeight, startLocation, incriminatingItemsList):
+    def __init__(self, base_weights, start_location, incriminating_items_list):
         # Base weights for decision making tree
-        self.NpcWeight = baseNpcWeight
-        self.searchWeight = baseSearchWeight
-        self.moveWeight = baseMoveWeight
+        self.npc_weight = base_weights[0]
+        self.search_weight = base_weights[1]
+        self.move_weight = base_weights[2]
 
-        # AI starting location 
-        self.currLoc = startLocation
+        # AI starting location
+        self.curr_loc = start_location
 
         # Dictionary for storing which Incriminating items the AI has found.
-        self.incriminatingItemFoundDict = {}
-        # Dictionary for storing the location of each incriminating item the AI knows the location of.
-        self.incriminatingItemLocationDict = {}
+        self.incriminating_item_found_dict = {}
+        # Dictionary for storing the location of each incriminating item the AI knows about.
+        self.incriminating_item_location_dict = {}
 
         # Collect data for each incriminating item passed in
-        for item in incriminatingItemsList:
-            self.incriminatingItemFoundDict[item] = 0
-            self.incriminatingItemLocationDict = None
-        
+        for item in incriminating_items_list:
+            self.incriminating_item_found_dict[item] = 0
+            self.incriminating_item_location_dict = None
+
         # Initialize the Suspicion Meter
-        self.suspicionMeter = 0
-       
+        self.suspicion_meter = 0
+
         # Initialize a list to keep track of NPCs in the current room of the AI
-        self.NpcsInRoom = []
+        self.npcs_in_room = []
         # Initialize a list to keep track of the NPCs that the AI has currently spoken to
-        self.NpcsSpokenTo = []
+        self.npcs_spoken_to = []
 
         # Initialize a list to keep track of furniture to search in the AI's current room.
-        self.furnitureInRoom = []
-        # Initialize a dictionary to keep track of the furniture the AI has searched and the room it's currently in
-        self.furnitureSearched = []
+        self.furniture_in_room = []
+        # Initialize a list to keep track of the furniture the AI has searched
+        self.furniture_searched = []
 
         # Create a variable to contain the AI's knowledge of the map state.
         self.graph = None
-        # Create an initial graph of the map, which will be updated as the AI finds previously blocked doors unblocked
+        # Create an initial graph of the map, updated as the AI learns of unblocked doors
         self.initialize_graph()
         # Update values with info gathered from the current room
         self.update_room_knowledge()
 
     def initialize_graph(self):
-        """Method to create an initial graph of the map (so the AI doesn't instantly know about unblocked doors)"""
-        # Queue for storing new nodes to visit. Note: Collection Module's deque is used to allow FIFO functionality efficiently
-        nodeQueue = collections.deque([self.currLoc])
-        # Set of already visited Nodes. Note: Set is used as it has a faster lookup time than a list.
-        visitedNodes = {self.currLoc}
+        """Method to create an initial graph of the map 
+        (so the AI doesn't instantly know about unblocked doors)"""
+        # Queue for storing new nodes to visit.
+        node_queue = collections.deque([self.curr_loc])
+        # Set of already visited Nodes.
+        visited_nodes = {self.curr_loc}
         # Initialize the AI's graph with the first location and its exits.
-        self.graph = {self.currLoc:self.currLoc.get_exits()}
-        while nodeQueue:
-            currNode = nodeQueue.popleft()
+        self.graph = {self.curr_loc:self.curr_loc.get_exits()}
+        while node_queue:
+            curr_node = node_queue.popleft()
 
-            for node in currNode.get_exits().keys():
-                if node not in visitedNodes:
-                    nodeQueue.append(node)
-            
-            visitedNodes.add(currNode)
-            self.graph[currNode] = currNode.get_exits()
+            for node in curr_node.get_exits().keys():
+                if node not in visited_nodes:
+                    node_queue.append(node)
+
+            visited_nodes.add(curr_node)
+            self.graph[curr_node] = curr_node.get_exits()
 
 
-    def get_path_to(self, targetLoc):
+    def get_path_to(self, target_loc):
         """Method to get a pathway to a desired node in the AI's graph using BFS"""
-        nodeQueue = collections.deque([self.currLoc])
-        visitedNodes = [self.currLoc]
-        predecessorNode = {self.currLoc: None}
+        node_queue = collections.deque([self.curr_loc])
+        visited_nodes = [self.curr_loc]
+        predecessor_node = {self.curr_loc: None}
 
-        while nodeQueue:
-            currNode = nodeQueue.popleft()
+        while node_queue:
+            curr_node = node_queue.popleft()
 
-            if currNode == targetLoc:
-                finalPath = []
-                while predecessorNode[currNode] is not None:
-                    finalPath.append(currNode)
-                    currNode = predecessorNode[currNode]
-                finalPath = finalPath[::-1]
-                return finalPath
+            if curr_node == target_loc:
+                final_path = []
+                while predecessor_node[curr_node] is not None:
+                    final_path.append(curr_node)
+                    curr_node = predecessor_node[curr_node]
+                final_path = final_path[::-1]
+                return final_path
 
-            currExits = self.graph[currNode]
-            for node in currExits.keys():
-                if node not in visitedNodes and currExits[node] != 0:
-                    nodeQueue.append(node)
-                    if node not in predecessorNode.keys():
-                        predecessorNode[node] = currNode
-            
-            visitedNodes.append(currNode)
-        
+            curr_exits = self.graph[curr_node]
+            for node in curr_exits.keys():
+                if node not in visited_nodes and curr_exits[node] != 0:
+                    node_queue.append(node)
+                    if node in predecessor_node:
+                        predecessor_node[node] = curr_node
+
+            visited_nodes.append(curr_node)
+
         return None
 
 
-    def talk_to_NPC(self, chosenNPC):
+    def talk_to_npc(self, chosen_npc):
         # Acknowledge when the AI attempts to speak to an NPC it has already spoken to.
-        if chosenNPC in self.NpcsSpokenTo:
+        if chosen_npc in self.npcs_spoken_to:
             print("AI has attempted to speak to an AI it has already spoken to")
         else:
             # Add the chosen NPC to the list of NPCs the AI has already spoken to
-            self.NpcsSpokenTo.append(chosenNPC)
+            self.npcs_spoken_to.append(chosen_npc)
             # Get information about incriminating items from the AI
-            item = chosenNPC.getInfoAI()
+            item = chosen_npc.getInfoAI()
             # Check if the NPC has informed the AI of an incriminating item
             if item is not None:
                 # Store the item in our list of incriminating items
-                self.incriminatingItemLocationDict[item] = item.get_location()
-                print(f"{chosenNPC} has informed the AI of an incriminating item!")
+                self.incriminating_item_location_dict[item] = item.get_location()
+                print(f"{chosen_npc} has informed the AI of an incriminating item!")
             else:
-                print(f"AI spoke to {chosenNPC}.")
-            
-        
+                print(f"AI spoke to {chosen_npc}.")
 
-    def search_room(self, chosenSearchable):
-         pass      
 
-    def move_self(self, newLoc):
+
+    def search_room(self, chosen_searchable):
+        pass
+
+    def move_self(self, new_loc):
         # Acknowledge when the AI attempts to make an invalid move
-        if self.currLoc.is_blocked(newLoc):
-            print(f"AI has attempted an invalid move from {self.currLoc.name} to {newLoc.name}")
+        if self.curr_loc.is_blocked(new_loc):
+            print(f"AI has attempted an invalid move from {self.curr_loc.name} to {new_loc.name}")
         else:
-            self.currLoc = newLoc
-            print(f"AI has moved to {self.currLoc.name}")
+            self.curr_loc = new_loc
+            print(f"AI has moved to {self.curr_loc.name}")
             self.update_room_knowledge()
 
     def update_room_knowledge(self):
-        self.NpcsInRoom = self.currLoc.get_npcs()
-        self.furnitureInRoom = self.currLoc.get_items()
-        roomExits = self.currLoc.get_exits()
+        self.npcs_in_room = self.curr_loc.get_npcs()
+        self.furniture_in_room = self.curr_loc.get_items()
+        room_exits = self.curr_loc.get_exits()
 
-        if roomExits != self.graph[self.currLoc]:
-            for exit in roomExits.keys():
-                self.graph[self.currLoc][exit] = roomExits[exit]
-                
+        if room_exits != self.graph[self.curr_loc]:
+            for exits in room_exits.keys():
+                self.graph[self.curr_loc][exits] = room_exits[exits]
+
 
     def take_turn(self):
         # If the suspicion meter exceeds 100, end the game and return true.
-        if self.suspicionMeter >= 100:
-            return True     
-        
+        if self.suspicion_meter >= 100:
+            return True
+
         # If the AI has found every incriminating item, end the game and return true
-        if 0 not in self.incriminatingItemFoundDict.values():
+        if 0 not in self.incriminating_item_found_dict.values():
             return True
 
     def get_suspicion_meter(self):
-        return self.suspicionMeter
-    
+        return self.suspicion_meter
+
     def increment_suspicion_meter(self, inc):
-        self.suspicionMeter += inc
+        self.suspicion_meter += inc
 
     def make_choice(self):
         pass
@@ -170,7 +171,7 @@ carKeys = Item("Car Keys", "Car Keys", livingRoom)
 magazine = Item("Magazine", "Magazine", livingRoom)
 spareChange = Item("Spare Change", "Spare Change", foyer)
 basementKey = Item("Basement Key", "Basement Key", foyer, required_location=livingRoom)
-surveillanceFootage = Item("Surveillance Footage", "Surveillance Footage", basement, is_evidence=True)
+survey_footage = Item("Surveillance Footage", "Surveillance Footage", basement, is_evidence=True)
 gardenGnome = Item("Garden Gnome", "Garden Gnome", outside, False)
 spareKey = Item("Spare Key", "Spare Key", outside)
 
@@ -180,7 +181,7 @@ livingRoom.add_item(carKeys)
 livingRoom.add_item(magazine)
 foyer.add_item(spareChange)
 foyer.add_item(basementKey)
-basement.add_item(surveillanceFootage)
+basement.add_item(survey_footage)
 outside.add_item(gardenGnome)
 outside.add_item(spareKey)
 
@@ -232,5 +233,4 @@ room23.add_mult_exit({room18:1,room22:1,room24:1,})
 room24.add_mult_exit({room23:1,room25:1,})
 room25.add_mult_exit({room24:1,room21:1,})
 
-testAgent = AiAgent(1,1,1,room1,["surveillance footage"])
-
+testAgent = AiAgent([1,1,1],room1,["surveillance footage"])
