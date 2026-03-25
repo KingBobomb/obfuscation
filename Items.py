@@ -1,11 +1,15 @@
 class Item:
-    def __init__(self, name, description, can_be_taken=True, is_evidence=False, required_location=None):
+    def __init__(self, name, description, location, can_be_taken=True, is_evidence=False, required_location=None):
         self.name = name 
-        self.description = description 
+        self.description = description
+        self.location = location 
         self.can_be_taken = can_be_taken  
         self.is_evidence = is_evidence  
         self.required_location = required_location   
         self.is_barred = False  
+
+    def get_location(self):
+        return self.location
 
     def use(self, current_location):
         # Check if the item requires a specific location to be used 
