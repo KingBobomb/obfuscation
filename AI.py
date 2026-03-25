@@ -12,10 +12,16 @@ class AiAgent:
 
         # AI starting location 
         self.currLoc = startLocation
+
+        # Dictionary for storing which Incriminating items the AI has found.
         self.incriminatingItemFoundDict = {}
+        # Dictionary for storing the location of each incriminating item the AI knows the location of.
+        self.incriminatingItemLocationDict = {}
+
         # Collect data for each incriminating item passed in
         for item in incriminatingItemsList:
             self.incriminatingItemFoundDict[item] = 0
+            self.incriminatingItemLocationDict = None
         
         # Initialize the Suspicion Meter
         self.suspicionMeter = 0
@@ -113,12 +119,15 @@ class AiAgent:
             for exit in roomExits.keys():
                 self.graph[self.currLoc][exit] = roomExits[exit]
                 
-         
 
     def takeTurn(self):
-        # Check if the game should end, if so return true.
+        # If the suspicion meter exceeds 100, end the game and return true.
         if self.suspicionMeter >= 100:
             return True     
+        
+        # If the AI has found every incriminating item, end the game and return true
+        if 0 not in self.incriminatingItemFoundDict.values():
+            return True
 
 
 # Small home location for testing
