@@ -17,10 +17,14 @@ class Location:
         return self.npcs
 
     def is_blocked(self, destination):
-        # If the exit to the user's destination is blocked or no destination 
-        # was given, return true. Otherwise return false
-        if self.exits[destination] == 0 or destination is None:
-            return True
+        # Check if the destination is an exit of this room, if not return false.
+        if destination in self.exits:
+            # If the exit to the user's destination is blocked 
+            # return true. Otherwise return false
+            if self.exits[destination] == 0:
+                return True
+            else:
+                return False
         else:
             return False
 
