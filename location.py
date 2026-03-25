@@ -16,8 +16,13 @@ class Location:
     def get_npcs(self):
         return self.npcs
 
-    def is_blocked(self):
-        return self.blocked
+    def is_blocked(self, destination):
+        # If the exit to the user's destination is blocked or no destination 
+        # was given, return true. Otherwise return false
+        if self.exits[destination] == 0 or destination is None:
+            return True
+        else:
+            return False
 
     def add_item(self, item):
         self.items.append(item)
@@ -38,8 +43,22 @@ class Location:
             return True
         return False
 
-    def add_exit(self, direction, location):
-        self.exits[direction] = location
+    def add_exit(self, location, blockState):
+        self.exits[location] = blockState
+
+    def add_mult_exit(self, exitDict={}):
+        """Helper method that allows defining multiple exits simultaneously"""
+        for exit in exitDict.keys():
+            self.exits[exit] = exitDict[exit]
+
+    def set_exit(self, exit, blockState):
+        if blockState is None:
+            blockState = 0
+        
+        if exit in self.exits:
+            self.exits[exit] = blockState
+        else:
+            print(f"Error: {self.name} has no exit named {exit}")
 
     def __str__(self):
         return f"{self.name}: {self.description}"
