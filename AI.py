@@ -92,22 +92,34 @@ class AiAgent:
 
 
     def talkToNPC(self, chosenNPC):
-        # Get information about incriminating items from the AI
-        item = chosenNPC.getInfoAI()
-        # Check if the NPC has informed the AI of an incriminating item
-        if item is not None:
-            # 
-            item.getLocation()
-        self.updateRoomKnowledge()
+        # Acknowledge when the AI attempts to speak to an NPC it has already spoken to.
+        if chosenNPC in self.NpcsSpokenTo:
+            print("AI has attempted to speak to an AI it has already spoken to")
+        else:
+            # Add the chosen NPC to the list of NPCs the AI has already spoken to
+            self.NpcsSpokenTo.append(chosenNPC)
+            # Get information about incriminating items from the AI
+            item = chosenNPC.getInfoAI()
+            # Check if the NPC has informed the AI of an incriminating item
+            if item is not None:
+                # Store the item in our list of incriminating items
+                self.incriminatingItemLocationDict[item] = item.get_location()
+                print(f"{chosenNPC} has informed the AI of an incriminating item!")
+            else:
+                print(f"AI spoke to {chosenNPC}.")
+            
+        
 
     def searchRoom(self, chosenSearchable):
          pass      
 
     def moveSelf(self, newLoc):
+        # Acknowledge when the AI attempts to make an invalid move
         if self.currLoc.is_blocked(newLoc):
             print(f"AI has attempted an invalid move from {self.currLoc.name} to {newLoc.name}")
         else:
             self.currLoc = newLoc
+            print(f"AI has moved to {self.currLoc.name}")
             self.updateRoomKnowledge()
 
     def updateRoomKnowledge(self):
