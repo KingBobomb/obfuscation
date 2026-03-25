@@ -142,6 +142,14 @@ class AiAgent:
         if 0 not in self.incriminatingItemFoundDict.values():
             return True
 
+    def get_suspicion_meter(self):
+        return self.suspicionMeter
+    
+    def increment_suspicion_meter(self, inc):
+        self.suspicionMeter += inc
+
+    def make_choice(self):
+        pass
 
 # Small home location for testing
 kitchen = Location("Kitchen","Kitchen", [], None, ["Chef"])
