@@ -2,45 +2,43 @@ import random
 
 class NPC:
     def __init__(self, name):
+        """Initialize NPC with a name and starting trust level."""
         self.name = name
         self.trust = 50
-        self.suspicion = 0
-        self.has_info = False
+    
+    def trust_level(self):
+        """Returns the current trust level of the NPC."""
+        return self.trust
 
-    def talk(self, player):
-        # Get the player's current location
-        location = player.location
-
-        # Check for evidence in this location
-        evidence_items = [item.name for item in location.items if item.evidence]
-
+    def get_responses(self, evidence_items):
+        """Returns a list of possible responses based on the evidence items."""
         if evidence_items:
-            responses = [
+            return [
                 f"I noticed something strange: {', '.join(evidence_items)} was here!",
                 f"There seems to be {', '.join(evidence_items)} around.",
                 f"I think {', '.join(evidence_items)} is important!"
             ]
         else:
-            responses = [
+            return [
                 "I didn't notice anything unusual.",
                 "Someone passed by earlier.",
                 "I heard a strange noise."
             ]
+    
+    def has_talked_to(self, player):
+        """NPC responds based on the evidence items in the player's inventory.
+        Trust increases if the player has an evidence item."""
+        # Evidence items that the player has.
+        evidence_items = [item.name for item in player.inventory if item.evidence]
 
-        print(f"{self.name} says: {random.choice(responses)}")
+        # If the player has an evidence item, then NPC gives a response. 
+        # The trust level is increases.
+        if evidence_items:
+            responses = self.get_responses(evidence_items)
+            print(f"{self.name} says: {random.choice(responses)}")
+            self.trust = min(100, self.trust + 5)
+            return
 
-        # Talking to an NPC increases trust.
-        self.trust = min(100, self.trust + 5)
-
-
-    def manipulate(self):
-        success_chance = random.randint(0, 100) + (self.trust // 2)
-
-        if success_chance > 60:
-            print(f"{self.name} was convinced by your lie! You manipulated them.")
-            self.trust = min(100, self.trust + 10)
-            return True
-        else:
-            print(f"{self.name} did not believe you. Suspicion increased!")
-            self.suspicion += 15
-            return False
+        # Else, NPC will not talk to the player unless they have an evidence item.
+        print(f"{self.name} says: I won't talk unless you have something to show me.")
+        return

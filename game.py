@@ -44,7 +44,7 @@ class Game:
         garage.items.append(Item("Gloves"))
         garden.items.append(Item("Shovel"))
         living_room.items.append(Item("Remote"))
-        office.items.append(Item("Laptop", evidence=True))
+        office.items.append(Item("Laptop"))
 
         kitchen.npcs.append(NPC("Chef"))
         bedroom.npcs.append(NPC("Maid"))
