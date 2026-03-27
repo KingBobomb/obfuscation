@@ -53,7 +53,7 @@ class Item:
         return self.__location
 
     def use(self, current_location):
-        """A method to allow the caller to use an item.
+        """Incomplete method to allow the caller to use an item.
 
         This method takes in a location, checks if the item can
         be used there, and applies the Item's effect.
@@ -63,6 +63,10 @@ class Item:
 
         Returns:
             True if the item was successfully used, False if not.
+
+        Notes:
+            This method is currently incomplete for this release as
+            the apply_effect helper function still needs to be implemented.
         """
         # Check if the item requires a specific location to be used
         if self.__required_location and current_location != self.__required_location:
