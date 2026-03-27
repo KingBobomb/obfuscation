@@ -1,54 +1,92 @@
+"""
+This module provides a singular class for creating and maintaining an NPC.
+
+Classes:
+    NPC: Creates an NPC and manages its logic and data.
+"""
 import random
 
+
 class NPC:
+    """A class to create and manage an NPC.
+
+    This class is designed to initialize an NPC and manage its logic for
+    interacting with the Player and the AI about the locations of important
+    items and the status of the suspicion meter
+
+    Args:
+        name (string): The NPC's name
+        location (Location): The NPC's location
+        ai_info (Item or None): An item that the AI can query the location of
+    """
     def __init__(self, name, location, ai_info=None):
-        """Initialize NPC with a name, location, ai_info and starting trust level."""
-        self.name = name
-        self.location = location
-        self.ai_info = ai_info
-        self.trust = 50
+        self.__name = name
+        self.__location = location
+        self.__ai_info = ai_info
+        self.__trust = 50
+
+    def get_location(self):
+        """Getter for the NPC's location"""
+        return self.__location
 
     def get_name(self):
         """Getter for the NPC's name"""
-        return self.name
+        return self.__name
 
     def get_info_ai(self):
         """Returns None or an item that the ai can query the location of."""
-        return self.ai_info
-    
+        return self.__ai_info
+
     def trust_level(self):
         """Returns the current trust level of the NPC."""
-        return self.trust
+        return self.__trust
 
-    def get_responses(self, evidence_items):
-        """Returns a list of possible responses based on the evidence items."""
+    def __get_responses(self, evidence_items):
+        # Helper function to return a list of responses based on passed in item/items
         if evidence_items:
             return [
                 f"I noticed something strange: {', '.join(evidence_items)} was here!",
                 f"There seems to be {', '.join(evidence_items)} around.",
                 f"I think {', '.join(evidence_items)} is important!"
             ]
-        else:
-            return [
-                "I didn't notice anything unusual.",
-                "Someone passed by earlier.",
-                "I heard a strange noise."
-            ]
-    
-    def has_talked_to(self, player):
-        """NPC responds based on the evidence items in the player's inventory.
-        Trust increases if the player has an evidence item."""
-        # Evidence items that the player has.
-        evidence_items = [item.name for item in player.inventory if item.evidence]
 
-        # If the player has an evidence item, then NPC gives a response. 
+        return [
+            "I didn't notice anything unusual.",
+            "Someone passed by earlier.",
+            "I heard a strange noise."
+        ]
+
+    def has_talked_to(self, inventory, dialogue_choice):
+        """An incomplete method used by the player to get a response from an NPC.
+
+        This is an incomplete method that takes in a players inventory and their
+        dialogue choice and prints a fitting message to the player. In the current
+        implementation, dialog choice is just printed out and the NPC response is
+        based on the number of key_items the player has in their inventory, but this
+        will change in future releases.
+
+        Arguments:
+            inventory (list): The player's current inventory
+            dialogue_choice (int): The dialogue response the player chose
+
+        Notes:
+            As of this release, this function is unfinished as there are still ongoing
+            discussions about how to handle communication between the player, game, and
+            NPC classes and disagreements on logic distribution.
+        """
+        # Evidence items that the player has.
+        evidence_items = [item.get_name() for item in inventory if item.is_evidence()]
+
+        print(f"You chose option: {dialogue_choice}")
+
+        # If the player has an evidence item, then NPC gives a response.
         # The trust level is increases.
         if evidence_items:
-            responses = self.get_responses(evidence_items)
-            print(f"{self.name} says: {random.choice(responses)}")
-            self.trust = min(100, self.trust + 5)
+            responses = self.__get_responses(evidence_items)
+            print(f"{self.__name} says: {random.choice(responses)}")
+            self.__trust = min(100, self.__trust + 5)
             return
 
         # Else, NPC will not talk to the player unless they have an evidence item.
-        print(f"{self.name} says: I won't talk unless you have something to show me.")
+        print(f"{self.__name} says: I won't talk unless you have something to show me.")
         return
