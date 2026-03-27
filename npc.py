@@ -1,10 +1,20 @@
 import random
 
 class NPC:
-    def __init__(self, name):
-        """Initialize NPC with a name and starting trust level."""
+    def __init__(self, name, location, ai_info=None):
+        """Initialize NPC with a name, location, ai_info and starting trust level."""
         self.name = name
+        self.location = location
+        self.ai_info = ai_info
         self.trust = 50
+
+    def get_name(self):
+        """Getter for the NPC's name"""
+        return self.name
+
+    def get_info_ai(self):
+        """Returns None or an item that the ai can query the location of."""
+        return self.ai_info
     
     def trust_level(self):
         """Returns the current trust level of the NPC."""
