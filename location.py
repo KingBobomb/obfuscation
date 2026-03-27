@@ -6,6 +6,8 @@ class Location:
         self.exits = exits if exits is not None else {}
         self.npcs = npcs if npcs is not None else []
 
+    def get_name(self):
+        return self.name
 
     def get_items(self):
         return self.items
@@ -62,7 +64,7 @@ class Location:
         if new_exit in self.exits:
             self.exits[new_exit] = block_state
         else:
-            print(f"Error: {self.name} has no exit named {exit}")
+            print(f"Error: {self.name} has no exit named {new_exit}")
 
     def __str__(self):
         return f"{self.name}: {self.description}"
