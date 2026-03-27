@@ -17,8 +17,8 @@ class AiAgent:
     information from NPCs, searching for items, and ending the game.
 
     Args:
-        base_weights (dict): Weights used to guide the AI on what to do during
-        its turn start_location (Location): The starting location of the AI agent.
+        base_weights (dict): Weights used to guide the AI on what to do during its turn
+        start_location (Location): The starting location of the AI agent.
         incriminating_items_list (list): List of items the AI must find to win the game.
     """
     def __init__(self, base_weights, start_location, incriminating_items_list):
