@@ -1,14 +1,20 @@
 class Item:
     def __init__(self, name, description, location,
-                 can_be_taken=True, is_evidence=False, required_location=None):
+                 can_be_taken=True, evidence=False, required_location=None):
         self.name = name
         self.description = description
         self.location = location
         self.can_be_taken = can_be_taken
-        self.is_evidence = is_evidence
+        self.evidence = evidence
         self.required_location = required_location
         self.is_barred = False
 
+    def get_name(self):
+        return self.name
+
+    def is_evidence(self):
+        return self.evidence
+    
     def get_location(self):
         return self.location
 
