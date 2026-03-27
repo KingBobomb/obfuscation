@@ -4,7 +4,6 @@ This module provides a singular class for creating and maintaining a player.
 Classes:
     Player: Creates a Player and manages its logic and data.
 """
-from random import choice
 
 
 class Player:
@@ -118,20 +117,19 @@ class Player:
         """A currently incomplete method designed to allow players to talk to NPCs
 
         This method is a currently incomplete method that takes in a dialog choice
-        from a player and the NPC the player is interacting with, gets a list of
-        responses from the input NPC, and chooses one at random to print.
+        from a player and the NPC the player is interacting with, and communicates
+        them to an NPC.
 
         Arguments:
             dialogue_choice (int): Player input integer specifying which dialog option they chose
             chosen_npc (NPC): The NPC the Player is currently interacting with
 
         Notes:
-            As of this release this function is unfinished as there are still ongoing
+            As of this release, this function is unfinished as there are still ongoing
             discussions about how to handle communication between the player, game, and
             NPC classes and disagreements on logic distribution.
         """
-        response = choice(chosen_npc.get_responses(dialogue_choice))
-        print(response)
+        chosen_npc.has_talked(self.__inventory, dialogue_choice)
 
         # FIX ME: Decide encapsulation for dialogue_choice
         # (potentially let the NPC class handle this logic)
@@ -142,16 +140,16 @@ class Player:
         """A currently unimplemented method designed to allow players to manipulate NPCs
 
         This method is a currently unimplemented method that takes in the NPC the player
-        is interacting with and communicates with the NPC class to determine the result
+        is interacting with and communicating with the NPC class to determine the result
         of the attempted manipulation.
 
         Arguments:
             npc (NPC): The NPC the player is currently interacting with
 
         Notes:
-            As of this release this function still needs to be implemented. Additionally,
+            As of this release, this function still needs to be implemented. Additionally,
             there are still ongoing discussions about how to handle communication between
-            the player, and NPC classes and disagreements on logic distribution.
+            the player, and NPC classes, and disagreements on logic distribution.
         """
         # FIX ME: Implement class (further discussion on NPC to
         # player communications and distribution of logic required)
