@@ -2,7 +2,7 @@
 This module provides a singular class for creating and maintaining a player.
 
 Classes:
-    Player: Creates an Player and manages its logic and data.
+    Player: Creates a Player and manages its logic and data.
 """
 from random import choice
 
