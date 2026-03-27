@@ -467,9 +467,9 @@ testAgent = AiAgent({'move': 1, 'search': 2, 'talk': 2},
                     living_room, [survey_footage])
 
 for i in range(0, 50):
-    print(testAgent.take_turn())
+    testAgent.take_turn()
 
-x = input()
+x = input("Press Enter to unlock basement")
 living_room.set_exit(basement, 1)
 basement.set_exit(living_room, 1)
 
@@ -477,4 +477,5 @@ ENDED = False
 
 while not ENDED:
     ENDED = testAgent.take_turn()
-    print(ENDED)
+
+print("Game Over")
