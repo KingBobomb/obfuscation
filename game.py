@@ -6,7 +6,7 @@ Classes:
 """
 from player import Player
 from ai import AiAgent
-from item import Item
+from items import Item
 from npc import NPC
 from location import Location
 

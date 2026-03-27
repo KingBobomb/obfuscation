@@ -83,4 +83,3 @@ class Item:
     def __apply_effect(self):
         # Unimplemented helper function for actually using an item
         pass
-
