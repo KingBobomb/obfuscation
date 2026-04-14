@@ -45,6 +45,47 @@ class Game:
         else:
             print("You can't start without committing a crime.")
 
+    def __prompt_user(self):
+        # Helper method to obtain user input
+
+        # Obtain player location
+        player_loc = self.__player.get_location()
+
+        print(f"Current location - {player_loc}")
+
+        player_turn = True
+
+        while player_turn:
+            print("Please enter the number of the option you'd like to select:")
+            print("1 - Move to a new room")
+            print("2 - Speak with someone in the room")
+            print("3 - Use an item")
+            print("4 - Dispose of an item")
+            player_response = input()
+
+            if player_response == '1':
+                player_turn = self.__handle_player_move()
+            elif player_response == '2':
+                player_turn = self.__handle_player_speak()
+            elif player_response == '3':
+                player_turn = self.__handle_player_use()
+            elif player_response == '4':
+                player_turn = self.__handle_player_dispose()
+            else:
+                print("Sorry, I didn't understand. Please enter 1, 2, 3, or 4 to make a selection.")
+
+    def __handle_player_move(self):
+        return False
+
+    def __handle_player_speak(self):
+        return False
+
+    def __handle_player_use(self):
+        return False
+
+    def __handle_player_dispose(self):
+        return False
+
     def __commit_crime(self):
         # Helper method to actually activate the game
         print("You committed a crime.")
@@ -56,12 +97,8 @@ class Game:
     def __run_game(self):
         # Helper method that contains the game loop
         while self.__game_active:
-            # FIX ME: Swap to player turn function when one is implemented.
-            self.__player.get_inventory()
+            self.__prompt_user()
             self.__game_active = self.__ai.take_turn()
-            # FIX ME: Remove this call for actual game, this is to prevent
-            # looping forever.
-            self.__ai.increment_suspicion_meter(5)
 
     def __create_game(self):
         # Helper method to initialize game objects
