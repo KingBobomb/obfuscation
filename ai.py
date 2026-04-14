@@ -226,23 +226,23 @@ class AiAgent:
         execute those actions, and check if the conditions are met to end the game.
 
         Returns:
-            bool : True if the game should end, false if the game should continue
+            bool : True if the game should continue, false if the game should end
         """
         # Update the Ai's knowledge about the room its in.
         self.__update_room_knowledge()
         # Have the AI make a choice on what to do.
         self.__make_choice()
 
-        # If the suspicion meter exceeds 100, end the game by returning true.
+        # If the suspicion meter exceeds 100, end the game by returning false.
         if self.__suspicion_meter >= 100:
-            return True
+            return False
 
-        # If the AI has found every incriminating item, end the game by returning true
+        # If the AI has found every incriminating item, end the game by returning false
         if 0 not in self.__incriminating_item_found_dict.values():
-            return True
+            return False
 
-        # If neither are true, return false to continue the game.
-        return False
+        # If neither are true, return true to continue the game.
+        return True
 
     def get_suspicion_meter(self):
         """Getter method for the AI managed suspicion meter"""
