@@ -51,9 +51,12 @@ class Game:
         # Obtain player location
         player_loc = self.__player.get_location()
 
-        print(f"Current location - {player_loc}")
+        print(f"Current location - {player_loc}\n")
 
         player_turn = True
+        # Function references the player can choose from
+        action_list = [self.__handle_player_move, self.__handle_player_speak,
+                       self.__handle_player_use, self.__handle_player_dispose]
 
         while player_turn:
             print("Please enter the number of the option you'd like to select:")
@@ -61,22 +64,24 @@ class Game:
             print("2 - Speak with someone in the room")
             print("3 - Use an item")
             print("4 - Dispose of an item")
+
             player_response = input().strip().lower()
 
-            if player_response == '1':
-                player_turn = self.__handle_player_move()
-            elif player_response == '2':
-                player_turn = self.__handle_player_speak()
-            elif player_response == '3':
-                player_turn = self.__handle_player_use()
-            elif player_response == '4':
-                player_turn = self.__handle_player_dispose()
-            elif player_response in ('exit','quit'):
+            if player_response in ('exit','quit'):
                 print("Ending game...")
                 return False
+
+            if not player_response.isnumeric():
+                print("\nSorry, I didn't understand.")
+                print("Please enter 1, 2, 3, or 4 to make a selection.\n")
             else:
-                print("Sorry, I didn't understand. Please enter 1, 2, 3, or 4 to make a selection.")
-                print()
+                selected = int(player_response)
+
+                if 1 <= selected <= 4:
+                    player_turn = action_list[selected -1]()
+                else:
+                    print("\nSorry, I didn't understand.")
+                    print("Please enter 1, 2, 3, or 4 to make a selection.\n")
 
         return True
 
@@ -95,8 +100,7 @@ class Game:
     def __commit_crime(self):
         # Helper method to actually activate the game
         print("You committed a crime.")
-        print("Type exit or quit to end the game at any point.")
-        print()
+        print("Type exit or quit to end the game at any point.\n")
 
         # Game is active and a crime has been committed to start the game.
         self.__game_active = True
