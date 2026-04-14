@@ -61,7 +61,7 @@ class Game:
             print("2 - Speak with someone in the room")
             print("3 - Use an item")
             print("4 - Dispose of an item")
-            player_response = input()
+            player_response = input().strip().lower()
 
             if player_response == '1':
                 player_turn = self.__handle_player_move()
@@ -71,8 +71,14 @@ class Game:
                 player_turn = self.__handle_player_use()
             elif player_response == '4':
                 player_turn = self.__handle_player_dispose()
+            elif player_response in ('exit','quit'):
+                print("Ending game...")
+                return False
             else:
                 print("Sorry, I didn't understand. Please enter 1, 2, 3, or 4 to make a selection.")
+                print()
+
+        return True
 
     def __handle_player_move(self):
         return False
@@ -89,6 +95,8 @@ class Game:
     def __commit_crime(self):
         # Helper method to actually activate the game
         print("You committed a crime.")
+        print("Type exit or quit to end the game at any point.")
+        print()
 
         # Game is active and a crime has been committed to start the game.
         self.__game_active = True
@@ -97,8 +105,11 @@ class Game:
     def __run_game(self):
         # Helper method that contains the game loop
         while self.__game_active:
-            self.__prompt_user()
-            self.__game_active = self.__ai.take_turn()
+            self.__game_active = self.__prompt_user()
+
+            if self.__game_active:
+                print()
+                self.__game_active = self.__ai.take_turn()
 
     def __create_game(self):
         # Helper method to initialize game objects
