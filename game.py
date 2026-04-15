@@ -67,21 +67,14 @@ class Game:
 
             player_response = input().strip().lower()
 
-            if player_response in ('exit','quit'):
+            valid_check = self.__validate_input(4, ('exit','quit'), player_response)
+
+            if valid_check == 0:
                 print("Ending game...")
                 return False
 
-            if not player_response.isnumeric():
-                print("\nSorry, I didn't understand.")
-                print("Please enter 1, 2, 3, or 4 to make a selection.\n")
-            else:
-                selected = int(player_response)
-
-                if 1 <= selected <= 4:
-                    player_turn = action_list[selected -1]()
-                else:
-                    print("\nSorry, I didn't understand.")
-                    print("Please enter 1, 2, 3, or 4 to make a selection.\n")
+            if valid_check > 0:
+                player_turn = action_list[valid_check - 1](player_loc)
 
         return True
 
@@ -96,6 +89,32 @@ class Game:
 
     def __handle_player_dispose(self):
         return False
+
+    def __validate_input(self, upper_bound, accepted_words, player_response):
+        # Helper function to validate if a user's input is valid. Returns -1 if invalid, 
+        # 0 if an accepted word is detected, and the player's response as an int if valid.
+        if upper_bound == 1:
+            ext_msg = "Please enter 1 to make this selection.\n"
+        else:
+            ext_msg = f"Please enter a number between 1 and {upper_bound} to make a selection.\n"
+
+        if player_response in accepted_words:
+            return 0
+
+        if not player_response.isnumeric():
+            print("\nSorry, I didn't understand.")
+            print(ext_msg)
+            return -1
+
+        selected = int(player_response)
+
+        if 1 <= selected <= upper_bound:
+            return selected
+
+        print("\nSorry, I didn't understand.")
+        print(ext_msg)
+        return -1
+
 
     def __commit_crime(self):
         # Helper method to actually activate the game
