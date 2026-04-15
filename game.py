@@ -67,17 +67,25 @@ class Game:
 
             player_response = input().strip().lower()
 
+            # Player shouldn't be able to go back from here, so set an input of back 
+            # to garbage data. 
             if player_response == 'back':
                 player_response = "back to where?"
 
+            # Validate input and detect if the player wants to end the game.
             valid_check, end_game = self.__validate_input(4, player_response)
 
+            # Check if player tried to end the game in this menu.
             if end_game:
                 return False
 
             if valid_check > 0:
+                # Index the player's chosen function. If the function is successful,
+                # we end the player's turn, if not we re-prompt. Also, detect if player
+                # tried to end the game in the sub menu
                 player_turn, end_game = action_list[valid_check - 1](player_loc)
 
+            # Check if the player tried to end the game in the sub-menu
             if end_game:
                 return False
 
@@ -91,38 +99,42 @@ class Game:
         loc_exits = player_loc.get_exits()
         end_game = False
 
+        # Make sure there are locations for the player to move to.
         if len(loc_exits) == 0:
             print("\nThere are no valid locations to move to.")
             return False, end_game
 
+        # Assume input is invalid until proven valid
         valid = False
 
         while not valid:
             print("\nSelect a location to move to or type 'back' to go back:")
+            # enumerate is used here to allow us to index the exit dictionary
             for i, ext in enumerate(loc_exits):
                 print(f"{i + 1} - {ext}")
 
             player_choice = input().strip().lower()
-            validity_check, end_game = self.__validate_input(len(loc_exits),player_choice)
+            validity_check, end_game = self.__validate_input(len(loc_exits), player_choice)
 
             if end_game:
                 return False, end_game
 
+            # If the player didn't end the game, but validity_check is 0, then the
+            # player has requested to go back. 
             if validity_check == 0:
                 return True, end_game
 
             if validity_check > 0:
+                # Here we type cast the exit dict keys as a list to allow indexing
                 chosen_exit = list(loc_exits.keys())[validity_check - 1]
 
-                if player_loc.is_blocked(chosen_exit):
-                    print("\nThis location is blocked. "
-                    "Use an item to unblock it or select another location.")
+                # Make sure that the player can move to the location they chose
+                if self.__player.move_to(chosen_exit):
+                    print(f"Moved to {chosen_exit.get_name()}")
+                    valid = True
                 else:
-                    if self.__player.move_to(chosen_exit):
-                        print(f"Moved to {chosen_exit.get_name()}")
-                        valid = True
-                    else:
-                        print(f"Movement to {chosen_exit.get_name()} failed.")
+                    print("\nThis location is blocked. "
+                            "Use an item to unblock it or select another location.")
 
         return False, end_game
 
