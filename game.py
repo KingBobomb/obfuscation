@@ -51,7 +51,7 @@ class Game:
         # Obtain player location
         player_loc = self.__player.get_location()
 
-        print(f"Current location - {player_loc}\n")
+        print(f"Current location - {player_loc}")
 
         player_turn = True
         # Function references the player can choose from
@@ -59,7 +59,7 @@ class Game:
                        self.__handle_player_use, self.__handle_player_dispose]
 
         while player_turn:
-            print("Please enter the number of the option you'd like to select:")
+            print("\nPlease enter the number of the option you'd like to select:")
             print("1 - Move to a new room")
             print("2 - Speak with someone in the room")
             print("3 - Use an item")
@@ -67,18 +67,24 @@ class Game:
 
             player_response = input().strip().lower()
 
-            valid_check = self.__validate_input(4, ('exit','quit'), player_response)
+            valid_check, end_game = self.__validate_input(4, [], player_response)
 
-            if valid_check == 0:
-                print("Ending game...")
+            if end_game:
                 return False
 
             if valid_check > 0:
-                player_turn = action_list[valid_check - 1](player_loc)
+                player_turn, end_game = action_list[valid_check - 1](player_loc)
+
+            if end_game:
+                return False
 
         return True
 
     def __handle_player_move(self, player_loc):
+        # Helper function to handle the player moving. Returns a tuple where
+        # the first value is a bool indicating if the move was successful and
+        # the second value is a bool indicating if the player wants to end the
+        # game.
         loc_exits = player_loc.get_exits()
         valid = False
 
@@ -88,16 +94,19 @@ class Game:
                 print(f"{i + 1} - {ext}")
 
             player_choice = input().strip().lower()
-            validity_check = self.__validate_input(len(loc_exits), ('back',), player_choice)
+            validity_check, end_game = self.__validate_input(len(loc_exits),['back'],player_choice)
+
+            if end_game:
+                return False, end_game
 
             if validity_check == 0:
-                return True
+                return True, end_game
 
             if validity_check > 0:
                 chosen_exit = list(loc_exits.keys())[validity_check - 1]
 
                 if player_loc.is_blocked(chosen_exit):
-                    print("This location is blocked. "
+                    print("\nThis location is blocked. "
                     "Use an item to unblock it or select another location.")
                 else:
                     if self.__player.move_to(chosen_exit):
@@ -106,7 +115,7 @@ class Game:
                     else:
                         print(f"Movement to {chosen_exit.get_name()} failed.")
 
-        return False
+        return False, end_game
 
     def __handle_player_speak(self):
         return False
@@ -118,29 +127,37 @@ class Game:
         return False
 
     def __validate_input(self, upper_bound, accepted_words, player_response):
-        # Helper function to validate if a user's input is valid. Returns -1 if invalid, 
-        # 0 if an accepted word is detected, and the player's response as an int if valid.
+        # Helper function to validate a user's input. Returns a tuple where the
+        # first value is -1 if invalid, 0 if an accepted word is detected/the
+        # player attempts to end the game, and the player's response as an int
+        # if valid, and the second value is true if the player wants to end the
+        # game and false if not.
+
         if upper_bound == 1:
-            ext_msg = "Please enter 1 to make this selection.\n"
+            ext_msg = "Please enter 1 to make this selection."
         else:
-            ext_msg = f"Please enter a number between 1 and {upper_bound} to make a selection.\n"
+            ext_msg = f"Please enter a number between 1 and {upper_bound} to make a selection."
+
+        if player_response in ['exit', 'quit']:
+            print("Ending game...")
+            return (0, True)
 
         if player_response in accepted_words:
-            return 0
+            return (0, False)
 
         if not player_response.isnumeric():
             print("\nSorry, I didn't understand.")
             print(ext_msg)
-            return -1
+            return (-1, False)
 
         selected = int(player_response)
 
         if 1 <= selected <= upper_bound:
-            return selected
+            return (selected, False)
 
         print("\nSorry, I didn't understand.")
         print(ext_msg)
-        return -1
+        return (-1, False)
 
 
     def __commit_crime(self):
