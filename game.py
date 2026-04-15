@@ -67,7 +67,10 @@ class Game:
 
             player_response = input().strip().lower()
 
-            valid_check, end_game = self.__validate_input(4, [], player_response)
+            if player_response == 'back':
+                player_response = "back to where?"
+
+            valid_check, end_game = self.__validate_input(4, player_response)
 
             if end_game:
                 return False
@@ -86,6 +89,12 @@ class Game:
         # the second value is a bool indicating if the player wants to end the
         # game.
         loc_exits = player_loc.get_exits()
+        end_game = False
+
+        if len(loc_exits) == 0:
+            print("\nThere are no valid locations to move to.")
+            return False, end_game
+
         valid = False
 
         while not valid:
@@ -94,7 +103,7 @@ class Game:
                 print(f"{i + 1} - {ext}")
 
             player_choice = input().strip().lower()
-            validity_check, end_game = self.__validate_input(len(loc_exits),['back'],player_choice)
+            validity_check, end_game = self.__validate_input(len(loc_exits),player_choice)
 
             if end_game:
                 return False, end_game
@@ -126,7 +135,7 @@ class Game:
     def __handle_player_dispose(self):
         return False
 
-    def __validate_input(self, upper_bound, accepted_words, player_response):
+    def __validate_input(self, upper_bound, player_response):
         # Helper function to validate a user's input. Returns a tuple where the
         # first value is -1 if invalid, 0 if an accepted word is detected/the
         # player attempts to end the game, and the player's response as an int
@@ -142,7 +151,7 @@ class Game:
             print("Ending game...")
             return (0, True)
 
-        if player_response in accepted_words:
+        if player_response == 'back':
             return (0, False)
 
         if not player_response.isnumeric():
