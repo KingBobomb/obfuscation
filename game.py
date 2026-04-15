@@ -78,7 +78,34 @@ class Game:
 
         return True
 
-    def __handle_player_move(self):
+    def __handle_player_move(self, player_loc):
+        loc_exits = player_loc.get_exits()
+        valid = False
+
+        while not valid:
+            print("\nSelect a location to move to or type 'back' to go back:")
+            for i, ext in enumerate(loc_exits):
+                print(f"{i + 1} - {ext}")
+
+            player_choice = input().strip().lower()
+            validity_check = self.__validate_input(len(loc_exits), ('back',), player_choice)
+
+            if validity_check == 0:
+                return True
+
+            if validity_check > 0:
+                chosen_exit = list(loc_exits.keys())[validity_check - 1]
+
+                if player_loc.is_blocked(chosen_exit):
+                    print("This location is blocked. "
+                    "Use an item to unblock it or select another location.")
+                else:
+                    if self.__player.move_to(chosen_exit):
+                        print(f"Moved to {chosen_exit.get_name()}")
+                        valid = True
+                    else:
+                        print(f"Movement to {chosen_exit.get_name()} failed.")
+
         return False
 
     def __handle_player_speak(self):
