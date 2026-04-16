@@ -129,7 +129,7 @@ class Player:
             discussions about how to handle communication between the player, game, and
             NPC classes and disagreements on logic distribution.
         """
-        chosen_npc.has_talked(self.__inventory, dialogue_choice)
+        chosen_npc.has_talked_to(self.__inventory, dialogue_choice)
 
         # FIX ME: Decide encapsulation for dialogue_choice
         # (potentially let the NPC class handle this logic)
