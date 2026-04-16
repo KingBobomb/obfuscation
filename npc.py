@@ -90,3 +90,6 @@ class NPC:
         # Else, NPC will not talk to the player unless they have an evidence item.
         print(f"{self.__name} says: I won't talk unless you have something to show me.")
         return
+
+    def __str__(self):
+        return f"{self.__name}"
