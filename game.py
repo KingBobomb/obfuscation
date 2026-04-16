@@ -67,8 +67,8 @@ class Game:
 
             player_response = input().strip().lower()
 
-            # Player shouldn't be able to go back from here, so set an input of back 
-            # to garbage data. 
+            # Player shouldn't be able to go back from here, so set an input of back
+            # to garbage data.
             if player_response == 'back':
                 player_response = "back to where?"
 
@@ -91,38 +91,49 @@ class Game:
 
         return True
 
+    def __main_input_loop(self, options_list, select_msg):
+        # Helper function that handles getting user input, calling the
+        # validator, and deciding what to do with the output
+        # validating it.
+        end_game = False
+
+        print(f"\nSelect {select_msg} or type 'back' to go back:")
+        # enumerate is used here to allow us to index the exit dictionary
+        for i, ext in enumerate(options_list):
+            print(f"{i + 1} - {ext}")
+
+        player_choice = input().strip().lower()
+        validity_check, end_game = self.__validate_input(len(options_list), player_choice)
+
+        if end_game:
+            return validity_check, True
+
+        return validity_check, False
+
     def __handle_player_move(self, player_loc):
         # Helper function to handle the player moving. Returns a tuple where
         # the first value is a bool indicating if the move was successful and
         # the second value is a bool indicating if the player wants to end the
         # game.
         loc_exits = player_loc.get_exits()
-        end_game = False
+        valid = False
 
         # Make sure there are locations for the player to move to.
         if len(loc_exits) == 0:
             print("\nThere are no valid locations to move to.")
-            return False, end_game
-
-        # Assume input is invalid until proven valid
-        valid = False
+            return False, False
 
         while not valid:
-            print("\nSelect a location to move to or type 'back' to go back:")
-            # enumerate is used here to allow us to index the exit dictionary
-            for i, ext in enumerate(loc_exits):
-                print(f"{i + 1} - {ext}")
+            validity_check, end_game = self.__main_input_loop(loc_exits, "a location to move to:")
 
-            player_choice = input().strip().lower()
-            validity_check, end_game = self.__validate_input(len(loc_exits), player_choice)
-
+            # Check if player decided to end the game
             if end_game:
-                return False, end_game
+                return False, True
 
             # If the player didn't end the game, but validity_check is 0, then the
-            # player has requested to go back. 
+            # player has requested to go back.
             if validity_check == 0:
-                return True, end_game
+                return True, False
 
             if validity_check > 0:
                 # Here we type cast the exit dict keys as a list to allow indexing
@@ -136,10 +147,57 @@ class Game:
                     print("\nThis location is blocked. "
                             "Use an item to unblock it or select another location.")
 
-        return False, end_game
+        return False, False
 
-    def __handle_player_speak(self):
-        return False
+    def __handle_player_speak(self, player_loc):
+        # Helper function to handle the player speaking to an NPC. Returns
+        # a tuple where the first value is a bool indicating if the interaction
+        # was successful and the second value is a bool indicating if the player
+        # wants to end the game.
+        loc_npcs = player_loc.get_npcs()
+        end_game = False
+
+        if len(loc_npcs) == 0:
+            print("\nThere are no valid locations to move to.")
+            return False, end_game
+
+        valid = False
+
+        while not valid:
+            print("\nSelect someone to speak to or type 'back' to go back:")
+            for i, npc in enumerate(loc_npcs):
+                print(f"{i + 1} - {npc.get_name()}")
+
+            player_choice = input().strip().lower()
+            validity_check, end_game = self.__validate_input(len(loc_npcs), player_choice)
+
+            if end_game:
+                return False, end_game
+
+            if validity_check == 0:
+                return True, end_game
+
+            if validity_check > 0:
+                chosen_npc = loc_npcs[validity_check - 1]
+                # FIX ME: Implement handling for dialog options when implemented in NPC class.
+                # dialog_opts = chosen_npc.get_dialog_opt()
+
+                # In this set of dialog options the second to last option is suspicious and the
+                # last option is a manipulation attempt.
+                dialog_opts = ["Hello!", "See anything strange?", "What's happening?",
+                               "Where is some of the evidence for this crime?", 
+                               "Have you heard the rumors yet?"]
+
+                valid2 = False
+                while not valid2:
+                    print("\nSelect what you want to say or type 'back' to go back:")
+                    for i, npc in enumerate(dialog_opts):
+                        print(f"{i + 1} - {npc.get_name()}")
+
+                    player_choice = input().strip().lower()
+                    validity_check, end_game = self.__validate_input(len(dialog_opts), player_choice)
+
+        return False, end_game
 
     def __handle_player_use(self):
         return False
