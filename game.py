@@ -29,18 +29,6 @@ class Game:
         """Getter function for the list of locations in the game"""
         return self.__locations
 
-    def get_dialogue_choice(self):
-        """Getter function for the dialogue choice that the player chooses.
-
-        Returns:
-            dialogue_choice (int): The dialogue response the player chose
-        """
-        print("Please choose between these 3 dialogue options to talk to an NPC:")
-        print("1.Ask about the case\n2.Show evidence\n3.Act suspicious")
-
-        dialogue_choice = int(input("Enter an integer (1-3): "))
-        return dialogue_choice
-
     def start_game(self):
         """A method to prompt the user to start the game
 
@@ -49,7 +37,7 @@ class Game:
         we print out a failure message.
         """
         print("Welcome to the game!")
-        choice = input("Do you want to commit a crime? (yes/no): ").lower()
+        choice = input("Do you want to commit a crime? (yes/no): ").lower().strip()
 
         # If the player chooses yes, then they commit crime to start the game.
         if choice == "yes":
@@ -111,8 +99,8 @@ class Game:
 
         print(f"\nSelect {select_msg} or type 'back' to go back:")
         # enumerate is used here to allow us to index the exit dictionary
-        for i, ext in enumerate(options_list):
-            print(f"{i + 1} - {ext}")
+        for i, thing in enumerate(options_list):
+            print(f"{i + 1} - {thing}")
 
         player_choice = input().strip().lower()
         validity_check, end_game = self.__validate_input(len(options_list), player_choice)
@@ -162,36 +150,55 @@ class Game:
         return False, False
 
     def __handle_player_speak(self, player_loc):
-        npcs = player_loc.get_npcs()
+        loc_npcs = player_loc.get_npcs()
 
-        # Make sure there are NPCs for the player to talked to.
-        if len(npcs) == 0:
+        # Make sure there are NPCs for the player to talk to.
+        if len(loc_npcs) == 0:
             print("\nThere is no one to talk to here.")
             return False, False
 
-        print("\nWho do you want to talk to?")
-        # enumerate is used here to allow us to index the npc list
-        for i, npc in enumerate(npcs):
-            print(f"{i + 1} - {npc}")
+        valid = False
 
-        # Get player input for which NPC to talk to.
-        player_choice = input("Choose NPC: ").strip()
+        while not valid:
+            validity_check, end_game = self.__main_input_loop(loc_npcs, "someone to talk to")
 
-        valid, end_game = self.__validate_input(len(npcs), player_choice)
+            # If player chose to exit, stop the game immediately.
+            if end_game:
+                return False, True
 
-        # If player chose to exit, stop the game immediately.
-        if end_game:
-            return False, True
+            # If the player didn't end the game, but validity_check is 0, then the
+            # player has requested to go back.
+            if validity_check == 0:
+                return True, False
 
-        # If input is valid, continue interaction.
-        if valid > 0:
-            chosen_npc = npcs[valid - 1]
+            # If input is valid, continue interaction.
+            if validity_check > 0:
+                chosen_npc = loc_npcs[validity_check - 1]
 
-            dialogue_choice = self.get_dialogue_choice()
+                dialog_choice, end_game = self.__prompt_dialog_choice()
 
-            self.__player.interact_with_npc(dialogue_choice, chosen_npc)
+                # If player chose to exit, stop the game immediately.
+                if end_game:
+                    return False, True
+
+                if dialog_choice > 0:
+                    self.__player.interact_with_npc(dialog_choice, chosen_npc)
+                    valid = True
 
         return False, False
+
+    def __prompt_dialog_choice(self):
+        # Helper function that gets a dialog choice from the player
+        valid = False
+        choices = ["Ask about the case", "Show evidence", "Act suspicious"]
+
+        while not valid:
+            dialog_choice, end_game = self.__main_input_loop(choices, "what you want to say")
+
+            if dialog_choice != -1:
+                valid = True
+
+        return dialog_choice, end_game
 
     def __handle_player_use(self):
         return False
