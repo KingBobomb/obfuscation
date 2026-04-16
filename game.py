@@ -29,6 +29,18 @@ class Game:
         """Getter function for the list of locations in the game"""
         return self.__locations
 
+    def get_dialogue_choice(self):
+        """Getter function for the dialogue choice that the player chooses.
+
+        Returns:
+            dialogue_choice (int): The dialogue response the player chose
+        """
+        print("Please choose between these 3 dialogue options to talk to an NPC:")
+        print("1.Ask about the case\n2.Show evidence\n3.Act suspicious")
+
+        dialogue_choice = int(input("Enter an integer (1-3): "))
+        return dialogue_choice
+
     def start_game(self):
         """A method to prompt the user to start the game
 
@@ -138,8 +150,37 @@ class Game:
 
         return False, end_game
 
-    def __handle_player_speak(self):
-        return False
+    def __handle_player_speak(self, player_loc):
+        npcs = player_loc.get_npcs()
+
+        # Make sure there are NPCs for the player to talked to.
+        if len(npcs) == 0:
+            print("\nThere is no one to talk to here.")
+            return False, False
+
+        print("\nWho do you want to talk to?")
+        # enumerate is used here to allow us to index the npc list
+        for i, npc in enumerate(npcs):
+            print(f"{i + 1} - {npc}")
+
+        # Get player input for which NPC to talk to.
+        player_choice = input("Choose NPC: ").strip()
+
+        valid, end_game = self.__validate_input(len(npcs), player_choice)
+
+        # If player chose to exit, stop the game immediately.
+        if end_game:
+            return False, True
+
+        # If input is valid, continue interaction.
+        if valid > 0:
+            chosen_npc = npcs[valid - 1]
+
+            dialogue_choice = self.get_dialogue_choice()
+
+            self.__player.interact_with_npc(dialogue_choice, chosen_npc)
+
+        return False, False
 
     def __handle_player_use(self):
         return False
