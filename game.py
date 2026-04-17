@@ -202,8 +202,45 @@ class Game:
 
         return dialog_choice, end_game
 
-    def __handle_player_search(self):
+    def __handle_player_search(self, player_loc):
         # Helper function that handles the user searching a location.
+        loc_items = player_loc.get_items()
+
+        # Make sure there are items for the player to search for.
+        if len(loc_items) == 0:
+            print("\nThere is nothing to search for here.")
+            return False, False
+
+        loc_containers = []
+
+        for item in loc_items:
+            loc_containers.append(item.get_container())
+
+        valid = False
+
+        while not valid:
+            validity_check, end_game = self.__main_input_loop(loc_containers,"a location to search")
+
+            # If player chose to exit, stop the game immediately.
+            if end_game:
+                return False, True
+
+            # If the player didn't end the game, but validity_check is 0, then the
+            # player has requested to go back.
+            if validity_check == 0:
+                return True, False
+
+            # If input is valid, continue interaction.
+            if validity_check > 0:
+                chosen_item = loc_items[validity_check - 1]
+
+                if not self.__player.take_item(chosen_item):
+                    print(f"\nYou couldn't search here. {chosen_item.get_block_msg()}")
+                else:
+                    player_loc.remove_item(chosen_item)
+                    print(f"\nYou found: {chosen_item.get_name()}")
+                    valid = True
+
         return False, False
 
     def __handle_player_use(self):
@@ -278,16 +315,18 @@ class Game:
         basement.add_exit(living_room, 0)
         outside.add_exit(foyer, 1)
 
-        knife = Item("Knife", "Knife", kitchen)
-        rolling_pin = Item("Rolling Pin", "Rolling Pin", kitchen)
-        car_keys = Item("Car Keys", "Car Keys", living_room)
-        magazine = Item("Magazine", "Magazine", living_room)
-        spare_change = Item("Spare Change", "Spare Change", foyer)
-        basement_key = Item("Basement Key", "Basement Key", foyer, required_location=living_room)
+        knife = Item("Knife", "Knife", kitchen, container="Drawer")
+        rolling_pin = Item("Rolling Pin", "Rolling Pin", kitchen, container="Cupboard")
+        car_keys = Item("Car Keys", "Car Keys", living_room, container="TV stand")
+        magazine = Item("Magazine", "Magazine", living_room, container="Coffee table")
+        spare_change = Item("Spare Change", "Spare Change", foyer, container="Cabinet")
+        basement_key = Item("Basement Key", "Basement Key", foyer, required_location=living_room,
+                            target_exit=basement, container="Coat rack")
         survey_footage = Item("Surveillance Footage", "Surveillance Footage",
-                              basement, evidence=True)
-        garden_gnome = Item("Garden Gnome", "Garden Gnome", outside, False)
-        spare_key = Item("Spare Key", "Spare Key", outside)
+                              basement, evidence=True, container="Computer")
+        garden_gnome = Item("Garden Gnome", "Garden Gnome", outside, False, container="Bush",
+                            block_msg="The bush was too thick to get through")
+        spare_key = Item("Spare Key", "Spare Key", outside, container="Welcome mat")
 
         kitchen.add_item(knife)
         kitchen.add_item(rolling_pin)
