@@ -108,7 +108,9 @@ class Player:
             Item/Location or if there is enough specific behavior to warrant a unique
             class.
         """
-        if item in self.__inventory and disposal_set_piece.is_unblocked:
+        #FIX ME: Uncomment this line when disposal set piece is implemented
+        # if item in self.__inventory and disposal_set_piece.is_unblocked:
+        if item in self.__inventory and disposal_set_piece:
             self.__inventory.remove(item)
             return True
         return False

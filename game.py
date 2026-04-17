@@ -70,7 +70,7 @@ class Game:
             player_response = input().strip().lower()
 
             # Validate input and detect if the player wants to end the game.
-            valid_check, end_game = self.__validate_input(4, player_response)
+            valid_check, end_game = self.__validate_input(5, player_response)
 
             # Check if player tried to end the game in this menu.
             if end_game:
@@ -93,8 +93,7 @@ class Game:
 
     def __main_input_loop(self, options_list, select_msg):
         # Helper function that handles getting user input, calling the
-        # validator, and deciding what to do with the output
-        # validating it.
+        # validator, and deciding what to do with the output.
         end_game = False
 
         print(f"\nSelect {select_msg} or type 'back' to go back:")
@@ -105,14 +104,11 @@ class Game:
         player_choice = input().strip().lower()
         validity_check, end_game = self.__validate_input(len(options_list), player_choice)
 
-        if end_game:
-            return validity_check, True
-
-        return validity_check, False
+        return validity_check, end_game
 
     def __handle_player_move(self, player_loc):
         # Helper function to handle the player moving. Returns a tuple where
-        # the first value is a bool indicating if the move was successful and
+        # the first value is a bool indicating if player's turn should continue and
         # the second value is a bool indicating if the player wants to end the
         # game.
         loc_exits = player_loc.get_exits()
@@ -150,6 +146,10 @@ class Game:
         return False, False
 
     def __handle_player_speak(self, player_loc):
+        # Helper method for handling the player speaking to an NPC. Returns a tuple where
+        # the first value is a bool indicating if player's turn should continue and
+        # the second value is a bool indicating if the player wants to end the
+        # game.
         loc_npcs = player_loc.get_npcs()
 
         # Make sure there are NPCs for the player to talk to.
@@ -188,7 +188,10 @@ class Game:
         return False, False
 
     def __prompt_dialog_choice(self):
-        # Helper function that gets a dialog choice from the player
+        # Helper function that gets a dialog choice from the player. Returns a tuple where
+        # the first value is a bool indicating if player's turn should continue and
+        # the second value is a bool indicating if the player wants to end the
+        # game.
         valid = False
         choices = ["Ask about the case", "Show evidence", "Act suspicious"]
 
@@ -201,7 +204,10 @@ class Game:
         return dialog_choice, end_game
 
     def __handle_player_search(self, player_loc):
-        # Helper function that handles the user searching a location.
+        # Helper function that handles the player searching a location. Returns a tuple where
+        # the first value is a bool indicating if player's turn should continue and
+        # the second value is a bool indicating if the player wants to end the
+        # game.
         loc_items = player_loc.get_items()
 
         # Make sure there are items for the player to search for.
@@ -242,10 +248,13 @@ class Game:
         return False, False
 
     def __handle_player_use(self, _):
-        # Helper function that handles a user disposing of an item.
+        # Helper function that handles a player using an item. Returns a tuple where
+        # the first value is a bool indicating if player's turn should continue and
+        # the second value is a bool indicating if the player wants to end the
+        # game.
         player_inv = self.__player.get_inventory()
 
-        # Make sure there are items for the player to search for.
+        # Make sure there are items for the player to use.
         if len(player_inv) == 0:
             print("\nYou don't have any items to use.")
             return True, False
@@ -267,12 +276,58 @@ class Game:
             # If input is valid, continue interaction.
             if validity_check > 0:
                 chosen_item = player_inv[validity_check - 1]
+                # Further validity is handled by the player and item classes
                 valid = self.__player.use_item(chosen_item)
 
         return False, False
 
-    def __handle_player_dispose(self):
-        return False
+    def __handle_player_dispose(self, player_loc):
+        # Helper function that handles a user disposing of an item. Returns a tuple where
+        # the first value is a bool indicating if player's turn should continue and
+        # the second value is a bool indicating if the player wants to end the
+        # game.
+        player_inv = self.__player.get_inventory()
+
+        #FIX ME: Adjust to match actual disposal implementation
+        #disposer = player_loc.get_disposer()
+
+        # Make sure there are items for the player to search for.
+        if len(player_inv) == 0:
+            print("\nYou don't have any items to dispose of.")
+            return True, False
+
+        #FIX ME: Uncomment when disposal logic is implemented
+        # Make sure the given location contains a way to dispose items.
+        # if len(player_inv) == 0:
+        #     print("\nThere are no ways to dispose of items here.")
+        #     return True, False
+
+        valid = False
+
+        while not valid:
+            validity_check, end_game = self.__main_input_loop(player_inv, "an item to dispose of")
+
+            # If player chose to exit, stop the game immediately.
+            if end_game:
+                return False, True
+
+            # If the player didn't end the game, but validity_check is 0, then the
+            # player has requested to go back.
+            if validity_check == 0:
+                return True, False
+
+            # If input is valid, continue interaction.
+            if validity_check > 0:
+                chosen_item = player_inv[validity_check - 1]
+                #FIX ME: Replace second arg with disposer when that logic is implemented
+                valid = self.__player.dispose_of_item(chosen_item, player_loc)
+
+                if valid:
+                    print(f"\n{chosen_item.get_name()} was disposed of")
+                else:
+                    print(f"\n{chosen_item.get_name()} can't be disposed of here")
+
+        return False, False
 
     def __validate_input(self, upper_bound, player_response):
         # Helper function to validate a user's input. Returns a tuple where the
