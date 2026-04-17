@@ -97,14 +97,11 @@ class Item:
             the apply_effect helper function still needs to be implemented.
         """
         # Check if the item requires a specific location to be used
-        if self.__required_location and current_location != self.__required_location:
-            print(
-                f"The {self.__name} can't be used here. "
-                f"You need to be in the {self.__required_location.get_name()}."
-            )
+        if current_location != self.__required_location:
+            print(f"\nThe {self.__name} can't be used here.")
             return False
 
-        print(f"You used the {self.__name}: {self.__description}")
+        print(f"\nYou used the {self.__name}")
         self.__apply_effect(current_location)
         return True
 
@@ -116,3 +113,6 @@ class Item:
             # Exits are blocked both ways by default so we must unblock both sides
             self.__target_exit.set_exit(current_location, 1)
             print(f"The way to the {self.__target_exit.get_name()} has been unblocked!")
+
+    def __str__(self):
+        return f"{self.__name}: {self.__description}"
