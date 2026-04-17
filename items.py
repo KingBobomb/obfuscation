@@ -23,13 +23,14 @@ class Item:
         required_location (Location): Specifies the location where the item can be used
     """
     def __init__(self, name, description, location,
-                 can_be_taken=True, evidence=False, required_location=None):
+                 can_be_taken=True, evidence=False, required_location=None, target_exit=None):
         self.__name = name
         self.__description = description
         self.__location = location
         self.__can_be_taken = can_be_taken
         self.__evidence = evidence
         self.__required_location = required_location
+        self.__target_exit = target_location
         self.__is_barred = False
 
     def get_name(self):
@@ -72,15 +73,18 @@ class Item:
         if self.__required_location and current_location != self.__required_location:
             print(
                 f"The {self.__name} can't be used here. "
-                f"You need to be in the {self.__required_location}."
+                f"You need to be in the {self.__required_location.get_name()}."
             )
             return False
 
         print(f"You used the {self.__name}: {self.__description}")
-        self.__apply_effect()
+        self.__apply_effect(current_location)
         return True
 
-    def __apply_effect(self):
-        # Unimplemented helper function for actually using an item
-        pass
+    def __apply_effect(self, current_location):
+        # If this item has a target exit, unblock it in the current location
+        if self.__target_exit:
+            # 1 represents the unblocked state in the Location class 
+            current_location.set_exit(self.__target_exit, 1)
+            print(f"The way to the {self.__target_exit.get_name()} has been unblocked!")
 
