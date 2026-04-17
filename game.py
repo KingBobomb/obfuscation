@@ -56,14 +56,16 @@ class Game:
         player_turn = True
         # Function references the player can choose from
         action_list = [self.__handle_player_move, self.__handle_player_speak,
-                       self.__handle_player_use, self.__handle_player_dispose]
+                       self.__handle_player_search, self.__handle_player_use,
+                       self.__handle_player_dispose]
 
         while player_turn:
             print("\nPlease enter the number of the option you'd like to select:")
             print("1 - Move to a new room")
             print("2 - Speak with someone in the room")
-            print("3 - Use an item")
-            print("4 - Dispose of an item")
+            print("3 - Search for an item")
+            print("4 - Use an item")
+            print("5 - Dispose of an item")
 
             player_response = input().strip().lower()
 
@@ -199,6 +201,10 @@ class Game:
                 valid = True
 
         return dialog_choice, end_game
+
+    def __handle_player_search(self):
+        # Helper function that handles the user searching a location.
+        return False, False
 
     def __handle_player_use(self):
         return False
