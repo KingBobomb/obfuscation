@@ -19,10 +19,11 @@ class Game:
     when necessary.
     """
     def __init__(self):
+        self.__locations = []
+        self.__important_items = []
         player, ai = self.__create_game()
         self.__player = player
         self.__ai = ai
-        self.__locations = []
         self.__game_active = False
 
     def get_locations(self):
@@ -88,6 +89,9 @@ class Game:
             # Check if the player tried to end the game in the sub-menu
             if end_game:
                 return False
+
+        if len(self.__important_items) == 0:
+            return False
 
         return True
 
@@ -324,6 +328,8 @@ class Game:
 
                 if valid:
                     print(f"\n{chosen_item.get_name()} was disposed of")
+                    if chosen_item in self.__important_items:
+                        self.__important_items.remove(chosen_item)
                 else:
                     print(f"\n{chosen_item.get_name()} can't be disposed of here")
 
@@ -380,6 +386,12 @@ class Game:
             if self.__game_active:
                 print()
                 self.__game_active = self.__ai.take_turn()
+                if not self.__game_active:
+                    print("The investigator has found enough evidence to link you to the crime."
+                          " You Lose!")
+            else:
+                print("You have successfully destroyed all evidence linking you to the crime."
+                      " You Win!")
 
     def __create_game(self):
         # Helper method to initialize game objects
@@ -435,7 +447,7 @@ class Game:
         outside.add_npc(guest4)
 
         self.__locations = [kitchen, living_room, foyer, basement, outside]
-
+        self.__important_items = [survey_footage]
         player = Player(kitchen)
         ai = AiAgent({'move': 1, 'search': 2, 'talk': 2}, living_room, [survey_footage])
 
