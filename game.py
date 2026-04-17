@@ -69,17 +69,15 @@ class Game:
 
             player_response = input().strip().lower()
 
-            # Player shouldn't be able to go back from here, so set an input of back
-            # to garbage data.
-            if player_response == 'back':
-                player_response = "back to where?"
-
             # Validate input and detect if the player wants to end the game.
             valid_check, end_game = self.__validate_input(4, player_response)
 
             # Check if player tried to end the game in this menu.
             if end_game:
                 return False
+
+            if player_response == 'back':
+                print("\nNo turning back now.")
 
             if valid_check > 0:
                 # Index the player's chosen function. If the function is successful,
@@ -123,7 +121,7 @@ class Game:
         # Make sure there are locations for the player to move to.
         if len(loc_exits) == 0:
             print("\nThere are no valid locations to move to.")
-            return False, False
+            return True, False
 
         while not valid:
             validity_check, end_game = self.__main_input_loop(loc_exits, "a location to move to:")
@@ -157,7 +155,7 @@ class Game:
         # Make sure there are NPCs for the player to talk to.
         if len(loc_npcs) == 0:
             print("\nThere is no one to talk to here.")
-            return False, False
+            return True, False
 
         valid = False
 
@@ -209,7 +207,7 @@ class Game:
         # Make sure there are items for the player to search for.
         if len(loc_items) == 0:
             print("\nThere is nothing to search for here.")
-            return False, False
+            return True, False
 
         loc_containers = []
 
@@ -243,8 +241,35 @@ class Game:
 
         return False, False
 
-    def __handle_player_use(self):
-        return False
+    def __handle_player_use(self, _):
+        # Helper function that handles a user disposing of an item.
+        player_inv = self.__player.get_inventory()
+
+        # Make sure there are items for the player to search for.
+        if len(player_inv) == 0:
+            print("\nYou don't have any items to use.")
+            return True, False
+
+        valid = False
+
+        while not valid:
+            validity_check, end_game = self.__main_input_loop(player_inv, "an item to use")
+
+            # If player chose to exit, stop the game immediately.
+            if end_game:
+                return False, True
+
+            # If the player didn't end the game, but validity_check is 0, then the
+            # player has requested to go back.
+            if validity_check == 0:
+                return True, False
+
+            # If input is valid, continue interaction.
+            if validity_check > 0:
+                chosen_item = player_inv[validity_check - 1]
+                valid = self.__player.use_item(chosen_item)
+
+        return False, False
 
     def __handle_player_dispose(self):
         return False
