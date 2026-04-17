@@ -21,28 +21,48 @@ class Item:
         can_be_taken (bool): Specifies if the player can pick up the item (default = True)
         evidence (bool): Specifies if the item is a key item (default = False)
         required_location (Location): Specifies the location where the item can be used
+        container (string): Name of the container the item is in.
+        block_msg (string): Message to display when an attempt to pick up the item fails
+        unblock_item (Item or None): The item required to unblock this item
+        exit_to_unblock (Location or None): The exit this item unblocks
     """
     def __init__(self, name, description, location,
-                 can_be_taken=True, evidence=False, required_location=None):
+                 can_be_taken = True, evidence = False, required_location = None,
+                 container="", block_msg="", unblock_item = None, exit_to_unblock = None):
         self.__name = name
         self.__description = description
         self.__location = location
         self.__can_be_taken = can_be_taken
         self.__evidence = evidence
         self.__required_location = required_location
-        self.__is_barred = False
+        self.__container = container
+        self.__block_msg = block_msg
+        self.__unblock_item = unblock_item
+        self.__exit_to_unblock = exit_to_unblock
 
     def get_name(self):
         """Getter method for the Item's name"""
         return self.__name
 
+    def get_container(self):
+        """Getter method for the Item's container"""
+        return self.__container
+
+    def get_unblock_item(self):
+        """Getter method for the Item's unblock item"""
+        return self.__unblock_item
+
+    def get_block_msg(self):
+        """Getter for the Item's block message"""
+        return self.__block_msg
+
+    def get_exit_to_unblock(self):
+        """Getter for the exit this item unblocks"""
+        return self.__exit_to_unblock
+
     def can_be_taken(self):
         """Method to check if an item can be picked up"""
         return self.__can_be_taken
-
-    def is_barred(self):
-        """Method to check if the item is blocked from being picked up"""
-        return self.__is_barred
 
     def is_evidence(self):
         """Method to check if an item is a key item"""
@@ -52,8 +72,16 @@ class Item:
         """Getter method for the item's current location"""
         return self.__location
 
+    def set_unblock_item(self, unblock_item):
+        """Setter method for the Item's unblock Item"""
+        self.__unblock_item = unblock_item
+
+    def set_exit_to_unblock(self, exit_to_unblock):
+        """Setter method for the exit this item unblocks"""
+        self.__exit_to_unblock = exit_to_unblock
+
     def use(self, current_location):
-        """Incomplete method to allow the caller to use an item.
+        """Method to allow the caller to use an item.
 
         This method takes in a location, checks if the item can
         be used there, and applies the Item's effect.
