@@ -71,20 +71,17 @@ class Player:
         return False
 
     def use_item(self, item):
-        """A method to allow the player to use items in their inventory
-
-        This method takes in an item that the player wants to use, checks
-        if it is in their inventory, and calls that Item's use function.
-        Returns True if successful, and False if unsuccessful
-
-        Arguments:
-            item (Item): The item the player is attempting to use
-
-        Returns:
-            True if using the item is successful, False if using the item is invalid
-        """
+        """A method to allow the player to use items in their inventory"""
         if item in self.__inventory:
-            return item.use(self.__location)
+            used_successfully = item.use(self.__location)
+            
+            #If it worked and the item is consumabable remove it.
+            if used_successfully and item.is_consumable():
+                self.__inventory.remove(item)
+                print(f"The {item.get_name()} was consumed.")
+                
+            return used_successfully
+            
         return False
 
     def dispose_of_item(self, item, disposal_set_piece):
