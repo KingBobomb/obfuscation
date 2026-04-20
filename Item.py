@@ -23,7 +23,7 @@ class Item:
         required_location (Location): Specifies the location where the item can be used
     """
     def __init__(self, name, description, location,
-                 can_be_taken=True, evidence=False, required_location=None, target_exit=None):
+                 can_be_taken=True, evidence=False, required_location=None, target_exit=None, is_consumable=False, effect_type="unblock"):
         self.__name = name
         self.__description = description
         self.__location = location
@@ -32,7 +32,13 @@ class Item:
         self.__required_location = required_location
         self.__target_exit = target_exit
         self.__is_barred = False
+        self.__is_consumable = is_consumable
+        self.__effect_type = effect_type
 
+    def is_consumable(self):
+        """Method to check if the item is still in invintory after usage"""
+        return self.__is_consumable
+        
     def get_name(self):
         """Getter method for the Item's name"""
         return self.__name
@@ -82,8 +88,12 @@ class Item:
         return True
 
     def __apply_effect(self, current_location):
-        # If this item has a target exit, unblock it in the current location
-        if self.__target_exit:
-            # 1 represents the "unblocked" state in the Location class 
-            current_location.set_exit(self.__target_exit, 1)
-            print(f"The way to the {self.__target_exit.get_name()} has been unblocked!")
+        if self.__effect_type = "unblocked":
+            if self.__target_exit:
+                # 1 represents the "unblocked" state in the Location class 
+                current_location.set_exit(self.__target_exit, 1)
+                print(f"The way to the {self.__target_exit.get_name()} has been unblocked!")
+        elif self.__effect_type == "distract":
+            print(f"You used the {self.__name} to create a distraction.")    
+        elif self.__effect_type == "disguise":
+            print(f"You put on the {self.__name}. You look less suspicious.")
