@@ -85,33 +85,31 @@ class Player:
         return False
 
     def dispose_of_item(self, item, disposal_set_piece):
-        """A currently incomplete method designed to allow players to dispose of items
-
-        This is a currently incomplete method that takes in an item that the player wants
-        to dispose of and an object that the want to use to dispose it, checks if the item
-        is in their inventory and the disposal object is unblocked, and removes that Item's
-        from the player's inventory. Returns True if successful, and False if unsuccessful
-
-        Arguments:
-            item (Item): The item the player is attempting to use
-            disposal_set_piece (Object): The object used to dispose of the Item
-
+        """Allows the player to dispose of an item using a valid disposal object.
+    
+        Checks:
+        - Item exists in inventory
+        - Disposal object is valid
+        - Disposal object is unblocked
+    
         Returns:
-            True if using the item is successful, False if using the item is invalid
-
-        Notes:
-            As of this release this function is unfinished as there are still ongoing
-            discussions about whether the disposal object should be an instance of
-            Item/Location or if there is enough specific behavior to warrant a unique
-            class.
+            True if successful, False otherwise
         """
-        #FIX ME: Uncomment this line when disposal set piece is implemented
-        # if item in self.__inventory and disposal_set_piece.is_unblocked:
-        if item in self.__inventory and disposal_set_piece:
-            self.__inventory.remove(item)
-            return True
-        return False
-
+    
+        if item not in self.__inventory:
+            return False
+    
+        if disposal_set_piece is None:
+            return False
+    
+        if hasattr(disposal_set_piece, "is_unblocked"):
+            if not disposal_set_piece.is_unblocked():
+                return False
+    
+        # Remove item from inventory
+        self.__inventory.remove(item)
+        return True
+        
     def interact_with_npc(self, dialogue_choice, chosen_npc):
         """A currently incomplete method designed to allow players to talk to NPCs
 
