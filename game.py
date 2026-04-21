@@ -80,9 +80,15 @@ class Game:
         knife = Item("Knife", "Knife", kitchen)
         rolling_pin = Item("Rolling Pin", "Rolling Pin", kitchen)
         car_keys = Item("Car Keys", "Car Keys", living_room)
-        magazine = Item("Magazine", "Magazine", living_room)
+        magazine = Item("Magazine", "A distracting magazine", living_room, 
+                is_consumable=True, 
+                effect_type="distract")
         spare_change = Item("Spare Change", "Spare Change", foyer)
-        basement_key = Item("Basement Key", "Basement Key", foyer, required_location=living_room, target_exit=basement)
+        basement_key = Item("Basement Key", "Basement Key", foyer, 
+                    required_location=living_room, 
+                    target_exit=basement, 
+                    is_consumable=False, 
+                    effect_type="unblock")
         survey_footage = Item("Surveillance Footage", "Surveillance Footage",
                               basement, evidence=True)
         garden_gnome = Item("Garden Gnome", "Garden Gnome", outside, False)
