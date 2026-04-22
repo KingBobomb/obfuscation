@@ -22,10 +22,10 @@ class Item:
             the item (default = True)
         evidence (bool): Specifies if the item is a key
             item (default = False)
-        required_location (Location): Specifies the location where
-            the item can be used (default = None)
-        target_exit (Location): Specifies the location that the
-            item can unblock (default = None)
+        required_location (Location or None): Specifies the location
+            where the item can be used (default = None)
+        target_exit (Location or None): Specifies the location that
+            the item can unblock (default = None)
         consumable (bool): Specifies whether an item should be
             removed after use (default = False)
         container (string): Name of the container the item is in.
@@ -34,11 +34,11 @@ class Item:
         unblock_item (Item or None): The item required to unblock
             this item
         effect_type (string): String specifying the special behavior
-            of an item if it has one (default = "unblock")
+            of an item if it has one
     """
     def __init__(self, name, description, location, can_be_taken=True, evidence=False,
                  required_location=None, target_exit=None, consumable=False,
-                 effect_type="unblock", container="", block_msg="", unblock_item = None):
+                 effect_type="", container="", block_msg="", unblock_item = None):
         self.__name = name
         self.__description = description
         self.__location = location
@@ -119,7 +119,7 @@ class Item:
         return True
 
     def __apply_effect(self, current_location):
-        if self.__effect_type == "unblocked":
+        if self.__effect_type == "unblock":
             if self.__target_exit:
                 # 1 represents the "unblocked" state in the Location class
                 current_location.set_exit(self.__target_exit, 1)
