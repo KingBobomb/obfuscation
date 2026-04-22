@@ -111,21 +111,21 @@ class Player:
         Returns:
             True if successful, False if unsuccessful
         """
-    
+
         if item not in self.__inventory:
             return False
-    
+
         if disposal_set_piece is None:
             return False
-    
+
         if hasattr(disposal_set_piece, "is_unblocked"):
             if not disposal_set_piece.is_unblocked():
                 return False
-    
+
         # Remove item from inventory
         self.__inventory.remove(item)
         return True
-        
+
     def interact_with_npc(self, dialogue_choice, chosen_npc):
         """A currently incomplete method designed to allow players to talk to NPCs
 
