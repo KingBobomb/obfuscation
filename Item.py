@@ -135,5 +135,5 @@ class Item:
         elif self.__effect_type == "disguise":
             print(f"You put on the {self.__name}. You look less suspicious.")
 
-def __str__(self):
+    def __str__(self):
         return f"{self.__name}: {self.__description}"
