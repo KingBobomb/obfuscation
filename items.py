@@ -26,9 +26,9 @@ class Item:
         unblock_item (Item or None): The item required to unblock this item
         target_exit (Location or None): The exit this item unblocks
     """
-    def __init__(self, name, description, location,can_be_taken=True, evidence=False,
-                 required_location=None, container="", block_msg="", unblock_item=None,
-                 target_exit=None):
+    def __init__(self, name, description, location,
+                 can_be_taken = True, evidence = False, required_location = None,
+                 container="", block_msg="", unblock_item = None, target_exit = None):
         self.__name = name
         self.__description = description
         self.__location = location
@@ -81,7 +81,7 @@ class Item:
         self.__target_exit = target_exit
 
     def use(self, current_location):
-        """Incomplete method to allow the caller to use an item.
+        """Method to allow the caller to use an item.
 
         This method takes in a location, checks if the item can
         be used there, and applies the Item's effect.
