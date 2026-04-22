@@ -9,7 +9,7 @@ Classes:
 class Item:
     """A class to create and manage an Item.
 
-    This class is designed to initialize an Item and manage it's data,
+    This class is designed to initialize an Item and manage its data,
     including whether or not it's a key item, the location of the item,
     where the item can be used, if the item can be picked up, the item's
     name and the item's description.
@@ -98,7 +98,7 @@ class Item:
         self.__target_exit = target_exit
 
     def use(self, current_location):
-        """Incomplete method to allow the caller to use an item.
+        """A method to allow the caller to use an item.
 
         This method takes in a location, checks if the item can
         be used there, and applies the Item's effect.
@@ -108,10 +108,6 @@ class Item:
 
         Returns:
             True if the item was successfully used, False if not.
-
-        Notes:
-            This method is currently incomplete for this release as
-            the apply_effect helper function still needs to be implemented.
         """
         # Check if the item requires a specific location to be used
         if current_location != self.__required_location:
@@ -127,7 +123,7 @@ class Item:
             if self.__target_exit:
                 # 1 represents the "unblocked" state in the Location class
                 current_location.set_exit(self.__target_exit, 1)
-                # Exits are blocked both ways by default so we must unblock both sides
+                # Exits are blocked both ways by default, so we must unblock both sides
                 self.__target_exit.set_exit(current_location, 1)
                 print(f"The way to the {self.__target_exit.get_name()} has been unblocked!")
         elif self.__effect_type == "distract":
