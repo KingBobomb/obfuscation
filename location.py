@@ -17,7 +17,8 @@ class Location:
         name (string): Name of the given location
         description (string): The description of the given location
         items (list or None): The list of items at the given location.
-        exits (dict or None): A dictionary of the location's exits and their block state
+        exits (dict or None): A dictionary of the location's exits and
+            their block state
         npcs (list or None): The list of npcs at the given location.
     """
     def __init__(self, name, description, items=None, exits=None, npcs=None):
