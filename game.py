@@ -6,7 +6,7 @@ Classes:
 """
 from player import Player
 from ai import AiAgent
-from items import Item
+from item import Item
 from npc import NPC
 from location import Location
 
@@ -409,11 +409,11 @@ class Game:
         knife = Item("Knife", "Knife", kitchen, container="Drawer")
         rolling_pin = Item("Rolling Pin", "Rolling Pin", kitchen, container="Cupboard")
         car_keys = Item("Car Keys", "Car Keys", living_room, container="TV stand")
-        magazine = Item("Magazine", "Magazine", living_room, container="Coffee table", 
-                        is_consumable=True, effect_type="distract")
+        magazine = Item("Magazine", "Magazine", living_room, container="Coffee table",
+                        consumable=True, effect_type="distract")
         spare_change = Item("Spare Change", "Spare Change", foyer, container="Cabinet")
         basement_key = Item("Basement Key", "Basement Key", foyer, required_location=living_room,
-                            target_exit=basement, container="Coat rack", is_consumable=False,
+                            target_exit=basement, container="Coat rack", consumable=False,
                             effect_type="unblock")
         survey_footage = Item("Surveillance Footage", "Surveillance Footage",
                               basement, evidence=True, container="Computer")
