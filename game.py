@@ -19,10 +19,11 @@ class Game:
     when necessary.
     """
     def __init__(self):
+        self.__locations = []
+        self.__important_items = []
         player, ai = self.__create_game()
         self.__player = player
         self.__ai = ai
-        self.__locations = []
         self.__game_active = False
 
     def get_locations(self):
@@ -37,7 +38,7 @@ class Game:
         we print out a failure message.
         """
         print("Welcome to the game!")
-        choice = input("Do you want to commit a crime? (yes/no): ").lower()
+        choice = input("Do you want to commit a crime? (yes/no): ").lower().strip()
 
         # If the player chooses yes, then they commit crime to start the game.
         if choice == "yes":
@@ -45,9 +46,332 @@ class Game:
         else:
             print("You can't start without committing a crime.")
 
+    def __prompt_user(self):
+        # Helper method to obtain user input
+
+        # Obtain player location
+        player_loc = self.__player.get_location()
+
+        print(f"Current location - {player_loc}")
+
+        player_turn = True
+        # Function references the player can choose from
+        action_list = [self.__handle_player_move, self.__handle_player_speak,
+                       self.__handle_player_search, self.__handle_player_use,
+                       self.__handle_player_dispose]
+
+        while player_turn:
+            print("\nPlease enter the number of the option you'd like to select:")
+            print("1 - Move to a new room")
+            print("2 - Speak with someone in the room")
+            print("3 - Search for an item")
+            print("4 - Use an item")
+            print("5 - Dispose of an item")
+
+            player_response = input().strip().lower()
+
+            # Validate input and detect if the player wants to end the game.
+            valid_check, end_game = self.__validate_input(5, player_response)
+
+            # Check if player tried to end the game in this menu.
+            if end_game:
+                return False
+
+            if player_response == 'back':
+                print("\nNo turning back now.")
+
+            if valid_check > 0:
+                # Index the player's chosen function. If the function is successful,
+                # we end the player's turn, if not we re-prompt. Also, detect if player
+                # tried to end the game in the sub menu
+                player_turn, end_game = action_list[valid_check - 1](player_loc)
+
+            # Check if the player tried to end the game in the sub-menu
+            if end_game:
+                return False
+
+        if len(self.__important_items) == 0:
+            return False
+
+        return True
+
+    def __main_input_loop(self, options_list, select_msg):
+        # Helper function that handles getting user input, calling the
+        # validator, and deciding what to do with the output.
+        end_game = False
+
+        print(f"\nSelect {select_msg} or type 'back' to go back:")
+        # enumerate is used here to allow us to index the exit dictionary
+        for i, thing in enumerate(options_list):
+            print(f"{i + 1} - {thing}")
+
+        player_choice = input().strip().lower()
+        validity_check, end_game = self.__validate_input(len(options_list), player_choice)
+
+        return validity_check, end_game
+
+    def __handle_player_move(self, player_loc):
+        # Helper function to handle the player moving. Returns a tuple where
+        # the first value is a bool indicating if player's turn should continue and
+        # the second value is a bool indicating if the player wants to end the
+        # game.
+        loc_exits = player_loc.get_exits()
+        valid = False
+
+        # Make sure there are locations for the player to move to.
+        if len(loc_exits) == 0:
+            print("\nThere are no valid locations to move to.")
+            return True, False
+
+        while not valid:
+            validity_check, end_game = self.__main_input_loop(loc_exits, "a location to move to:")
+
+            # Check if player decided to end the game
+            if end_game:
+                return False, True
+
+            # If the player didn't end the game, but validity_check is 0, then the
+            # player has requested to go back.
+            if validity_check == 0:
+                return True, False
+
+            if validity_check > 0:
+                # Here we type cast the exit dict keys as a list to allow indexing
+                chosen_exit = list(loc_exits.keys())[validity_check - 1]
+
+                # Make sure that the player can move to the location they chose
+                if self.__player.move_to(chosen_exit):
+                    print(f"Moved to {chosen_exit.get_name()}")
+                    valid = True
+                else:
+                    print("\nThis location is blocked. "
+                            "Use an item to unblock it or select another location.")
+
+        return False, False
+
+    def __handle_player_speak(self, player_loc):
+        # Helper method for handling the player speaking to an NPC. Returns a tuple where
+        # the first value is a bool indicating if player's turn should continue and
+        # the second value is a bool indicating if the player wants to end the
+        # game.
+        loc_npcs = player_loc.get_npcs()
+
+        # Make sure there are NPCs for the player to talk to.
+        if len(loc_npcs) == 0:
+            print("\nThere is no one to talk to here.")
+            return True, False
+
+        valid = False
+
+        while not valid:
+            validity_check, end_game = self.__main_input_loop(loc_npcs, "someone to talk to")
+
+            # If player chose to exit, stop the game immediately.
+            if end_game:
+                return False, True
+
+            # If the player didn't end the game, but validity_check is 0, then the
+            # player has requested to go back.
+            if validity_check == 0:
+                return True, False
+
+            # If input is valid, continue interaction.
+            if validity_check > 0:
+                chosen_npc = loc_npcs[validity_check - 1]
+
+                dialog_choice, end_game = self.__prompt_dialog_choice()
+
+                # If player chose to exit, stop the game immediately.
+                if end_game:
+                    return False, True
+
+                if dialog_choice > 0:
+                    self.__player.interact_with_npc(dialog_choice, chosen_npc)
+                    valid = True
+
+        return False, False
+
+    def __prompt_dialog_choice(self):
+        # Helper function that gets a dialog choice from the player. Returns a tuple where
+        # the first value is a bool indicating if player's turn should continue and
+        # the second value is a bool indicating if the player wants to end the
+        # game.
+        valid = False
+        choices = ["Ask about the case", "Show evidence", "Act suspicious"]
+
+        while not valid:
+            dialog_choice, end_game = self.__main_input_loop(choices, "what you want to say")
+
+            if dialog_choice != -1:
+                valid = True
+
+        return dialog_choice, end_game
+
+    def __handle_player_search(self, player_loc):
+        # Helper function that handles the player searching a location. Returns a tuple where
+        # the first value is a bool indicating if player's turn should continue and
+        # the second value is a bool indicating if the player wants to end the
+        # game.
+        loc_items = player_loc.get_items()
+
+        # Make sure there are items for the player to search for.
+        if len(loc_items) == 0:
+            print("\nThere is nothing to search for here.")
+            return True, False
+
+        loc_containers = []
+
+        for item in loc_items:
+            loc_containers.append(item.get_container())
+
+        valid = False
+
+        while not valid:
+            validity_check, end_game = self.__main_input_loop(loc_containers,"a location to search")
+
+            # If player chose to exit, stop the game immediately.
+            if end_game:
+                return False, True
+
+            # If the player didn't end the game, but validity_check is 0, then the
+            # player has requested to go back.
+            if validity_check == 0:
+                return True, False
+
+            # If input is valid, continue interaction.
+            if validity_check > 0:
+                chosen_item = loc_items[validity_check - 1]
+
+                if not self.__player.take_item(chosen_item):
+                    print(f"\nYou couldn't search here. {chosen_item.get_block_msg()}")
+                else:
+                    player_loc.remove_item(chosen_item)
+                    print(f"\nYou found: {chosen_item.get_name()}")
+                    valid = True
+
+        return False, False
+
+    def __handle_player_use(self, _):
+        # Helper function that handles a player using an item. Returns a tuple where
+        # the first value is a bool indicating if player's turn should continue and
+        # the second value is a bool indicating if the player wants to end the
+        # game.
+        player_inv = self.__player.get_inventory()
+
+        # Make sure there are items for the player to use.
+        if len(player_inv) == 0:
+            print("\nYou don't have any items to use.")
+            return True, False
+
+        valid = False
+
+        while not valid:
+            validity_check, end_game = self.__main_input_loop(player_inv, "an item to use")
+
+            # If player chose to exit, stop the game immediately.
+            if end_game:
+                return False, True
+
+            # If the player didn't end the game, but validity_check is 0, then the
+            # player has requested to go back.
+            if validity_check == 0:
+                return True, False
+
+            # If input is valid, continue interaction.
+            if validity_check > 0:
+                chosen_item = player_inv[validity_check - 1]
+                # Further validity is handled by the player and item classes
+                valid = self.__player.use_item(chosen_item)
+
+        return False, False
+
+    def __handle_player_dispose(self, player_loc):
+        # Helper function that handles a user disposing of an item. Returns a tuple where
+        # the first value is a bool indicating if player's turn should continue and
+        # the second value is a bool indicating if the player wants to end the
+        # game.
+        player_inv = self.__player.get_inventory()
+
+        #FIX ME: Adjust to match actual disposal implementation
+        #disposer = player_loc.get_disposer()
+
+        # Make sure there are items for the player to search for.
+        if len(player_inv) == 0:
+            print("\nYou don't have any items to dispose of.")
+            return True, False
+
+        #FIX ME: Uncomment when disposal logic is implemented
+        # Make sure the given location contains a way to dispose items.
+        # if len(player_inv) == 0:
+        #     print("\nThere are no ways to dispose of items here.")
+        #     return True, False
+
+        valid = False
+
+        while not valid:
+            validity_check, end_game = self.__main_input_loop(player_inv, "an item to dispose of")
+
+            # If player chose to exit, stop the game immediately.
+            if end_game:
+                return False, True
+
+            # If the player didn't end the game, but validity_check is 0, then the
+            # player has requested to go back.
+            if validity_check == 0:
+                return True, False
+
+            # If input is valid, continue interaction.
+            if validity_check > 0:
+                chosen_item = player_inv[validity_check - 1]
+                #FIX ME: Replace second arg with disposer when that logic is implemented
+                valid = self.__player.dispose_of_item(chosen_item, player_loc)
+
+                if valid:
+                    print(f"\n{chosen_item.get_name()} was disposed of")
+                    if chosen_item in self.__important_items:
+                        self.__important_items.remove(chosen_item)
+                else:
+                    print(f"\n{chosen_item.get_name()} can't be disposed of here")
+
+        return False, False
+
+    def __validate_input(self, upper_bound, player_response):
+        # Helper function to validate a user's input. Returns a tuple where the
+        # first value is -1 if invalid, 0 if an accepted word is detected/the
+        # player attempts to end the game, and the player's response as an int
+        # if valid, and the second value is true if the player wants to end the
+        # game and false if not.
+
+        if upper_bound == 1:
+            ext_msg = "Please enter 1 to make this selection."
+        else:
+            ext_msg = f"Please enter a number between 1 and {upper_bound} to make a selection."
+
+        if player_response in ['exit', 'quit']:
+            print("Ending game...")
+            return (0, True)
+
+        if player_response == 'back':
+            return (0, False)
+
+        if not player_response.isnumeric():
+            print("\nSorry, I didn't understand.")
+            print(ext_msg)
+            return (-1, False)
+
+        selected = int(player_response)
+
+        if 1 <= selected <= upper_bound:
+            return (selected, False)
+
+        print("\nSorry, I didn't understand.")
+        print(ext_msg)
+        return (-1, False)
+
     def __commit_crime(self):
         # Helper method to actually activate the game
         print("You committed a crime.")
+        print("Type exit or quit to end the game at any point.\n")
 
         # Game is active and a crime has been committed to start the game.
         self.__game_active = True
@@ -56,12 +380,17 @@ class Game:
     def __run_game(self):
         # Helper method that contains the game loop
         while self.__game_active:
-            # FIX ME: Swap to player turn function when one is implemented.
-            self.__player.get_inventory()
-            self.__game_active = self.__ai.take_turn()
-            # FIX ME: Remove this call for actual game, this is to prevent
-            # looping forever.
-            self.__ai.increment_suspicion_meter(5)
+            self.__game_active = self.__prompt_user()
+
+            if self.__game_active:
+                print()
+                self.__game_active = self.__ai.take_turn()
+                if not self.__game_active:
+                    print("The investigator has found enough evidence to link you to the crime."
+                          " You Lose!")
+            else:
+                print("You have successfully destroyed all evidence linking you to the crime."
+                      " You Win!")
 
     def __create_game(self):
         # Helper method to initialize game objects
@@ -77,22 +406,20 @@ class Game:
         basement.add_exit(living_room, 0)
         outside.add_exit(foyer, 1)
 
-        knife = Item("Knife", "Knife", kitchen)
-        rolling_pin = Item("Rolling Pin", "Rolling Pin", kitchen)
-        car_keys = Item("Car Keys", "Car Keys", living_room)
-        magazine = Item("Magazine", "A distracting magazine", living_room, 
-                is_consumable=True, 
-                effect_type="distract")
-        spare_change = Item("Spare Change", "Spare Change", foyer)
-        basement_key = Item("Basement Key", "Basement Key", foyer, 
-                    required_location=living_room, 
-                    target_exit=basement, 
-                    is_consumable=False, 
-                    effect_type="unblock")
+        knife = Item("Knife", "Knife", kitchen, container="Drawer")
+        rolling_pin = Item("Rolling Pin", "Rolling Pin", kitchen, container="Cupboard")
+        car_keys = Item("Car Keys", "Car Keys", living_room, container="TV stand")
+        magazine = Item("Magazine", "Magazine", living_room, container="Coffee table", 
+                        is_consumable=True, effect_type="distract")
+        spare_change = Item("Spare Change", "Spare Change", foyer, container="Cabinet")
+        basement_key = Item("Basement Key", "Basement Key", foyer, required_location=living_room,
+                            target_exit=basement, container="Coat rack", is_consumable=False,
+                            effect_type="unblock")
         survey_footage = Item("Surveillance Footage", "Surveillance Footage",
-                              basement, evidence=True)
-        garden_gnome = Item("Garden Gnome", "Garden Gnome", outside, False)
-        spare_key = Item("Spare Key", "Spare Key", outside)
+                              basement, evidence=True, container="Computer")
+        garden_gnome = Item("Garden Gnome", "Garden Gnome", outside, False, container="Bush",
+                            block_msg="The bush was too thick to get through")
+        spare_key = Item("Spare Key", "Spare Key", outside, container="Welcome mat")
 
         kitchen.add_item(knife)
         kitchen.add_item(rolling_pin)
@@ -121,8 +448,8 @@ class Game:
         outside.add_npc(guest4)
 
         self.__locations = [kitchen, living_room, foyer, basement, outside]
-
+        self.__important_items = [survey_footage]
         player = Player(kitchen)
         ai = AiAgent({'move': 1, 'search': 2, 'talk': 2}, living_room, [survey_footage])
 
-        return player, ai
+        return (player, ai)

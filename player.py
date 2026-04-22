@@ -71,11 +71,22 @@ class Player:
         return False
 
     def use_item(self, item):
-        """A method to allow the player to use items in their inventory"""
+        """A method to allow the player to use items in their inventory
+
+        This method takes in an item that the player wants to use, checks
+        if it is in their inventory, and calls that Item's use function.
+        Returns True if successful, and False if unsuccessful
+
+        Arguments:
+            item (Item): The item the player is attempting to use
+
+        Returns:
+            True if using the item is successful, False if using the item is invalid
+        """
         if item in self.__inventory:
             used_successfully = item.use(self.__location)
             
-            #If it worked and the item is consumabable remove it.
+            #If it worked and the item is consumable remove it.
             if used_successfully and item.is_consumable():
                 self.__inventory.remove(item)
                 print(f"The {item.get_name()} was consumed.")
@@ -86,14 +97,19 @@ class Player:
 
     def dispose_of_item(self, item, disposal_set_piece):
         """Allows the player to dispose of an item using a valid disposal object.
-    
-        Checks:
-        - Item exists in inventory
-        - Disposal object is valid
-        - Disposal object is unblocked
+
+        A method that takes in an item that the player wants to dispose of and an object
+        that the want to use to dispose it, checks if the item is in their inventory, the
+        disposal object is valid, and the disposal object is unblocked. If so it removes 
+        that Item from the player's inventory and returns True. Returns False if 
+        unsuccessful.
+
+        Arguments:
+            item (Item): The item the player is attempting to dispose of
+            disposal_set_piece (Object): The object used to dispose of the Item
     
         Returns:
-            True if successful, False otherwise
+            True if successful, False if unsuccessful
         """
     
         if item not in self.__inventory:
