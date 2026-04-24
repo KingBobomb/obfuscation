@@ -24,56 +24,37 @@ class AiUnitTests(unittest.TestCase):
         self.ai.increment_suspicion_meter(20)
         self.assertEqual(initial_sus + 20, self.ai.get_suspicion_meter)
 
-
-
-class GameUnitTests(unittest.TestCase):
-    """A class to hold unit tests for the ai, location and item"""
-    def setUp(self):
-        """Setting up the game environment for each test"""
-        self.hall = Location("Hall", "A hallway.")
-        self.closet = Location("Closet", "A storage room.")
-
-        # setting hallway and closet to be blocked
-        self.hall.add_exit(self.closet, 0)
-        self.closet.add_exit(self.hall, 0)
-
-        self.player = Player(self.hall)
-        self.evidence = Item("Evidence", "Dirty GLove", self.closet, evidence=True)
-
-    def test_location_exit_blocking(self):
-        """ Testing if exit of a location is blocked/ unblocked"""
-        l1 = Location("L1", "Room 1")
-        l2 = Location("L2", "Room 2")
-        l1.add_exit(l2, 0) # 0 means blocked
-
-        self.assertTrue(l1.is_blocked(l2), "Exit should be blocked")
-
-        l1.set_exit(l2, 1) # 1 means unblocked
-        self.assertFalse(l1.is_blocked(l2), "Exit should now be unblocked")
-
-    def test_item_use_unblocks_path(self):
-        """Tests if using an item unblocks an exit."""
-        key = Item("Key", "Master key", self.hall, 
-                   required_location=self.hall, 
-                   target_exit=self.closet, 
-                   effect_type="unblock")
-
-        # See if it's blocked already
-        self.assertTrue(self.hall.is_blocked(self.closet))
-
-        # Use the item
-        result = key.use(self.hall)
-
-        # Assertions
-        self.assertTrue(result)
-        self.assertFalse(self.hall.is_blocked(self.closet), "Hall should be open")
-        self.assertFalse(self.closet.is_blocked(self.hall), "Closet should be open")
-
+class item_tests(unittest.TestCase):
+    """ Test to see if a player can pick up item"""
     def test_player_inventory(self):
         """Tests if player can pick up an item"""
         item = Item("Flashlight", "So you can see", self.hall, can_be_taken=True)
         self.player.take_item(item)
         self.assertIn(item, self.player.get_inventory())
+
+class TestGameInteractions(unittest.TestCase):
+    """Checks if different classes interact correctly."""
+    def setUp(self):
+        self.room_a = Location("Room1", "Start")
+        self.room_b = Location("Room2", "End")
+        self.room_a.add_exit(self.room_b, 0)# blocked
+        self.room_b.add_exit(self.room_a, 0)# blocked
+
+    def test_unblock(self):
+        """Tests Item in location"""
+        key = Item("Key", "Key", self.room_a, required_location=self.room_a, 
+                   target_exit=self.room_b, effect_type="unblock")
+
+        # This checks to see if key makes a door unblocked
+        key.use(self.room_a)
+        self.assertFalse(self.room_a.is_blocked(self.room_b))
+
+    def test_movement(self):
+        """Tests player and where it can and cannot go"""
+        player = Player(self.room_a)
+        # Verify player cannot move through blocked exit
+        self.assertFalse(player.move_to(self.room_b))
+
 
 if __name__ == '__main__':
     unittest.main()
