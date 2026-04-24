@@ -24,7 +24,7 @@ class GameUnitTests(unittest.TestCase):
         
     def test_ai_suspicion(self):
         """Tests if the AI suspicion meter works."""
-        ai = AiAgent(start_location=self.hall)
+        ai = AiAgent(start_location=self.hall, incriminating_items_list=[])
         ai.increment_suspicion_meter(20)
         self.assertEqual(ai.get_suspicion_meter(), 20)
 
