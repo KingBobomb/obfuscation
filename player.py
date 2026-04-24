@@ -85,14 +85,14 @@ class Player:
         """
         if item in self.__inventory:
             used_successfully = item.use(self.__location)
-            
-            #If it worked and the item is consumable remove it.
+
+            # If it worked and the item is consumable remove it.
             if used_successfully and item.is_consumable():
                 self.__inventory.remove(item)
                 print(f"The {item.get_name()} was consumed.")
-                
+
             return used_successfully
-            
+
         return False
 
     def dispose_of_item(self, item, disposal_set_piece):
@@ -100,14 +100,14 @@ class Player:
 
         A method that takes in an item that the player wants to dispose of and an object
         that the want to use to dispose it, checks if the item is in their inventory, the
-        disposal object is valid, and the disposal object is unblocked. If so it removes 
-        that Item from the player's inventory and returns True. Returns False if 
+        disposal object is valid, and the disposal object is unblocked. If so it removes
+        that Item from the player's inventory and returns True. Returns False if
         unsuccessful.
 
         Arguments:
             item (Item): The item the player is attempting to dispose of
             disposal_set_piece (Object): The object used to dispose of the Item
-    
+
         Returns:
             True if successful, False if unsuccessful
         """
@@ -143,11 +143,6 @@ class Player:
             NPC classes and disagreements on logic distribution.
         """
         chosen_npc.has_talked_to(self.__inventory, dialogue_choice)
-
-        # FIX ME: Decide encapsulation for dialogue_choice
-        # (potentially let the NPC class handle this logic)
-        # if dialogue_choice == "suspicious":
-        #     self.__suspicion_meter += 10
 
     def manipulate_npc(self, npc):
         """A currently unimplemented method designed to allow players to manipulate NPCs

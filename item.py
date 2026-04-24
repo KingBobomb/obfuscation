@@ -38,7 +38,7 @@ class Item:
     """
     def __init__(self, name, description, location, can_be_taken=True, evidence=False,
                  required_location=None, target_exit=None, consumable=False,
-                 effect_type="", container="", block_msg="", unblock_item = None):
+                 effect_type="", container="", block_msg="", unblock_item=None):
         self.__name = name
         self.__description = description
         self.__location = location

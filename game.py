@@ -88,7 +88,7 @@ class Game:
 
             # Check if the player tried to end the game in the sub-menu
             if end_game:
-                return False
+                return -1
 
         if len(self.__important_items) == 0:
             return False
@@ -145,7 +145,7 @@ class Game:
                     valid = True
                 else:
                     print("\nThis location is blocked. "
-                            "Use an item to unblock it or select another location.")
+                          "Use an item to unblock it or select another location.")
 
         return False, False
 
@@ -227,7 +227,8 @@ class Game:
         valid = False
 
         while not valid:
-            validity_check, end_game = self.__main_input_loop(loc_containers,"a location to search")
+            validity_check, end_game = self.__main_input_loop(loc_containers,
+                                                              "a location to search")
 
             # If player chose to exit, stop the game immediately.
             if end_game:
@@ -292,15 +293,15 @@ class Game:
         # game.
         player_inv = self.__player.get_inventory()
 
-        #FIX ME: Adjust to match actual disposal implementation
-        #disposer = player_loc.get_disposer()
+        # FIX ME: Adjust to match actual disposal implementation
+        # disposer = player_loc.get_disposer()
 
         # Make sure there are items for the player to search for.
         if len(player_inv) == 0:
             print("\nYou don't have any items to dispose of.")
             return True, False
 
-        #FIX ME: Uncomment when disposal logic is implemented
+        # FIX ME: Uncomment when disposal logic is implemented
         # Make sure the given location contains a way to dispose items.
         # if len(player_inv) == 0:
         #     print("\nThere are no ways to dispose of items here.")
@@ -323,7 +324,7 @@ class Game:
             # If input is valid, continue interaction.
             if validity_check > 0:
                 chosen_item = player_inv[validity_check - 1]
-                #FIX ME: Replace second arg with disposer when that logic is implemented
+                # FIX ME: Replace second arg with disposer when that logic is implemented
                 valid = self.__player.dispose_of_item(chosen_item, player_loc)
 
                 if valid:
@@ -381,6 +382,11 @@ class Game:
         # Helper method that contains the game loop
         while self.__game_active:
             self.__game_active = self.__prompt_user()
+
+            # If -1 is returned, the player ended the game early, so we leave
+            # the loop immediately.
+            if self.__game_active == -1:
+                break
 
             if self.__game_active:
                 print()
