@@ -29,6 +29,7 @@ class GameUnitTests(unittest.TestCase):
         self.assertEqual(ai.get_suspicion_meter(), 20)
 
     def test_location_exit_blocking(self):
+        """ Testing if exit of a location is blocked/ unblocked"""
         l1 = Location("L1", "Room 1")
         l2 = Location("L2", "Room 2")
         l1.add_exit(l2, 0) # 0 means blocked
