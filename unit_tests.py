@@ -11,7 +11,7 @@ from AI import AiAgent
 class GameUnitTests(unittest.TestCase):
     """A class to hold unit tests for the ai, location and item"""
     def setUp(self):
-        """basic game environment for every test."""
+        """Setting up the game enviorment for each test"""
         self.hall = Location("Hall", "A hallway.")
         self.closet = Location("Closet", "A storage room.")
         
