@@ -75,7 +75,7 @@ class Game:
 
             # Check if player tried to end the game in this menu.
             if end_game:
-                return False
+                return -1
 
             if player_response == 'back':
                 print("\nNo turning back now.")
