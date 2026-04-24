@@ -6,7 +6,7 @@ from player import Player
 from npc import NPC             
 from location import Location   
 from Item import Item
-from ai import AiAgent
+from AI import AiAgent
 
 class GameUnitTests(unittest.TestCase):
     """A class to hold unit tests for the ai, location and item"""
