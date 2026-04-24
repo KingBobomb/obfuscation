@@ -39,6 +39,7 @@ class EnvironmentTests(unittest.TestCase):
         
         # Check if the location state changed
         self.assertFalse(hall.is_blocked(closet))
+        self.assertFalse(closet.is_blocked(hall))
 
 if __name__ == '__main__':
     unittest.main()
