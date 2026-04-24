@@ -29,6 +29,7 @@ class EnvironmentTests(unittest.TestCase):
         hall = Location("Hall", "A hall")
         closet = Location("Closet", "A closet")
         hall.add_exit(closet, 0) # blocked
+        closet.add_exit(hall, 0) # blocked
         
         key = Item("Key", "Key", hall, required_location=hall, 
                    target_exit=closet, effect_type="unblock")
