@@ -8,10 +8,28 @@ from location import Location
 from item import Item
 from ai import AiAgent
 
+class AiUnitTests(unittest.TestCase):
+    """A class to hold unit tests for the ai"""
+    def setUp(self):
+        self.ai = AiAgent()
+
+    def test_ai_get_suspicion(self):
+        """Tests if getter for AI suspicion meter works."""
+        ret = self.ai.get_suspicion_meter()
+        self.assertIsInstance(ret, int)
+
+    def test_ai_set_suspicion(self):
+        """Tests if setter for AI suspicion meter works."""
+        initial_sus = self.ai.get_suspicion_meter()
+        self.ai.increment_suspicion_meter(20)
+        self.assertEqual(initial_sus + 20, self.ai.get_suspicion_meter)
+
+
+
 class GameUnitTests(unittest.TestCase):
     """A class to hold unit tests for the ai, location and item"""
     def setUp(self):
-        """Setting up the game enviorment for each test"""
+        """Setting up the game environment for each test"""
         self.hall = Location("Hall", "A hallway.")
         self.closet = Location("Closet", "A storage room.")
 
@@ -21,12 +39,6 @@ class GameUnitTests(unittest.TestCase):
 
         self.player = Player(self.hall)
         self.evidence = Item("Evidence", "Dirty GLove", self.closet, evidence=True)
-
-    def test_ai_suspicion(self):
-        """Tests if the AI suspicion meter works."""
-        ai = AiAgent(start_location=self.hall, incriminating_items_list=[])
-        ai.increment_suspicion_meter(20)
-        self.assertEqual(ai.get_suspicion_meter(), 20)
 
     def test_location_exit_blocking(self):
         """ Testing if exit of a location is blocked/ unblocked"""
