@@ -180,76 +180,84 @@ player    </h1>
 </span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a><span class="sd">            True if using the item is successful, False if using the item is invalid</span>
 </span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a>        <span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__inventory</span><span class="p">:</span>
-</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a>            <span class="k">return</span> <span class="n">item</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__location</span><span class="p">)</span>
-</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a>        <span class="k">return</span> <span class="kc">False</span>
-</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a>
-</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a>    <span class="k">def</span> <span class="nf">dispose_of_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">disposal_set_piece</span><span class="p">):</span>
-</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A currently incomplete method designed to allow players to dispose of items</span>
-</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a>
-</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a><span class="sd">        This is a currently incomplete method that takes in an item that the player wants</span>
-</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a><span class="sd">        to dispose of and an object that the want to use to dispose it, checks if the item</span>
-</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a><span class="sd">        is in their inventory and the disposal object is unblocked, and removes that Item&#39;s</span>
-</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a><span class="sd">        from the player&#39;s inventory. Returns True if successful, and False if unsuccessful</span>
+</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a>            <span class="n">used_successfully</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__location</span><span class="p">)</span>
+</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a>
+</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a>            <span class="c1"># If it worked and the item is consumable remove it.</span>
+</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a>            <span class="k">if</span> <span class="n">used_successfully</span> <span class="ow">and</span> <span class="n">item</span><span class="o">.</span><span class="n">is_consumable</span><span class="p">():</span>
+</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">__inventory</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The </span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="si">}</span><span class="s2"> was consumed.&quot;</span><span class="p">)</span>
+</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a>
+</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a>            <span class="k">return</span> <span class="n">used_successfully</span>
+</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>
+</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>        <span class="k">return</span> <span class="kc">False</span>
 </span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a>
-</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a><span class="sd">        Arguments:</span>
-</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a><span class="sd">            item (Item): The item the player is attempting to use</span>
-</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a><span class="sd">            disposal_set_piece (Object): The object used to dispose of the Item</span>
-</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>
-</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a><span class="sd">        Returns:</span>
-</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a><span class="sd">            True if using the item is successful, False if using the item is invalid</span>
-</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a>
-</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a><span class="sd">        Notes:</span>
-</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a><span class="sd">            As of this release this function is unfinished as there are still ongoing</span>
-</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a><span class="sd">            discussions about whether the disposal object should be an instance of</span>
-</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a><span class="sd">            Item/Location or if there is enough specific behavior to warrant a unique</span>
-</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a><span class="sd">            class.</span>
-</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a>        <span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__inventory</span> <span class="ow">and</span> <span class="n">disposal_set_piece</span><span class="o">.</span><span class="n">is_unblocked</span><span class="p">:</span>
-</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">__inventory</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a>            <span class="k">return</span> <span class="kc">True</span>
-</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a>        <span class="k">return</span> <span class="kc">False</span>
-</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a>
-</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a>    <span class="k">def</span> <span class="nf">interact_with_npc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dialogue_choice</span><span class="p">,</span> <span class="n">chosen_npc</span><span class="p">):</span>
-</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A currently incomplete method designed to allow players to talk to NPCs</span>
-</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a>
-</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a><span class="sd">        This method is a currently incomplete method that takes in a dialog choice</span>
-</span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a><span class="sd">        from a player and the NPC the player is interacting with, and communicates</span>
-</span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a><span class="sd">        them to an NPC.</span>
-</span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a>
-</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a><span class="sd">        Arguments:</span>
-</span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a><span class="sd">            dialogue_choice (int): Player input integer specifying which dialog option they chose</span>
-</span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a><span class="sd">            chosen_npc (NPC): The NPC the Player is currently interacting with</span>
-</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a>
-</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a><span class="sd">        Notes:</span>
-</span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a><span class="sd">            As of this release, this function is unfinished as there are still ongoing</span>
-</span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a><span class="sd">            discussions about how to handle communication between the player, game, and</span>
-</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a><span class="sd">            NPC classes and disagreements on logic distribution.</span>
-</span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a>        <span class="n">chosen_npc</span><span class="o">.</span><span class="n">has_talked</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__inventory</span><span class="p">,</span> <span class="n">dialogue_choice</span><span class="p">)</span>
-</span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a>
-</span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a>        <span class="c1"># FIX ME: Decide encapsulation for dialogue_choice</span>
-</span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a>        <span class="c1"># (potentially let the NPC class handle this logic)</span>
-</span><span id="L-136"><a href="#L-136"><span class="linenos">136</span></a>        <span class="c1"># if dialogue_choice == &quot;suspicious&quot;:</span>
-</span><span id="L-137"><a href="#L-137"><span class="linenos">137</span></a>        <span class="c1">#     self.__suspicion_meter += 10</span>
-</span><span id="L-138"><a href="#L-138"><span class="linenos">138</span></a>
-</span><span id="L-139"><a href="#L-139"><span class="linenos">139</span></a>    <span class="k">def</span> <span class="nf">manipulate_npc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">npc</span><span class="p">):</span>
-</span><span id="L-140"><a href="#L-140"><span class="linenos">140</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A currently unimplemented method designed to allow players to manipulate NPCs</span>
-</span><span id="L-141"><a href="#L-141"><span class="linenos">141</span></a>
-</span><span id="L-142"><a href="#L-142"><span class="linenos">142</span></a><span class="sd">        This method is a currently unimplemented method that takes in the NPC the player</span>
-</span><span id="L-143"><a href="#L-143"><span class="linenos">143</span></a><span class="sd">        is interacting with and communicating with the NPC class to determine the result</span>
-</span><span id="L-144"><a href="#L-144"><span class="linenos">144</span></a><span class="sd">        of the attempted manipulation.</span>
-</span><span id="L-145"><a href="#L-145"><span class="linenos">145</span></a>
-</span><span id="L-146"><a href="#L-146"><span class="linenos">146</span></a><span class="sd">        Arguments:</span>
-</span><span id="L-147"><a href="#L-147"><span class="linenos">147</span></a><span class="sd">            npc (NPC): The NPC the player is currently interacting with</span>
-</span><span id="L-148"><a href="#L-148"><span class="linenos">148</span></a>
-</span><span id="L-149"><a href="#L-149"><span class="linenos">149</span></a><span class="sd">        Notes:</span>
-</span><span id="L-150"><a href="#L-150"><span class="linenos">150</span></a><span class="sd">            As of this release, this function still needs to be implemented. Additionally,</span>
-</span><span id="L-151"><a href="#L-151"><span class="linenos">151</span></a><span class="sd">            there are still ongoing discussions about how to handle communication between</span>
-</span><span id="L-152"><a href="#L-152"><span class="linenos">152</span></a><span class="sd">            the player, and NPC classes, and disagreements on logic distribution.</span>
-</span><span id="L-153"><a href="#L-153"><span class="linenos">153</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-154"><a href="#L-154"><span class="linenos">154</span></a>        <span class="c1"># FIX ME: Implement class (further discussion on NPC to</span>
-</span><span id="L-155"><a href="#L-155"><span class="linenos">155</span></a>        <span class="c1"># player communications and distribution of logic required)</span>
-</span><span id="L-156"><a href="#L-156"><span class="linenos">156</span></a>        <span class="nb">print</span><span class="p">(</span><span class="n">npc</span><span class="p">)</span>
+</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>    <span class="k">def</span> <span class="nf">dispose_of_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">disposal_set_piece</span><span class="p">):</span>
+</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Allows the player to dispose of an item using a valid disposal object.</span>
+</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>
+</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a><span class="sd">        A method that takes in an item that the player wants to dispose of and an object</span>
+</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a><span class="sd">        that the want to use to dispose it, checks if the item is in their inventory, the</span>
+</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a><span class="sd">        disposal object is valid, and the disposal object is unblocked. If so it removes</span>
+</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a><span class="sd">        that Item from the player&#39;s inventory and returns True. Returns False if</span>
+</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a><span class="sd">        unsuccessful.</span>
+</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a>
+</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a><span class="sd">        Arguments:</span>
+</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a><span class="sd">            item (Item): The item the player is attempting to dispose of</span>
+</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a><span class="sd">            disposal_set_piece (Object): The object used to dispose of the Item</span>
+</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a>
+</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a><span class="sd">        Returns:</span>
+</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a><span class="sd">            True if successful, False if unsuccessful</span>
+</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a>
+</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a>        <span class="k">if</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__inventory</span><span class="p">:</span>
+</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a>            <span class="k">return</span> <span class="kc">False</span>
+</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a>
+</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a>        <span class="k">if</span> <span class="n">disposal_set_piece</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a>            <span class="k">return</span> <span class="kc">False</span>
+</span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a>
+</span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a>        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">disposal_set_piece</span><span class="p">,</span> <span class="s2">&quot;is_unblocked&quot;</span><span class="p">):</span>
+</span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">disposal_set_piece</span><span class="o">.</span><span class="n">is_unblocked</span><span class="p">():</span>
+</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a>                <span class="k">return</span> <span class="kc">False</span>
+</span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a>
+</span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a>        <span class="c1"># Remove item from inventory</span>
+</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__inventory</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a>        <span class="k">return</span> <span class="kc">True</span>
+</span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a>
+</span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a>    <span class="k">def</span> <span class="nf">interact_with_npc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dialogue_choice</span><span class="p">,</span> <span class="n">chosen_npc</span><span class="p">):</span>
+</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A currently incomplete method designed to allow players to talk to NPCs</span>
+</span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a>
+</span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a><span class="sd">        This method is a currently incomplete method that takes in a dialog choice</span>
+</span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a><span class="sd">        from a player and the NPC the player is interacting with, and communicates</span>
+</span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a><span class="sd">        them to an NPC.</span>
+</span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a>
+</span><span id="L-136"><a href="#L-136"><span class="linenos">136</span></a><span class="sd">        Arguments:</span>
+</span><span id="L-137"><a href="#L-137"><span class="linenos">137</span></a><span class="sd">            dialogue_choice (int): Player input integer specifying which dialog option they chose</span>
+</span><span id="L-138"><a href="#L-138"><span class="linenos">138</span></a><span class="sd">            chosen_npc (NPC): The NPC the Player is currently interacting with</span>
+</span><span id="L-139"><a href="#L-139"><span class="linenos">139</span></a>
+</span><span id="L-140"><a href="#L-140"><span class="linenos">140</span></a><span class="sd">        Notes:</span>
+</span><span id="L-141"><a href="#L-141"><span class="linenos">141</span></a><span class="sd">            As of this release, this function is unfinished as there are still ongoing</span>
+</span><span id="L-142"><a href="#L-142"><span class="linenos">142</span></a><span class="sd">            discussions about how to handle communication between the player, game, and</span>
+</span><span id="L-143"><a href="#L-143"><span class="linenos">143</span></a><span class="sd">            NPC classes and disagreements on logic distribution.</span>
+</span><span id="L-144"><a href="#L-144"><span class="linenos">144</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-145"><a href="#L-145"><span class="linenos">145</span></a>        <span class="n">chosen_npc</span><span class="o">.</span><span class="n">has_talked_to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__inventory</span><span class="p">,</span> <span class="n">dialogue_choice</span><span class="p">)</span>
+</span><span id="L-146"><a href="#L-146"><span class="linenos">146</span></a>
+</span><span id="L-147"><a href="#L-147"><span class="linenos">147</span></a>    <span class="k">def</span> <span class="nf">manipulate_npc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">npc</span><span class="p">):</span>
+</span><span id="L-148"><a href="#L-148"><span class="linenos">148</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A currently unimplemented method designed to allow players to manipulate NPCs</span>
+</span><span id="L-149"><a href="#L-149"><span class="linenos">149</span></a>
+</span><span id="L-150"><a href="#L-150"><span class="linenos">150</span></a><span class="sd">        This method is a currently unimplemented method that takes in the NPC the player</span>
+</span><span id="L-151"><a href="#L-151"><span class="linenos">151</span></a><span class="sd">        is interacting with and communicating with the NPC class to determine the result</span>
+</span><span id="L-152"><a href="#L-152"><span class="linenos">152</span></a><span class="sd">        of the attempted manipulation.</span>
+</span><span id="L-153"><a href="#L-153"><span class="linenos">153</span></a>
+</span><span id="L-154"><a href="#L-154"><span class="linenos">154</span></a><span class="sd">        Arguments:</span>
+</span><span id="L-155"><a href="#L-155"><span class="linenos">155</span></a><span class="sd">            npc (NPC): The NPC the player is currently interacting with</span>
+</span><span id="L-156"><a href="#L-156"><span class="linenos">156</span></a>
+</span><span id="L-157"><a href="#L-157"><span class="linenos">157</span></a><span class="sd">        Notes:</span>
+</span><span id="L-158"><a href="#L-158"><span class="linenos">158</span></a><span class="sd">            As of this release, this function still needs to be implemented. Additionally,</span>
+</span><span id="L-159"><a href="#L-159"><span class="linenos">159</span></a><span class="sd">            there are still ongoing discussions about how to handle communication between</span>
+</span><span id="L-160"><a href="#L-160"><span class="linenos">160</span></a><span class="sd">            the player, and NPC classes, and disagreements on logic distribution.</span>
+</span><span id="L-161"><a href="#L-161"><span class="linenos">161</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-162"><a href="#L-162"><span class="linenos">162</span></a>        <span class="c1"># FIX ME: Implement class (further discussion on NPC to</span>
+</span><span id="L-163"><a href="#L-163"><span class="linenos">163</span></a>        <span class="c1"># player communications and distribution of logic required)</span>
+</span><span id="L-164"><a href="#L-164"><span class="linenos">164</span></a>        <span class="nb">print</span><span class="p">(</span><span class="n">npc</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -343,76 +351,84 @@ player    </h1>
 </span><span id="Player-85"><a href="#Player-85"><span class="linenos"> 85</span></a><span class="sd">            True if using the item is successful, False if using the item is invalid</span>
 </span><span id="Player-86"><a href="#Player-86"><span class="linenos"> 86</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="Player-87"><a href="#Player-87"><span class="linenos"> 87</span></a>        <span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__inventory</span><span class="p">:</span>
-</span><span id="Player-88"><a href="#Player-88"><span class="linenos"> 88</span></a>            <span class="k">return</span> <span class="n">item</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__location</span><span class="p">)</span>
-</span><span id="Player-89"><a href="#Player-89"><span class="linenos"> 89</span></a>        <span class="k">return</span> <span class="kc">False</span>
-</span><span id="Player-90"><a href="#Player-90"><span class="linenos"> 90</span></a>
-</span><span id="Player-91"><a href="#Player-91"><span class="linenos"> 91</span></a>    <span class="k">def</span> <span class="nf">dispose_of_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">disposal_set_piece</span><span class="p">):</span>
-</span><span id="Player-92"><a href="#Player-92"><span class="linenos"> 92</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A currently incomplete method designed to allow players to dispose of items</span>
-</span><span id="Player-93"><a href="#Player-93"><span class="linenos"> 93</span></a>
-</span><span id="Player-94"><a href="#Player-94"><span class="linenos"> 94</span></a><span class="sd">        This is a currently incomplete method that takes in an item that the player wants</span>
-</span><span id="Player-95"><a href="#Player-95"><span class="linenos"> 95</span></a><span class="sd">        to dispose of and an object that the want to use to dispose it, checks if the item</span>
-</span><span id="Player-96"><a href="#Player-96"><span class="linenos"> 96</span></a><span class="sd">        is in their inventory and the disposal object is unblocked, and removes that Item&#39;s</span>
-</span><span id="Player-97"><a href="#Player-97"><span class="linenos"> 97</span></a><span class="sd">        from the player&#39;s inventory. Returns True if successful, and False if unsuccessful</span>
+</span><span id="Player-88"><a href="#Player-88"><span class="linenos"> 88</span></a>            <span class="n">used_successfully</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__location</span><span class="p">)</span>
+</span><span id="Player-89"><a href="#Player-89"><span class="linenos"> 89</span></a>
+</span><span id="Player-90"><a href="#Player-90"><span class="linenos"> 90</span></a>            <span class="c1"># If it worked and the item is consumable remove it.</span>
+</span><span id="Player-91"><a href="#Player-91"><span class="linenos"> 91</span></a>            <span class="k">if</span> <span class="n">used_successfully</span> <span class="ow">and</span> <span class="n">item</span><span class="o">.</span><span class="n">is_consumable</span><span class="p">():</span>
+</span><span id="Player-92"><a href="#Player-92"><span class="linenos"> 92</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">__inventory</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</span><span id="Player-93"><a href="#Player-93"><span class="linenos"> 93</span></a>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The </span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="si">}</span><span class="s2"> was consumed.&quot;</span><span class="p">)</span>
+</span><span id="Player-94"><a href="#Player-94"><span class="linenos"> 94</span></a>
+</span><span id="Player-95"><a href="#Player-95"><span class="linenos"> 95</span></a>            <span class="k">return</span> <span class="n">used_successfully</span>
+</span><span id="Player-96"><a href="#Player-96"><span class="linenos"> 96</span></a>
+</span><span id="Player-97"><a href="#Player-97"><span class="linenos"> 97</span></a>        <span class="k">return</span> <span class="kc">False</span>
 </span><span id="Player-98"><a href="#Player-98"><span class="linenos"> 98</span></a>
-</span><span id="Player-99"><a href="#Player-99"><span class="linenos"> 99</span></a><span class="sd">        Arguments:</span>
-</span><span id="Player-100"><a href="#Player-100"><span class="linenos">100</span></a><span class="sd">            item (Item): The item the player is attempting to use</span>
-</span><span id="Player-101"><a href="#Player-101"><span class="linenos">101</span></a><span class="sd">            disposal_set_piece (Object): The object used to dispose of the Item</span>
-</span><span id="Player-102"><a href="#Player-102"><span class="linenos">102</span></a>
-</span><span id="Player-103"><a href="#Player-103"><span class="linenos">103</span></a><span class="sd">        Returns:</span>
-</span><span id="Player-104"><a href="#Player-104"><span class="linenos">104</span></a><span class="sd">            True if using the item is successful, False if using the item is invalid</span>
-</span><span id="Player-105"><a href="#Player-105"><span class="linenos">105</span></a>
-</span><span id="Player-106"><a href="#Player-106"><span class="linenos">106</span></a><span class="sd">        Notes:</span>
-</span><span id="Player-107"><a href="#Player-107"><span class="linenos">107</span></a><span class="sd">            As of this release this function is unfinished as there are still ongoing</span>
-</span><span id="Player-108"><a href="#Player-108"><span class="linenos">108</span></a><span class="sd">            discussions about whether the disposal object should be an instance of</span>
-</span><span id="Player-109"><a href="#Player-109"><span class="linenos">109</span></a><span class="sd">            Item/Location or if there is enough specific behavior to warrant a unique</span>
-</span><span id="Player-110"><a href="#Player-110"><span class="linenos">110</span></a><span class="sd">            class.</span>
-</span><span id="Player-111"><a href="#Player-111"><span class="linenos">111</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Player-112"><a href="#Player-112"><span class="linenos">112</span></a>        <span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__inventory</span> <span class="ow">and</span> <span class="n">disposal_set_piece</span><span class="o">.</span><span class="n">is_unblocked</span><span class="p">:</span>
-</span><span id="Player-113"><a href="#Player-113"><span class="linenos">113</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">__inventory</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-</span><span id="Player-114"><a href="#Player-114"><span class="linenos">114</span></a>            <span class="k">return</span> <span class="kc">True</span>
-</span><span id="Player-115"><a href="#Player-115"><span class="linenos">115</span></a>        <span class="k">return</span> <span class="kc">False</span>
-</span><span id="Player-116"><a href="#Player-116"><span class="linenos">116</span></a>
-</span><span id="Player-117"><a href="#Player-117"><span class="linenos">117</span></a>    <span class="k">def</span> <span class="nf">interact_with_npc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dialogue_choice</span><span class="p">,</span> <span class="n">chosen_npc</span><span class="p">):</span>
-</span><span id="Player-118"><a href="#Player-118"><span class="linenos">118</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A currently incomplete method designed to allow players to talk to NPCs</span>
-</span><span id="Player-119"><a href="#Player-119"><span class="linenos">119</span></a>
-</span><span id="Player-120"><a href="#Player-120"><span class="linenos">120</span></a><span class="sd">        This method is a currently incomplete method that takes in a dialog choice</span>
-</span><span id="Player-121"><a href="#Player-121"><span class="linenos">121</span></a><span class="sd">        from a player and the NPC the player is interacting with, and communicates</span>
-</span><span id="Player-122"><a href="#Player-122"><span class="linenos">122</span></a><span class="sd">        them to an NPC.</span>
-</span><span id="Player-123"><a href="#Player-123"><span class="linenos">123</span></a>
-</span><span id="Player-124"><a href="#Player-124"><span class="linenos">124</span></a><span class="sd">        Arguments:</span>
-</span><span id="Player-125"><a href="#Player-125"><span class="linenos">125</span></a><span class="sd">            dialogue_choice (int): Player input integer specifying which dialog option they chose</span>
-</span><span id="Player-126"><a href="#Player-126"><span class="linenos">126</span></a><span class="sd">            chosen_npc (NPC): The NPC the Player is currently interacting with</span>
-</span><span id="Player-127"><a href="#Player-127"><span class="linenos">127</span></a>
-</span><span id="Player-128"><a href="#Player-128"><span class="linenos">128</span></a><span class="sd">        Notes:</span>
-</span><span id="Player-129"><a href="#Player-129"><span class="linenos">129</span></a><span class="sd">            As of this release, this function is unfinished as there are still ongoing</span>
-</span><span id="Player-130"><a href="#Player-130"><span class="linenos">130</span></a><span class="sd">            discussions about how to handle communication between the player, game, and</span>
-</span><span id="Player-131"><a href="#Player-131"><span class="linenos">131</span></a><span class="sd">            NPC classes and disagreements on logic distribution.</span>
-</span><span id="Player-132"><a href="#Player-132"><span class="linenos">132</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Player-133"><a href="#Player-133"><span class="linenos">133</span></a>        <span class="n">chosen_npc</span><span class="o">.</span><span class="n">has_talked</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__inventory</span><span class="p">,</span> <span class="n">dialogue_choice</span><span class="p">)</span>
-</span><span id="Player-134"><a href="#Player-134"><span class="linenos">134</span></a>
-</span><span id="Player-135"><a href="#Player-135"><span class="linenos">135</span></a>        <span class="c1"># FIX ME: Decide encapsulation for dialogue_choice</span>
-</span><span id="Player-136"><a href="#Player-136"><span class="linenos">136</span></a>        <span class="c1"># (potentially let the NPC class handle this logic)</span>
-</span><span id="Player-137"><a href="#Player-137"><span class="linenos">137</span></a>        <span class="c1"># if dialogue_choice == &quot;suspicious&quot;:</span>
-</span><span id="Player-138"><a href="#Player-138"><span class="linenos">138</span></a>        <span class="c1">#     self.__suspicion_meter += 10</span>
-</span><span id="Player-139"><a href="#Player-139"><span class="linenos">139</span></a>
-</span><span id="Player-140"><a href="#Player-140"><span class="linenos">140</span></a>    <span class="k">def</span> <span class="nf">manipulate_npc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">npc</span><span class="p">):</span>
-</span><span id="Player-141"><a href="#Player-141"><span class="linenos">141</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A currently unimplemented method designed to allow players to manipulate NPCs</span>
-</span><span id="Player-142"><a href="#Player-142"><span class="linenos">142</span></a>
-</span><span id="Player-143"><a href="#Player-143"><span class="linenos">143</span></a><span class="sd">        This method is a currently unimplemented method that takes in the NPC the player</span>
-</span><span id="Player-144"><a href="#Player-144"><span class="linenos">144</span></a><span class="sd">        is interacting with and communicating with the NPC class to determine the result</span>
-</span><span id="Player-145"><a href="#Player-145"><span class="linenos">145</span></a><span class="sd">        of the attempted manipulation.</span>
-</span><span id="Player-146"><a href="#Player-146"><span class="linenos">146</span></a>
-</span><span id="Player-147"><a href="#Player-147"><span class="linenos">147</span></a><span class="sd">        Arguments:</span>
-</span><span id="Player-148"><a href="#Player-148"><span class="linenos">148</span></a><span class="sd">            npc (NPC): The NPC the player is currently interacting with</span>
-</span><span id="Player-149"><a href="#Player-149"><span class="linenos">149</span></a>
-</span><span id="Player-150"><a href="#Player-150"><span class="linenos">150</span></a><span class="sd">        Notes:</span>
-</span><span id="Player-151"><a href="#Player-151"><span class="linenos">151</span></a><span class="sd">            As of this release, this function still needs to be implemented. Additionally,</span>
-</span><span id="Player-152"><a href="#Player-152"><span class="linenos">152</span></a><span class="sd">            there are still ongoing discussions about how to handle communication between</span>
-</span><span id="Player-153"><a href="#Player-153"><span class="linenos">153</span></a><span class="sd">            the player, and NPC classes, and disagreements on logic distribution.</span>
-</span><span id="Player-154"><a href="#Player-154"><span class="linenos">154</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Player-155"><a href="#Player-155"><span class="linenos">155</span></a>        <span class="c1"># FIX ME: Implement class (further discussion on NPC to</span>
-</span><span id="Player-156"><a href="#Player-156"><span class="linenos">156</span></a>        <span class="c1"># player communications and distribution of logic required)</span>
-</span><span id="Player-157"><a href="#Player-157"><span class="linenos">157</span></a>        <span class="nb">print</span><span class="p">(</span><span class="n">npc</span><span class="p">)</span>
+</span><span id="Player-99"><a href="#Player-99"><span class="linenos"> 99</span></a>    <span class="k">def</span> <span class="nf">dispose_of_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">disposal_set_piece</span><span class="p">):</span>
+</span><span id="Player-100"><a href="#Player-100"><span class="linenos">100</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Allows the player to dispose of an item using a valid disposal object.</span>
+</span><span id="Player-101"><a href="#Player-101"><span class="linenos">101</span></a>
+</span><span id="Player-102"><a href="#Player-102"><span class="linenos">102</span></a><span class="sd">        A method that takes in an item that the player wants to dispose of and an object</span>
+</span><span id="Player-103"><a href="#Player-103"><span class="linenos">103</span></a><span class="sd">        that the want to use to dispose it, checks if the item is in their inventory, the</span>
+</span><span id="Player-104"><a href="#Player-104"><span class="linenos">104</span></a><span class="sd">        disposal object is valid, and the disposal object is unblocked. If so it removes</span>
+</span><span id="Player-105"><a href="#Player-105"><span class="linenos">105</span></a><span class="sd">        that Item from the player&#39;s inventory and returns True. Returns False if</span>
+</span><span id="Player-106"><a href="#Player-106"><span class="linenos">106</span></a><span class="sd">        unsuccessful.</span>
+</span><span id="Player-107"><a href="#Player-107"><span class="linenos">107</span></a>
+</span><span id="Player-108"><a href="#Player-108"><span class="linenos">108</span></a><span class="sd">        Arguments:</span>
+</span><span id="Player-109"><a href="#Player-109"><span class="linenos">109</span></a><span class="sd">            item (Item): The item the player is attempting to dispose of</span>
+</span><span id="Player-110"><a href="#Player-110"><span class="linenos">110</span></a><span class="sd">            disposal_set_piece (Object): The object used to dispose of the Item</span>
+</span><span id="Player-111"><a href="#Player-111"><span class="linenos">111</span></a>
+</span><span id="Player-112"><a href="#Player-112"><span class="linenos">112</span></a><span class="sd">        Returns:</span>
+</span><span id="Player-113"><a href="#Player-113"><span class="linenos">113</span></a><span class="sd">            True if successful, False if unsuccessful</span>
+</span><span id="Player-114"><a href="#Player-114"><span class="linenos">114</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Player-115"><a href="#Player-115"><span class="linenos">115</span></a>
+</span><span id="Player-116"><a href="#Player-116"><span class="linenos">116</span></a>        <span class="k">if</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__inventory</span><span class="p">:</span>
+</span><span id="Player-117"><a href="#Player-117"><span class="linenos">117</span></a>            <span class="k">return</span> <span class="kc">False</span>
+</span><span id="Player-118"><a href="#Player-118"><span class="linenos">118</span></a>
+</span><span id="Player-119"><a href="#Player-119"><span class="linenos">119</span></a>        <span class="k">if</span> <span class="n">disposal_set_piece</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="Player-120"><a href="#Player-120"><span class="linenos">120</span></a>            <span class="k">return</span> <span class="kc">False</span>
+</span><span id="Player-121"><a href="#Player-121"><span class="linenos">121</span></a>
+</span><span id="Player-122"><a href="#Player-122"><span class="linenos">122</span></a>        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">disposal_set_piece</span><span class="p">,</span> <span class="s2">&quot;is_unblocked&quot;</span><span class="p">):</span>
+</span><span id="Player-123"><a href="#Player-123"><span class="linenos">123</span></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">disposal_set_piece</span><span class="o">.</span><span class="n">is_unblocked</span><span class="p">():</span>
+</span><span id="Player-124"><a href="#Player-124"><span class="linenos">124</span></a>                <span class="k">return</span> <span class="kc">False</span>
+</span><span id="Player-125"><a href="#Player-125"><span class="linenos">125</span></a>
+</span><span id="Player-126"><a href="#Player-126"><span class="linenos">126</span></a>        <span class="c1"># Remove item from inventory</span>
+</span><span id="Player-127"><a href="#Player-127"><span class="linenos">127</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__inventory</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</span><span id="Player-128"><a href="#Player-128"><span class="linenos">128</span></a>        <span class="k">return</span> <span class="kc">True</span>
+</span><span id="Player-129"><a href="#Player-129"><span class="linenos">129</span></a>
+</span><span id="Player-130"><a href="#Player-130"><span class="linenos">130</span></a>    <span class="k">def</span> <span class="nf">interact_with_npc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dialogue_choice</span><span class="p">,</span> <span class="n">chosen_npc</span><span class="p">):</span>
+</span><span id="Player-131"><a href="#Player-131"><span class="linenos">131</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A currently incomplete method designed to allow players to talk to NPCs</span>
+</span><span id="Player-132"><a href="#Player-132"><span class="linenos">132</span></a>
+</span><span id="Player-133"><a href="#Player-133"><span class="linenos">133</span></a><span class="sd">        This method is a currently incomplete method that takes in a dialog choice</span>
+</span><span id="Player-134"><a href="#Player-134"><span class="linenos">134</span></a><span class="sd">        from a player and the NPC the player is interacting with, and communicates</span>
+</span><span id="Player-135"><a href="#Player-135"><span class="linenos">135</span></a><span class="sd">        them to an NPC.</span>
+</span><span id="Player-136"><a href="#Player-136"><span class="linenos">136</span></a>
+</span><span id="Player-137"><a href="#Player-137"><span class="linenos">137</span></a><span class="sd">        Arguments:</span>
+</span><span id="Player-138"><a href="#Player-138"><span class="linenos">138</span></a><span class="sd">            dialogue_choice (int): Player input integer specifying which dialog option they chose</span>
+</span><span id="Player-139"><a href="#Player-139"><span class="linenos">139</span></a><span class="sd">            chosen_npc (NPC): The NPC the Player is currently interacting with</span>
+</span><span id="Player-140"><a href="#Player-140"><span class="linenos">140</span></a>
+</span><span id="Player-141"><a href="#Player-141"><span class="linenos">141</span></a><span class="sd">        Notes:</span>
+</span><span id="Player-142"><a href="#Player-142"><span class="linenos">142</span></a><span class="sd">            As of this release, this function is unfinished as there are still ongoing</span>
+</span><span id="Player-143"><a href="#Player-143"><span class="linenos">143</span></a><span class="sd">            discussions about how to handle communication between the player, game, and</span>
+</span><span id="Player-144"><a href="#Player-144"><span class="linenos">144</span></a><span class="sd">            NPC classes and disagreements on logic distribution.</span>
+</span><span id="Player-145"><a href="#Player-145"><span class="linenos">145</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Player-146"><a href="#Player-146"><span class="linenos">146</span></a>        <span class="n">chosen_npc</span><span class="o">.</span><span class="n">has_talked_to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__inventory</span><span class="p">,</span> <span class="n">dialogue_choice</span><span class="p">)</span>
+</span><span id="Player-147"><a href="#Player-147"><span class="linenos">147</span></a>
+</span><span id="Player-148"><a href="#Player-148"><span class="linenos">148</span></a>    <span class="k">def</span> <span class="nf">manipulate_npc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">npc</span><span class="p">):</span>
+</span><span id="Player-149"><a href="#Player-149"><span class="linenos">149</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A currently unimplemented method designed to allow players to manipulate NPCs</span>
+</span><span id="Player-150"><a href="#Player-150"><span class="linenos">150</span></a>
+</span><span id="Player-151"><a href="#Player-151"><span class="linenos">151</span></a><span class="sd">        This method is a currently unimplemented method that takes in the NPC the player</span>
+</span><span id="Player-152"><a href="#Player-152"><span class="linenos">152</span></a><span class="sd">        is interacting with and communicating with the NPC class to determine the result</span>
+</span><span id="Player-153"><a href="#Player-153"><span class="linenos">153</span></a><span class="sd">        of the attempted manipulation.</span>
+</span><span id="Player-154"><a href="#Player-154"><span class="linenos">154</span></a>
+</span><span id="Player-155"><a href="#Player-155"><span class="linenos">155</span></a><span class="sd">        Arguments:</span>
+</span><span id="Player-156"><a href="#Player-156"><span class="linenos">156</span></a><span class="sd">            npc (NPC): The NPC the player is currently interacting with</span>
+</span><span id="Player-157"><a href="#Player-157"><span class="linenos">157</span></a>
+</span><span id="Player-158"><a href="#Player-158"><span class="linenos">158</span></a><span class="sd">        Notes:</span>
+</span><span id="Player-159"><a href="#Player-159"><span class="linenos">159</span></a><span class="sd">            As of this release, this function still needs to be implemented. Additionally,</span>
+</span><span id="Player-160"><a href="#Player-160"><span class="linenos">160</span></a><span class="sd">            there are still ongoing discussions about how to handle communication between</span>
+</span><span id="Player-161"><a href="#Player-161"><span class="linenos">161</span></a><span class="sd">            the player, and NPC classes, and disagreements on logic distribution.</span>
+</span><span id="Player-162"><a href="#Player-162"><span class="linenos">162</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Player-163"><a href="#Player-163"><span class="linenos">163</span></a>        <span class="c1"># FIX ME: Implement class (further discussion on NPC to</span>
+</span><span id="Player-164"><a href="#Player-164"><span class="linenos">164</span></a>        <span class="c1"># player communications and distribution of logic required)</span>
+</span><span id="Player-165"><a href="#Player-165"><span class="linenos">165</span></a>        <span class="nb">print</span><span class="p">(</span><span class="n">npc</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -632,8 +648,16 @@ inventory. Returns True if successful, and False if unsuccessful</p>
 </span><span id="Player.use_item-85"><a href="#Player.use_item-85"><span class="linenos">85</span></a><span class="sd">            True if using the item is successful, False if using the item is invalid</span>
 </span><span id="Player.use_item-86"><a href="#Player.use_item-86"><span class="linenos">86</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="Player.use_item-87"><a href="#Player.use_item-87"><span class="linenos">87</span></a>        <span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__inventory</span><span class="p">:</span>
-</span><span id="Player.use_item-88"><a href="#Player.use_item-88"><span class="linenos">88</span></a>            <span class="k">return</span> <span class="n">item</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__location</span><span class="p">)</span>
-</span><span id="Player.use_item-89"><a href="#Player.use_item-89"><span class="linenos">89</span></a>        <span class="k">return</span> <span class="kc">False</span>
+</span><span id="Player.use_item-88"><a href="#Player.use_item-88"><span class="linenos">88</span></a>            <span class="n">used_successfully</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__location</span><span class="p">)</span>
+</span><span id="Player.use_item-89"><a href="#Player.use_item-89"><span class="linenos">89</span></a>
+</span><span id="Player.use_item-90"><a href="#Player.use_item-90"><span class="linenos">90</span></a>            <span class="c1"># If it worked and the item is consumable remove it.</span>
+</span><span id="Player.use_item-91"><a href="#Player.use_item-91"><span class="linenos">91</span></a>            <span class="k">if</span> <span class="n">used_successfully</span> <span class="ow">and</span> <span class="n">item</span><span class="o">.</span><span class="n">is_consumable</span><span class="p">():</span>
+</span><span id="Player.use_item-92"><a href="#Player.use_item-92"><span class="linenos">92</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">__inventory</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</span><span id="Player.use_item-93"><a href="#Player.use_item-93"><span class="linenos">93</span></a>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The </span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="si">}</span><span class="s2"> was consumed.&quot;</span><span class="p">)</span>
+</span><span id="Player.use_item-94"><a href="#Player.use_item-94"><span class="linenos">94</span></a>
+</span><span id="Player.use_item-95"><a href="#Player.use_item-95"><span class="linenos">95</span></a>            <span class="k">return</span> <span class="n">used_successfully</span>
+</span><span id="Player.use_item-96"><a href="#Player.use_item-96"><span class="linenos">96</span></a>
+</span><span id="Player.use_item-97"><a href="#Player.use_item-97"><span class="linenos">97</span></a>        <span class="k">return</span> <span class="kc">False</span>
 </span></pre></div>
 
 
@@ -663,53 +687,53 @@ Returns True if successful, and False if unsuccessful</p>
 
     </div>
     <a class="headerlink" href="#Player.dispose_of_item"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Player.dispose_of_item-91"><a href="#Player.dispose_of_item-91"><span class="linenos"> 91</span></a>    <span class="k">def</span> <span class="nf">dispose_of_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">disposal_set_piece</span><span class="p">):</span>
-</span><span id="Player.dispose_of_item-92"><a href="#Player.dispose_of_item-92"><span class="linenos"> 92</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A currently incomplete method designed to allow players to dispose of items</span>
-</span><span id="Player.dispose_of_item-93"><a href="#Player.dispose_of_item-93"><span class="linenos"> 93</span></a>
-</span><span id="Player.dispose_of_item-94"><a href="#Player.dispose_of_item-94"><span class="linenos"> 94</span></a><span class="sd">        This is a currently incomplete method that takes in an item that the player wants</span>
-</span><span id="Player.dispose_of_item-95"><a href="#Player.dispose_of_item-95"><span class="linenos"> 95</span></a><span class="sd">        to dispose of and an object that the want to use to dispose it, checks if the item</span>
-</span><span id="Player.dispose_of_item-96"><a href="#Player.dispose_of_item-96"><span class="linenos"> 96</span></a><span class="sd">        is in their inventory and the disposal object is unblocked, and removes that Item&#39;s</span>
-</span><span id="Player.dispose_of_item-97"><a href="#Player.dispose_of_item-97"><span class="linenos"> 97</span></a><span class="sd">        from the player&#39;s inventory. Returns True if successful, and False if unsuccessful</span>
-</span><span id="Player.dispose_of_item-98"><a href="#Player.dispose_of_item-98"><span class="linenos"> 98</span></a>
-</span><span id="Player.dispose_of_item-99"><a href="#Player.dispose_of_item-99"><span class="linenos"> 99</span></a><span class="sd">        Arguments:</span>
-</span><span id="Player.dispose_of_item-100"><a href="#Player.dispose_of_item-100"><span class="linenos">100</span></a><span class="sd">            item (Item): The item the player is attempting to use</span>
-</span><span id="Player.dispose_of_item-101"><a href="#Player.dispose_of_item-101"><span class="linenos">101</span></a><span class="sd">            disposal_set_piece (Object): The object used to dispose of the Item</span>
-</span><span id="Player.dispose_of_item-102"><a href="#Player.dispose_of_item-102"><span class="linenos">102</span></a>
-</span><span id="Player.dispose_of_item-103"><a href="#Player.dispose_of_item-103"><span class="linenos">103</span></a><span class="sd">        Returns:</span>
-</span><span id="Player.dispose_of_item-104"><a href="#Player.dispose_of_item-104"><span class="linenos">104</span></a><span class="sd">            True if using the item is successful, False if using the item is invalid</span>
-</span><span id="Player.dispose_of_item-105"><a href="#Player.dispose_of_item-105"><span class="linenos">105</span></a>
-</span><span id="Player.dispose_of_item-106"><a href="#Player.dispose_of_item-106"><span class="linenos">106</span></a><span class="sd">        Notes:</span>
-</span><span id="Player.dispose_of_item-107"><a href="#Player.dispose_of_item-107"><span class="linenos">107</span></a><span class="sd">            As of this release this function is unfinished as there are still ongoing</span>
-</span><span id="Player.dispose_of_item-108"><a href="#Player.dispose_of_item-108"><span class="linenos">108</span></a><span class="sd">            discussions about whether the disposal object should be an instance of</span>
-</span><span id="Player.dispose_of_item-109"><a href="#Player.dispose_of_item-109"><span class="linenos">109</span></a><span class="sd">            Item/Location or if there is enough specific behavior to warrant a unique</span>
-</span><span id="Player.dispose_of_item-110"><a href="#Player.dispose_of_item-110"><span class="linenos">110</span></a><span class="sd">            class.</span>
-</span><span id="Player.dispose_of_item-111"><a href="#Player.dispose_of_item-111"><span class="linenos">111</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Player.dispose_of_item-112"><a href="#Player.dispose_of_item-112"><span class="linenos">112</span></a>        <span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__inventory</span> <span class="ow">and</span> <span class="n">disposal_set_piece</span><span class="o">.</span><span class="n">is_unblocked</span><span class="p">:</span>
-</span><span id="Player.dispose_of_item-113"><a href="#Player.dispose_of_item-113"><span class="linenos">113</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">__inventory</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-</span><span id="Player.dispose_of_item-114"><a href="#Player.dispose_of_item-114"><span class="linenos">114</span></a>            <span class="k">return</span> <span class="kc">True</span>
-</span><span id="Player.dispose_of_item-115"><a href="#Player.dispose_of_item-115"><span class="linenos">115</span></a>        <span class="k">return</span> <span class="kc">False</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Player.dispose_of_item-99"><a href="#Player.dispose_of_item-99"><span class="linenos"> 99</span></a>    <span class="k">def</span> <span class="nf">dispose_of_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">disposal_set_piece</span><span class="p">):</span>
+</span><span id="Player.dispose_of_item-100"><a href="#Player.dispose_of_item-100"><span class="linenos">100</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Allows the player to dispose of an item using a valid disposal object.</span>
+</span><span id="Player.dispose_of_item-101"><a href="#Player.dispose_of_item-101"><span class="linenos">101</span></a>
+</span><span id="Player.dispose_of_item-102"><a href="#Player.dispose_of_item-102"><span class="linenos">102</span></a><span class="sd">        A method that takes in an item that the player wants to dispose of and an object</span>
+</span><span id="Player.dispose_of_item-103"><a href="#Player.dispose_of_item-103"><span class="linenos">103</span></a><span class="sd">        that the want to use to dispose it, checks if the item is in their inventory, the</span>
+</span><span id="Player.dispose_of_item-104"><a href="#Player.dispose_of_item-104"><span class="linenos">104</span></a><span class="sd">        disposal object is valid, and the disposal object is unblocked. If so it removes</span>
+</span><span id="Player.dispose_of_item-105"><a href="#Player.dispose_of_item-105"><span class="linenos">105</span></a><span class="sd">        that Item from the player&#39;s inventory and returns True. Returns False if</span>
+</span><span id="Player.dispose_of_item-106"><a href="#Player.dispose_of_item-106"><span class="linenos">106</span></a><span class="sd">        unsuccessful.</span>
+</span><span id="Player.dispose_of_item-107"><a href="#Player.dispose_of_item-107"><span class="linenos">107</span></a>
+</span><span id="Player.dispose_of_item-108"><a href="#Player.dispose_of_item-108"><span class="linenos">108</span></a><span class="sd">        Arguments:</span>
+</span><span id="Player.dispose_of_item-109"><a href="#Player.dispose_of_item-109"><span class="linenos">109</span></a><span class="sd">            item (Item): The item the player is attempting to dispose of</span>
+</span><span id="Player.dispose_of_item-110"><a href="#Player.dispose_of_item-110"><span class="linenos">110</span></a><span class="sd">            disposal_set_piece (Object): The object used to dispose of the Item</span>
+</span><span id="Player.dispose_of_item-111"><a href="#Player.dispose_of_item-111"><span class="linenos">111</span></a>
+</span><span id="Player.dispose_of_item-112"><a href="#Player.dispose_of_item-112"><span class="linenos">112</span></a><span class="sd">        Returns:</span>
+</span><span id="Player.dispose_of_item-113"><a href="#Player.dispose_of_item-113"><span class="linenos">113</span></a><span class="sd">            True if successful, False if unsuccessful</span>
+</span><span id="Player.dispose_of_item-114"><a href="#Player.dispose_of_item-114"><span class="linenos">114</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Player.dispose_of_item-115"><a href="#Player.dispose_of_item-115"><span class="linenos">115</span></a>
+</span><span id="Player.dispose_of_item-116"><a href="#Player.dispose_of_item-116"><span class="linenos">116</span></a>        <span class="k">if</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__inventory</span><span class="p">:</span>
+</span><span id="Player.dispose_of_item-117"><a href="#Player.dispose_of_item-117"><span class="linenos">117</span></a>            <span class="k">return</span> <span class="kc">False</span>
+</span><span id="Player.dispose_of_item-118"><a href="#Player.dispose_of_item-118"><span class="linenos">118</span></a>
+</span><span id="Player.dispose_of_item-119"><a href="#Player.dispose_of_item-119"><span class="linenos">119</span></a>        <span class="k">if</span> <span class="n">disposal_set_piece</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="Player.dispose_of_item-120"><a href="#Player.dispose_of_item-120"><span class="linenos">120</span></a>            <span class="k">return</span> <span class="kc">False</span>
+</span><span id="Player.dispose_of_item-121"><a href="#Player.dispose_of_item-121"><span class="linenos">121</span></a>
+</span><span id="Player.dispose_of_item-122"><a href="#Player.dispose_of_item-122"><span class="linenos">122</span></a>        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">disposal_set_piece</span><span class="p">,</span> <span class="s2">&quot;is_unblocked&quot;</span><span class="p">):</span>
+</span><span id="Player.dispose_of_item-123"><a href="#Player.dispose_of_item-123"><span class="linenos">123</span></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">disposal_set_piece</span><span class="o">.</span><span class="n">is_unblocked</span><span class="p">():</span>
+</span><span id="Player.dispose_of_item-124"><a href="#Player.dispose_of_item-124"><span class="linenos">124</span></a>                <span class="k">return</span> <span class="kc">False</span>
+</span><span id="Player.dispose_of_item-125"><a href="#Player.dispose_of_item-125"><span class="linenos">125</span></a>
+</span><span id="Player.dispose_of_item-126"><a href="#Player.dispose_of_item-126"><span class="linenos">126</span></a>        <span class="c1"># Remove item from inventory</span>
+</span><span id="Player.dispose_of_item-127"><a href="#Player.dispose_of_item-127"><span class="linenos">127</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__inventory</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</span><span id="Player.dispose_of_item-128"><a href="#Player.dispose_of_item-128"><span class="linenos">128</span></a>        <span class="k">return</span> <span class="kc">True</span>
 </span></pre></div>
 
 
-            <div class="docstring"><p>A currently incomplete method designed to allow players to dispose of items</p>
+            <div class="docstring"><p>Allows the player to dispose of an item using a valid disposal object.</p>
 
-<p>This is a currently incomplete method that takes in an item that the player wants
-to dispose of and an object that the want to use to dispose it, checks if the item
-is in their inventory and the disposal object is unblocked, and removes that Item's
-from the player's inventory. Returns True if successful, and False if unsuccessful</p>
+<p>A method that takes in an item that the player wants to dispose of and an object
+that the want to use to dispose it, checks if the item is in their inventory, the
+disposal object is valid, and the disposal object is unblocked. If so it removes
+that Item from the player's inventory and returns True. Returns False if
+unsuccessful.</p>
 
 <p>Arguments:
-    item (Item): The item the player is attempting to use
+    item (Item): The item the player is attempting to dispose of
     disposal_set_piece (Object): The object used to dispose of the Item</p>
 
 <p>Returns:
-    True if using the item is successful, False if using the item is invalid</p>
-
-<p>Notes:
-    As of this release this function is unfinished as there are still ongoing
-    discussions about whether the disposal object should be an instance of
-    Item/Location or if there is enough specific behavior to warrant a unique
-    class.</p>
+    True if successful, False if unsuccessful</p>
 </div>
 
 
@@ -725,28 +749,23 @@ from the player's inventory. Returns True if successful, and False if unsuccessf
 
     </div>
     <a class="headerlink" href="#Player.interact_with_npc"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Player.interact_with_npc-117"><a href="#Player.interact_with_npc-117"><span class="linenos">117</span></a>    <span class="k">def</span> <span class="nf">interact_with_npc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dialogue_choice</span><span class="p">,</span> <span class="n">chosen_npc</span><span class="p">):</span>
-</span><span id="Player.interact_with_npc-118"><a href="#Player.interact_with_npc-118"><span class="linenos">118</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A currently incomplete method designed to allow players to talk to NPCs</span>
-</span><span id="Player.interact_with_npc-119"><a href="#Player.interact_with_npc-119"><span class="linenos">119</span></a>
-</span><span id="Player.interact_with_npc-120"><a href="#Player.interact_with_npc-120"><span class="linenos">120</span></a><span class="sd">        This method is a currently incomplete method that takes in a dialog choice</span>
-</span><span id="Player.interact_with_npc-121"><a href="#Player.interact_with_npc-121"><span class="linenos">121</span></a><span class="sd">        from a player and the NPC the player is interacting with, and communicates</span>
-</span><span id="Player.interact_with_npc-122"><a href="#Player.interact_with_npc-122"><span class="linenos">122</span></a><span class="sd">        them to an NPC.</span>
-</span><span id="Player.interact_with_npc-123"><a href="#Player.interact_with_npc-123"><span class="linenos">123</span></a>
-</span><span id="Player.interact_with_npc-124"><a href="#Player.interact_with_npc-124"><span class="linenos">124</span></a><span class="sd">        Arguments:</span>
-</span><span id="Player.interact_with_npc-125"><a href="#Player.interact_with_npc-125"><span class="linenos">125</span></a><span class="sd">            dialogue_choice (int): Player input integer specifying which dialog option they chose</span>
-</span><span id="Player.interact_with_npc-126"><a href="#Player.interact_with_npc-126"><span class="linenos">126</span></a><span class="sd">            chosen_npc (NPC): The NPC the Player is currently interacting with</span>
-</span><span id="Player.interact_with_npc-127"><a href="#Player.interact_with_npc-127"><span class="linenos">127</span></a>
-</span><span id="Player.interact_with_npc-128"><a href="#Player.interact_with_npc-128"><span class="linenos">128</span></a><span class="sd">        Notes:</span>
-</span><span id="Player.interact_with_npc-129"><a href="#Player.interact_with_npc-129"><span class="linenos">129</span></a><span class="sd">            As of this release, this function is unfinished as there are still ongoing</span>
-</span><span id="Player.interact_with_npc-130"><a href="#Player.interact_with_npc-130"><span class="linenos">130</span></a><span class="sd">            discussions about how to handle communication between the player, game, and</span>
-</span><span id="Player.interact_with_npc-131"><a href="#Player.interact_with_npc-131"><span class="linenos">131</span></a><span class="sd">            NPC classes and disagreements on logic distribution.</span>
-</span><span id="Player.interact_with_npc-132"><a href="#Player.interact_with_npc-132"><span class="linenos">132</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Player.interact_with_npc-133"><a href="#Player.interact_with_npc-133"><span class="linenos">133</span></a>        <span class="n">chosen_npc</span><span class="o">.</span><span class="n">has_talked</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__inventory</span><span class="p">,</span> <span class="n">dialogue_choice</span><span class="p">)</span>
-</span><span id="Player.interact_with_npc-134"><a href="#Player.interact_with_npc-134"><span class="linenos">134</span></a>
-</span><span id="Player.interact_with_npc-135"><a href="#Player.interact_with_npc-135"><span class="linenos">135</span></a>        <span class="c1"># FIX ME: Decide encapsulation for dialogue_choice</span>
-</span><span id="Player.interact_with_npc-136"><a href="#Player.interact_with_npc-136"><span class="linenos">136</span></a>        <span class="c1"># (potentially let the NPC class handle this logic)</span>
-</span><span id="Player.interact_with_npc-137"><a href="#Player.interact_with_npc-137"><span class="linenos">137</span></a>        <span class="c1"># if dialogue_choice == &quot;suspicious&quot;:</span>
-</span><span id="Player.interact_with_npc-138"><a href="#Player.interact_with_npc-138"><span class="linenos">138</span></a>        <span class="c1">#     self.__suspicion_meter += 10</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Player.interact_with_npc-130"><a href="#Player.interact_with_npc-130"><span class="linenos">130</span></a>    <span class="k">def</span> <span class="nf">interact_with_npc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dialogue_choice</span><span class="p">,</span> <span class="n">chosen_npc</span><span class="p">):</span>
+</span><span id="Player.interact_with_npc-131"><a href="#Player.interact_with_npc-131"><span class="linenos">131</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A currently incomplete method designed to allow players to talk to NPCs</span>
+</span><span id="Player.interact_with_npc-132"><a href="#Player.interact_with_npc-132"><span class="linenos">132</span></a>
+</span><span id="Player.interact_with_npc-133"><a href="#Player.interact_with_npc-133"><span class="linenos">133</span></a><span class="sd">        This method is a currently incomplete method that takes in a dialog choice</span>
+</span><span id="Player.interact_with_npc-134"><a href="#Player.interact_with_npc-134"><span class="linenos">134</span></a><span class="sd">        from a player and the NPC the player is interacting with, and communicates</span>
+</span><span id="Player.interact_with_npc-135"><a href="#Player.interact_with_npc-135"><span class="linenos">135</span></a><span class="sd">        them to an NPC.</span>
+</span><span id="Player.interact_with_npc-136"><a href="#Player.interact_with_npc-136"><span class="linenos">136</span></a>
+</span><span id="Player.interact_with_npc-137"><a href="#Player.interact_with_npc-137"><span class="linenos">137</span></a><span class="sd">        Arguments:</span>
+</span><span id="Player.interact_with_npc-138"><a href="#Player.interact_with_npc-138"><span class="linenos">138</span></a><span class="sd">            dialogue_choice (int): Player input integer specifying which dialog option they chose</span>
+</span><span id="Player.interact_with_npc-139"><a href="#Player.interact_with_npc-139"><span class="linenos">139</span></a><span class="sd">            chosen_npc (NPC): The NPC the Player is currently interacting with</span>
+</span><span id="Player.interact_with_npc-140"><a href="#Player.interact_with_npc-140"><span class="linenos">140</span></a>
+</span><span id="Player.interact_with_npc-141"><a href="#Player.interact_with_npc-141"><span class="linenos">141</span></a><span class="sd">        Notes:</span>
+</span><span id="Player.interact_with_npc-142"><a href="#Player.interact_with_npc-142"><span class="linenos">142</span></a><span class="sd">            As of this release, this function is unfinished as there are still ongoing</span>
+</span><span id="Player.interact_with_npc-143"><a href="#Player.interact_with_npc-143"><span class="linenos">143</span></a><span class="sd">            discussions about how to handle communication between the player, game, and</span>
+</span><span id="Player.interact_with_npc-144"><a href="#Player.interact_with_npc-144"><span class="linenos">144</span></a><span class="sd">            NPC classes and disagreements on logic distribution.</span>
+</span><span id="Player.interact_with_npc-145"><a href="#Player.interact_with_npc-145"><span class="linenos">145</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Player.interact_with_npc-146"><a href="#Player.interact_with_npc-146"><span class="linenos">146</span></a>        <span class="n">chosen_npc</span><span class="o">.</span><span class="n">has_talked_to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__inventory</span><span class="p">,</span> <span class="n">dialogue_choice</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -779,24 +798,24 @@ them to an NPC.</p>
 
     </div>
     <a class="headerlink" href="#Player.manipulate_npc"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Player.manipulate_npc-140"><a href="#Player.manipulate_npc-140"><span class="linenos">140</span></a>    <span class="k">def</span> <span class="nf">manipulate_npc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">npc</span><span class="p">):</span>
-</span><span id="Player.manipulate_npc-141"><a href="#Player.manipulate_npc-141"><span class="linenos">141</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A currently unimplemented method designed to allow players to manipulate NPCs</span>
-</span><span id="Player.manipulate_npc-142"><a href="#Player.manipulate_npc-142"><span class="linenos">142</span></a>
-</span><span id="Player.manipulate_npc-143"><a href="#Player.manipulate_npc-143"><span class="linenos">143</span></a><span class="sd">        This method is a currently unimplemented method that takes in the NPC the player</span>
-</span><span id="Player.manipulate_npc-144"><a href="#Player.manipulate_npc-144"><span class="linenos">144</span></a><span class="sd">        is interacting with and communicating with the NPC class to determine the result</span>
-</span><span id="Player.manipulate_npc-145"><a href="#Player.manipulate_npc-145"><span class="linenos">145</span></a><span class="sd">        of the attempted manipulation.</span>
-</span><span id="Player.manipulate_npc-146"><a href="#Player.manipulate_npc-146"><span class="linenos">146</span></a>
-</span><span id="Player.manipulate_npc-147"><a href="#Player.manipulate_npc-147"><span class="linenos">147</span></a><span class="sd">        Arguments:</span>
-</span><span id="Player.manipulate_npc-148"><a href="#Player.manipulate_npc-148"><span class="linenos">148</span></a><span class="sd">            npc (NPC): The NPC the player is currently interacting with</span>
-</span><span id="Player.manipulate_npc-149"><a href="#Player.manipulate_npc-149"><span class="linenos">149</span></a>
-</span><span id="Player.manipulate_npc-150"><a href="#Player.manipulate_npc-150"><span class="linenos">150</span></a><span class="sd">        Notes:</span>
-</span><span id="Player.manipulate_npc-151"><a href="#Player.manipulate_npc-151"><span class="linenos">151</span></a><span class="sd">            As of this release, this function still needs to be implemented. Additionally,</span>
-</span><span id="Player.manipulate_npc-152"><a href="#Player.manipulate_npc-152"><span class="linenos">152</span></a><span class="sd">            there are still ongoing discussions about how to handle communication between</span>
-</span><span id="Player.manipulate_npc-153"><a href="#Player.manipulate_npc-153"><span class="linenos">153</span></a><span class="sd">            the player, and NPC classes, and disagreements on logic distribution.</span>
-</span><span id="Player.manipulate_npc-154"><a href="#Player.manipulate_npc-154"><span class="linenos">154</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Player.manipulate_npc-155"><a href="#Player.manipulate_npc-155"><span class="linenos">155</span></a>        <span class="c1"># FIX ME: Implement class (further discussion on NPC to</span>
-</span><span id="Player.manipulate_npc-156"><a href="#Player.manipulate_npc-156"><span class="linenos">156</span></a>        <span class="c1"># player communications and distribution of logic required)</span>
-</span><span id="Player.manipulate_npc-157"><a href="#Player.manipulate_npc-157"><span class="linenos">157</span></a>        <span class="nb">print</span><span class="p">(</span><span class="n">npc</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Player.manipulate_npc-148"><a href="#Player.manipulate_npc-148"><span class="linenos">148</span></a>    <span class="k">def</span> <span class="nf">manipulate_npc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">npc</span><span class="p">):</span>
+</span><span id="Player.manipulate_npc-149"><a href="#Player.manipulate_npc-149"><span class="linenos">149</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A currently unimplemented method designed to allow players to manipulate NPCs</span>
+</span><span id="Player.manipulate_npc-150"><a href="#Player.manipulate_npc-150"><span class="linenos">150</span></a>
+</span><span id="Player.manipulate_npc-151"><a href="#Player.manipulate_npc-151"><span class="linenos">151</span></a><span class="sd">        This method is a currently unimplemented method that takes in the NPC the player</span>
+</span><span id="Player.manipulate_npc-152"><a href="#Player.manipulate_npc-152"><span class="linenos">152</span></a><span class="sd">        is interacting with and communicating with the NPC class to determine the result</span>
+</span><span id="Player.manipulate_npc-153"><a href="#Player.manipulate_npc-153"><span class="linenos">153</span></a><span class="sd">        of the attempted manipulation.</span>
+</span><span id="Player.manipulate_npc-154"><a href="#Player.manipulate_npc-154"><span class="linenos">154</span></a>
+</span><span id="Player.manipulate_npc-155"><a href="#Player.manipulate_npc-155"><span class="linenos">155</span></a><span class="sd">        Arguments:</span>
+</span><span id="Player.manipulate_npc-156"><a href="#Player.manipulate_npc-156"><span class="linenos">156</span></a><span class="sd">            npc (NPC): The NPC the player is currently interacting with</span>
+</span><span id="Player.manipulate_npc-157"><a href="#Player.manipulate_npc-157"><span class="linenos">157</span></a>
+</span><span id="Player.manipulate_npc-158"><a href="#Player.manipulate_npc-158"><span class="linenos">158</span></a><span class="sd">        Notes:</span>
+</span><span id="Player.manipulate_npc-159"><a href="#Player.manipulate_npc-159"><span class="linenos">159</span></a><span class="sd">            As of this release, this function still needs to be implemented. Additionally,</span>
+</span><span id="Player.manipulate_npc-160"><a href="#Player.manipulate_npc-160"><span class="linenos">160</span></a><span class="sd">            there are still ongoing discussions about how to handle communication between</span>
+</span><span id="Player.manipulate_npc-161"><a href="#Player.manipulate_npc-161"><span class="linenos">161</span></a><span class="sd">            the player, and NPC classes, and disagreements on logic distribution.</span>
+</span><span id="Player.manipulate_npc-162"><a href="#Player.manipulate_npc-162"><span class="linenos">162</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Player.manipulate_npc-163"><a href="#Player.manipulate_npc-163"><span class="linenos">163</span></a>        <span class="c1"># FIX ME: Implement class (further discussion on NPC to</span>
+</span><span id="Player.manipulate_npc-164"><a href="#Player.manipulate_npc-164"><span class="linenos">164</span></a>        <span class="c1"># player communications and distribution of logic required)</span>
+</span><span id="Player.manipulate_npc-165"><a href="#Player.manipulate_npc-165"><span class="linenos">165</span></a>        <span class="nb">print</span><span class="p">(</span><span class="n">npc</span><span class="p">)</span>
 </span></pre></div>
 
 
