@@ -21,9 +21,13 @@ class AiAgent:
         start_location (Location): The starting location of the AI agent.
         incriminating_items_list (list): List of items the AI must find to win the game.
     """
-    def __init__(self, base_weights, start_location, incriminating_items_list):
-        # Base weights for decision making tree
-        self.__base_weights = base_weights
+    def __init__(self, base_weights=None, start_location=None, incriminating_items_list=None):
+        # If base weights is none, set it to our default
+        if base_weights is None:
+            self.__base_weights = {'move': 1, 'search': 2, 'talk': 2}
+        else:
+            # Base weights for decision making tree
+            self.__base_weights = base_weights
 
         # AI starting location
         self.__curr_loc = start_location
