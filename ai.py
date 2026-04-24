@@ -22,6 +22,7 @@ class AiAgent:
         incriminating_items_list (list): List of items the AI must find to win the game.
     """
     def __init__(self, base_weights=None, start_location=None, incriminating_items_list=None):
+        """Initialization function for the ai class"""
         # If base weights is none, set it to our default
         if base_weights is None:
             self.__base_weights = {'move': 1, 'search': 2, 'talk': 2}

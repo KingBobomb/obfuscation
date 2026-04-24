@@ -22,6 +22,7 @@ class Location:
         npcs (list or None): The list of npcs at the given location.
     """
     def __init__(self, name, description, items=None, exits=None, npcs=None):
+        """Initialization function for the location"""
         self.__name = name
         self.__description = description
         self.__items = items if items is not None else []

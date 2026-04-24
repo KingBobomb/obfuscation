@@ -20,6 +20,7 @@ class NPC:
         ai_info (Item or None): An item that the AI can query the location of
     """
     def __init__(self, name, location, ai_info=None):
+        """Initialization function for the npc class"""
         self.__name = name
         self.__location = location
         self.__ai_info = ai_info
@@ -57,22 +58,14 @@ class NPC:
         ]
 
     def has_talked_to(self, inventory, dialogue_choice):
-        """An incomplete method used by the player to get a response from an NPC.
+        """A method used by the player to get a response from an NPC.
 
-        This is an incomplete method that takes in a players inventory and their
-        dialogue choice and prints a fitting message to the player. In the current
-        implementation, dialog choice is just printed out and the NPC response is
-        based on the number of key_items the player has in their inventory, but this
-        will change in future releases.
+        This is a method that takes in a players inventory and their dialogue choice
+        and prints a fitting message to the player.
 
         Arguments:
             inventory (list): The player's current inventory
             dialogue_choice (int): The dialogue response the player chose
-
-        Notes:
-            As of this release, this function is unfinished as there are still ongoing
-            discussions about how to handle communication between the player, game, and
-            NPC classes and disagreements on logic distribution.
         """
         # Evidence items that the player has.
         evidence_items = [item.get_name() for item in inventory if item.is_evidence()]

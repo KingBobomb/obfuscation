@@ -17,6 +17,7 @@ class Player:
         start_location (Location): The initial starting location of the Player
     """
     def __init__(self, start_location):
+        """Initialization function for the player"""
         self.__inventory = []  # Stores items
         self.__location = start_location  # Tracks current area
         self.__suspicion_meter = 0  # Tracks player's risk of being caught
@@ -95,18 +96,15 @@ class Player:
 
         return False
 
-    def dispose_of_item(self, item, disposal_set_piece):
+    def dispose_of_item(self, item):
         """Allows the player to dispose of an item using a valid disposal object.
 
-        A method that takes in an item that the player wants to dispose of and an object
-        that the want to use to dispose it, checks if the item is in their inventory, the
-        disposal object is valid, and the disposal object is unblocked. If so it removes
-        that Item from the player's inventory and returns True. Returns False if
-        unsuccessful.
+        A method that takes in an item that the player wants to dispose of and disposes of it.
+        Checks if the item is in their inventory and the given item is valid. If so it removes
+        that Item from the player's inventory and returns True. Returns False if unsuccessful.
 
         Arguments:
             item (Item): The item the player is attempting to dispose of
-            disposal_set_piece (Object): The object used to dispose of the Item
 
         Returns:
             True if successful, False if unsuccessful
@@ -115,50 +113,19 @@ class Player:
         if item not in self.__inventory:
             return False
 
-        if disposal_set_piece is None:
-            return False
-
-        if hasattr(disposal_set_piece, "is_unblocked"):
-            if not disposal_set_piece.is_unblocked():
-                return False
-
         # Remove item from inventory
         self.__inventory.remove(item)
         return True
 
     def interact_with_npc(self, dialogue_choice, chosen_npc):
-        """A currently incomplete method designed to allow players to talk to NPCs
+        """A method designed to allow players to talk to NPCs
 
-        This method is a currently incomplete method that takes in a dialog choice
-        from a player and the NPC the player is interacting with, and communicates
-        them to an NPC.
+        This method takes in a dialog choice from a player and the NPC the player is interacting
+        with, and communicates their choice to the NPC.
 
         Arguments:
             dialogue_choice (int): Player input integer specifying which dialog option they chose
             chosen_npc (NPC): The NPC the Player is currently interacting with
 
-        Notes:
-            As of this release, this function is unfinished as there are still ongoing
-            discussions about how to handle communication between the player, game, and
-            NPC classes and disagreements on logic distribution.
         """
         chosen_npc.has_talked_to(self.__inventory, dialogue_choice)
-
-    def manipulate_npc(self, npc):
-        """A currently unimplemented method designed to allow players to manipulate NPCs
-
-        This method is a currently unimplemented method that takes in the NPC the player
-        is interacting with and communicating with the NPC class to determine the result
-        of the attempted manipulation.
-
-        Arguments:
-            npc (NPC): The NPC the player is currently interacting with
-
-        Notes:
-            As of this release, this function still needs to be implemented. Additionally,
-            there are still ongoing discussions about how to handle communication between
-            the player, and NPC classes, and disagreements on logic distribution.
-        """
-        # FIX ME: Implement class (further discussion on NPC to
-        # player communications and distribution of logic required)
-        print(npc)

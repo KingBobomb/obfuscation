@@ -39,6 +39,7 @@ class Item:
     def __init__(self, name, description, location, can_be_taken=True, evidence=False,
                  required_location=None, target_exit=None, consumable=False,
                  effect_type="", container="", block_msg="", unblock_item=None):
+        """Initialization function for the item class"""
         self.__name = name
         self.__description = description
         self.__location = location
@@ -119,6 +120,7 @@ class Item:
         return True
 
     def __apply_effect(self, current_location):
+        # Helper method to apply an item's effect
         if self.__effect_type == "unblock":
             if self.__target_exit:
                 # 1 represents the "unblocked" state in the Location class

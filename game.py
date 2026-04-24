@@ -286,26 +286,17 @@ class Game:
 
         return False, False
 
-    def __handle_player_dispose(self, player_loc):
+    def __handle_player_dispose(self, _):
         # Helper function that handles a user disposing of an item. Returns a tuple where
         # the first value is a bool indicating if player's turn should continue and
         # the second value is a bool indicating if the player wants to end the
         # game.
         player_inv = self.__player.get_inventory()
 
-        # FIX ME: Adjust to match actual disposal implementation
-        # disposer = player_loc.get_disposer()
-
-        # Make sure there are items for the player to search for.
+        # Make sure there are items for the player to dispose of.
         if len(player_inv) == 0:
             print("\nYou don't have any items to dispose of.")
             return True, False
-
-        # FIX ME: Uncomment when disposal logic is implemented
-        # Make sure the given location contains a way to dispose items.
-        # if len(player_inv) == 0:
-        #     print("\nThere are no ways to dispose of items here.")
-        #     return True, False
 
         valid = False
 
@@ -324,8 +315,7 @@ class Game:
             # If input is valid, continue interaction.
             if validity_check > 0:
                 chosen_item = player_inv[validity_check - 1]
-                # FIX ME: Replace second arg with disposer when that logic is implemented
-                valid = self.__player.dispose_of_item(chosen_item, player_loc)
+                valid = self.__player.dispose_of_item(chosen_item)
 
                 if valid:
                     print(f"\n{chosen_item.get_name()} was disposed of")
