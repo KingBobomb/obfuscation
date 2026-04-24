@@ -127,128 +127,129 @@ location    </h1>
 </span><span id="L-22"><a href="#L-22"><span class="linenos"> 22</span></a><span class="sd">        npcs (list or None): The list of npcs at the given location.</span>
 </span><span id="L-23"><a href="#L-23"><span class="linenos"> 23</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="L-24"><a href="#L-24"><span class="linenos"> 24</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">items</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">exits</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">npcs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-</span><span id="L-25"><a href="#L-25"><span class="linenos"> 25</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__name</span> <span class="o">=</span> <span class="n">name</span>
-</span><span id="L-26"><a href="#L-26"><span class="linenos"> 26</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__description</span> <span class="o">=</span> <span class="n">description</span>
-</span><span id="L-27"><a href="#L-27"><span class="linenos"> 27</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__items</span> <span class="o">=</span> <span class="n">items</span> <span class="k">if</span> <span class="n">items</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">[]</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos"> 28</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span> <span class="o">=</span> <span class="n">exits</span> <span class="k">if</span> <span class="n">exits</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">{}</span>
-</span><span id="L-29"><a href="#L-29"><span class="linenos"> 29</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__npcs</span> <span class="o">=</span> <span class="n">npcs</span> <span class="k">if</span> <span class="n">npcs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">[]</span>
-</span><span id="L-30"><a href="#L-30"><span class="linenos"> 30</span></a>
-</span><span id="L-31"><a href="#L-31"><span class="linenos"> 31</span></a>    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="L-32"><a href="#L-32"><span class="linenos"> 32</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the location&#39;s name&quot;&quot;&quot;</span>
-</span><span id="L-33"><a href="#L-33"><span class="linenos"> 33</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__name</span>
-</span><span id="L-34"><a href="#L-34"><span class="linenos"> 34</span></a>
-</span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a>    <span class="k">def</span> <span class="nf">get_items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the location&#39;s list of items&quot;&quot;&quot;</span>
-</span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__items</span>
-</span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a>
-</span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a>    <span class="k">def</span> <span class="nf">get_exits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the location&#39;s dict of exits&quot;&quot;&quot;</span>
-</span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span>
-</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a>
-</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a>    <span class="k">def</span> <span class="nf">get_npcs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the location&#39;s list of NPCs&quot;&quot;&quot;</span>
-</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__npcs</span>
-</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a>
-</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a>    <span class="k">def</span> <span class="nf">is_blocked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">destination</span><span class="p">):</span>
-</span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to determine if movement to a location is blocked.</span>
-</span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a>
-</span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a><span class="sd">        This method takes in a location specified by destination and checks</span>
-</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a><span class="sd">        if a movement to this location is invalid. If a movement is invalid</span>
-</span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a><span class="sd">        this method returns True. If a movement is valid, this method returns</span>
-</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a><span class="sd">        False.</span>
-</span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a>
-</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a><span class="sd">        Arguments:</span>
-</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a><span class="sd">            destination (Location): Specifies where the caller wants to move to</span>
-</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a>
-</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a><span class="sd">        Returns:</span>
-</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a><span class="sd">            True if the movement is invalid, False if the movement is valid.</span>
-</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a>
-</span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a>        <span class="c1"># Check if the destination is an exit of this room, if not return false.</span>
-</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a>        <span class="k">if</span> <span class="n">destination</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">:</span>
-</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a>            <span class="c1"># If the exit to the user&#39;s destination is blocked</span>
-</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a>            <span class="c1"># return true. Otherwise return false</span>
-</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">[</span><span class="n">destination</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a>                <span class="k">return</span> <span class="kc">True</span>
-</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a>                <span class="k">return</span> <span class="kc">False</span>
-</span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a>            <span class="k">return</span> <span class="kc">True</span>
-</span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a>
-</span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a>    <span class="k">def</span> <span class="nf">add_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
-</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to add an item to the location&#39;s list of items.&quot;&quot;&quot;</span>
-</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a>
-</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a>    <span class="k">def</span> <span class="nf">remove_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
-</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to remove an item from a location.</span>
-</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a><span class="sd">        Returns True if removed, False if the item was not found.&quot;&quot;&quot;</span>
-</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a>        <span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__items</span><span class="p">:</span>
-</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">__items</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a>            <span class="k">return</span> <span class="kc">True</span>
-</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a>        <span class="k">return</span> <span class="kc">False</span>
-</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a>
-</span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a>    <span class="k">def</span> <span class="nf">add_npc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">npc</span><span class="p">):</span>
-</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to add an NPC to the location&#39;s list of NPCs.&quot;&quot;&quot;</span>
-</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__npcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">npc</span><span class="p">)</span>
-</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a>
-</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a>    <span class="k">def</span> <span class="nf">remove_npc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">npc</span><span class="p">):</span>
-</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to remove an NPC from a location.</span>
-</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a><span class="sd">        Returns True if removed, False if the NPC was not found.&quot;&quot;&quot;</span>
-</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a>        <span class="k">if</span> <span class="n">npc</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__npcs</span><span class="p">:</span>
-</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">__npcs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">npc</span><span class="p">)</span>
-</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a>            <span class="k">return</span> <span class="kc">True</span>
-</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>        <span class="k">return</span> <span class="kc">False</span>
-</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>
-</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a>    <span class="k">def</span> <span class="nf">add_exit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">block_state</span><span class="p">):</span>
-</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A method to add an exit to our location&#39;s list of exits</span>
-</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>
-</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a><span class="sd">        This method takes in a Location and an integer specifying whether</span>
-</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a><span class="sd">        the location is blocked (0) or not (1) and adds it to the calling</span>
-</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a><span class="sd">        location&#39;s dictionary of exits.</span>
-</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a>
-</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a><span class="sd">        Arguments:</span>
-</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a><span class="sd">            location (Location): A location to add to our list of exits</span>
-</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a><span class="sd">            block_state (int): An int specifying if the location is blocked</span>
-</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">[</span><span class="n">location</span><span class="p">]</span> <span class="o">=</span> <span class="n">block_state</span>
-</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a>
-</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a>    <span class="k">def</span> <span class="nf">add_mult_exit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exit_dict</span><span class="p">):</span>
-</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A method that allows defining multiple exits simultaneously</span>
-</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a>
-</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a><span class="sd">        This method is intended to be used when adding individual exits to a</span>
-</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a><span class="sd">        location would be too slow or tedious. It takes in a dictionary of</span>
-</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a><span class="sd">        Location and int pairs and adds them to the location&#39;s list of exits.</span>
-</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a>
-</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a><span class="sd">        Arguments:</span>
-</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a><span class="sd">            exit_dict (dict): A dictionary of Location and block state pairs</span>
-</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a>
-</span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a>        <span class="k">for</span> <span class="n">exits</span> <span class="ow">in</span> <span class="n">exit_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-</span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">[</span><span class="n">exits</span><span class="p">]</span> <span class="o">=</span> <span class="n">exit_dict</span><span class="p">[</span><span class="n">exits</span><span class="p">]</span>
-</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a>
-</span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a>    <span class="k">def</span> <span class="nf">set_exit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exit_to_alter</span><span class="p">,</span> <span class="n">block_state</span><span class="p">):</span>
-</span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Setter function used to alter whether an exit is blocked or not.</span>
-</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a>
-</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a><span class="sd">        This method takes in a location specified by exit_to_alter and checks if it</span>
-</span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a><span class="sd">        is an exit to the current location. If it is, we set the block state of</span>
-</span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a><span class="sd">        the exit to the int passed in by block_state. If it isn&#39;t, we print a</span>
-</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a><span class="sd">        message indicating that the set attempt failed.</span>
-</span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a>
-</span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a><span class="sd">        Arguments:</span>
-</span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a><span class="sd">            exit_to_alter (Location): An exit of the current location to alter</span>
-</span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a><span class="sd">            block_state (int): Value to set the chosen exit&#39;s block state to</span>
-</span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a>
-</span><span id="L-136"><a href="#L-136"><span class="linenos">136</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-137"><a href="#L-137"><span class="linenos">137</span></a>        <span class="k">if</span> <span class="n">block_state</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="L-138"><a href="#L-138"><span class="linenos">138</span></a>            <span class="n">block_state</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="L-139"><a href="#L-139"><span class="linenos">139</span></a>
-</span><span id="L-140"><a href="#L-140"><span class="linenos">140</span></a>        <span class="k">if</span> <span class="n">exit_to_alter</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">:</span>
-</span><span id="L-141"><a href="#L-141"><span class="linenos">141</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">[</span><span class="n">exit_to_alter</span><span class="p">]</span> <span class="o">=</span> <span class="n">block_state</span>
-</span><span id="L-142"><a href="#L-142"><span class="linenos">142</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="L-143"><a href="#L-143"><span class="linenos">143</span></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2"> has no exit named </span><span class="si">{</span><span class="n">exit_to_alter</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="L-144"><a href="#L-144"><span class="linenos">144</span></a>
-</span><span id="L-145"><a href="#L-145"><span class="linenos">145</span></a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="L-146"><a href="#L-146"><span class="linenos">146</span></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__description</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos"> 25</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialization function for the location&quot;&quot;&quot;</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos"> 26</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__name</span> <span class="o">=</span> <span class="n">name</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos"> 27</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__description</span> <span class="o">=</span> <span class="n">description</span>
+</span><span id="L-28"><a href="#L-28"><span class="linenos"> 28</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__items</span> <span class="o">=</span> <span class="n">items</span> <span class="k">if</span> <span class="n">items</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">[]</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos"> 29</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span> <span class="o">=</span> <span class="n">exits</span> <span class="k">if</span> <span class="n">exits</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">{}</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos"> 30</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__npcs</span> <span class="o">=</span> <span class="n">npcs</span> <span class="k">if</span> <span class="n">npcs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">[]</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos"> 31</span></a>
+</span><span id="L-32"><a href="#L-32"><span class="linenos"> 32</span></a>    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos"> 33</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the location&#39;s name&quot;&quot;&quot;</span>
+</span><span id="L-34"><a href="#L-34"><span class="linenos"> 34</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__name</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a>
+</span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a>    <span class="k">def</span> <span class="nf">get_items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the location&#39;s list of items&quot;&quot;&quot;</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__items</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a>
+</span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a>    <span class="k">def</span> <span class="nf">get_exits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the location&#39;s dict of exits&quot;&quot;&quot;</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a>
+</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a>    <span class="k">def</span> <span class="nf">get_npcs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the location&#39;s list of NPCs&quot;&quot;&quot;</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__npcs</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a>
+</span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a>    <span class="k">def</span> <span class="nf">is_blocked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">destination</span><span class="p">):</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to determine if movement to a location is blocked.</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a>
+</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a><span class="sd">        This method takes in a location specified by destination and checks</span>
+</span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a><span class="sd">        if a movement to this location is invalid. If a movement is invalid</span>
+</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a><span class="sd">        this method returns True. If a movement is valid, this method returns</span>
+</span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a><span class="sd">        False.</span>
+</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a>
+</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a><span class="sd">        Arguments:</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a><span class="sd">            destination (Location): Specifies where the caller wants to move to</span>
+</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a>
+</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a><span class="sd">        Returns:</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a><span class="sd">            True if the movement is invalid, False if the movement is valid.</span>
+</span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a>
+</span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a>        <span class="c1"># Check if the destination is an exit of this room, if not return false.</span>
+</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a>        <span class="k">if</span> <span class="n">destination</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">:</span>
+</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a>            <span class="c1"># If the exit to the user&#39;s destination is blocked</span>
+</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a>            <span class="c1"># return true. Otherwise return false</span>
+</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">[</span><span class="n">destination</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a>                <span class="k">return</span> <span class="kc">True</span>
+</span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a>            <span class="k">else</span><span class="p">:</span>
+</span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a>                <span class="k">return</span> <span class="kc">False</span>
+</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a>            <span class="k">return</span> <span class="kc">True</span>
+</span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a>
+</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a>    <span class="k">def</span> <span class="nf">add_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to add an item to the location&#39;s list of items.&quot;&quot;&quot;</span>
+</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a>
+</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a>    <span class="k">def</span> <span class="nf">remove_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to remove an item from a location.</span>
+</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a><span class="sd">        Returns True if removed, False if the item was not found.&quot;&quot;&quot;</span>
+</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a>        <span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__items</span><span class="p">:</span>
+</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">__items</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a>            <span class="k">return</span> <span class="kc">True</span>
+</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a>        <span class="k">return</span> <span class="kc">False</span>
+</span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a>
+</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a>    <span class="k">def</span> <span class="nf">add_npc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">npc</span><span class="p">):</span>
+</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to add an NPC to the location&#39;s list of NPCs.&quot;&quot;&quot;</span>
+</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__npcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">npc</span><span class="p">)</span>
+</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a>
+</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a>    <span class="k">def</span> <span class="nf">remove_npc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">npc</span><span class="p">):</span>
+</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to remove an NPC from a location.</span>
+</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a><span class="sd">        Returns True if removed, False if the NPC was not found.&quot;&quot;&quot;</span>
+</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a>        <span class="k">if</span> <span class="n">npc</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__npcs</span><span class="p">:</span>
+</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">__npcs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">npc</span><span class="p">)</span>
+</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>            <span class="k">return</span> <span class="kc">True</span>
+</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>        <span class="k">return</span> <span class="kc">False</span>
+</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a>
+</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>    <span class="k">def</span> <span class="nf">add_exit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">block_state</span><span class="p">):</span>
+</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A method to add an exit to our location&#39;s list of exits</span>
+</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>
+</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a><span class="sd">        This method takes in a Location and an integer specifying whether</span>
+</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a><span class="sd">        the location is blocked (0) or not (1) and adds it to the calling</span>
+</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a><span class="sd">        location&#39;s dictionary of exits.</span>
+</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a>
+</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a><span class="sd">        Arguments:</span>
+</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a><span class="sd">            location (Location): A location to add to our list of exits</span>
+</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a><span class="sd">            block_state (int): An int specifying if the location is blocked</span>
+</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">[</span><span class="n">location</span><span class="p">]</span> <span class="o">=</span> <span class="n">block_state</span>
+</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a>
+</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a>    <span class="k">def</span> <span class="nf">add_mult_exit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exit_dict</span><span class="p">):</span>
+</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A method that allows defining multiple exits simultaneously</span>
+</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a>
+</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a><span class="sd">        This method is intended to be used when adding individual exits to a</span>
+</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a><span class="sd">        location would be too slow or tedious. It takes in a dictionary of</span>
+</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a><span class="sd">        Location and int pairs and adds them to the location&#39;s list of exits.</span>
+</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a>
+</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a><span class="sd">        Arguments:</span>
+</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a><span class="sd">            exit_dict (dict): A dictionary of Location and block state pairs</span>
+</span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a>
+</span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a>        <span class="k">for</span> <span class="n">exits</span> <span class="ow">in</span> <span class="n">exit_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">[</span><span class="n">exits</span><span class="p">]</span> <span class="o">=</span> <span class="n">exit_dict</span><span class="p">[</span><span class="n">exits</span><span class="p">]</span>
+</span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a>
+</span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a>    <span class="k">def</span> <span class="nf">set_exit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exit_to_alter</span><span class="p">,</span> <span class="n">block_state</span><span class="p">):</span>
+</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Setter function used to alter whether an exit is blocked or not.</span>
+</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a>
+</span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a><span class="sd">        This method takes in a location specified by exit_to_alter and checks if it</span>
+</span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a><span class="sd">        is an exit to the current location. If it is, we set the block state of</span>
+</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a><span class="sd">        the exit to the int passed in by block_state. If it isn&#39;t, we print a</span>
+</span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a><span class="sd">        message indicating that the set attempt failed.</span>
+</span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a>
+</span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a><span class="sd">        Arguments:</span>
+</span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a><span class="sd">            exit_to_alter (Location): An exit of the current location to alter</span>
+</span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a><span class="sd">            block_state (int): Value to set the chosen exit&#39;s block state to</span>
+</span><span id="L-136"><a href="#L-136"><span class="linenos">136</span></a>
+</span><span id="L-137"><a href="#L-137"><span class="linenos">137</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-138"><a href="#L-138"><span class="linenos">138</span></a>        <span class="k">if</span> <span class="n">block_state</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="L-139"><a href="#L-139"><span class="linenos">139</span></a>            <span class="n">block_state</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="L-140"><a href="#L-140"><span class="linenos">140</span></a>
+</span><span id="L-141"><a href="#L-141"><span class="linenos">141</span></a>        <span class="k">if</span> <span class="n">exit_to_alter</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">:</span>
+</span><span id="L-142"><a href="#L-142"><span class="linenos">142</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">[</span><span class="n">exit_to_alter</span><span class="p">]</span> <span class="o">=</span> <span class="n">block_state</span>
+</span><span id="L-143"><a href="#L-143"><span class="linenos">143</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="L-144"><a href="#L-144"><span class="linenos">144</span></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2"> has no exit named </span><span class="si">{</span><span class="n">exit_to_alter</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-145"><a href="#L-145"><span class="linenos">145</span></a>
+</span><span id="L-146"><a href="#L-146"><span class="linenos">146</span></a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="L-147"><a href="#L-147"><span class="linenos">147</span></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__description</span><span class="si">}</span><span class="s2">&quot;</span>
 </span></pre></div>
 
 
@@ -280,128 +281,129 @@ location    </h1>
 </span><span id="Location-23"><a href="#Location-23"><span class="linenos"> 23</span></a><span class="sd">        npcs (list or None): The list of npcs at the given location.</span>
 </span><span id="Location-24"><a href="#Location-24"><span class="linenos"> 24</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="Location-25"><a href="#Location-25"><span class="linenos"> 25</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">items</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">exits</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">npcs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-</span><span id="Location-26"><a href="#Location-26"><span class="linenos"> 26</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__name</span> <span class="o">=</span> <span class="n">name</span>
-</span><span id="Location-27"><a href="#Location-27"><span class="linenos"> 27</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__description</span> <span class="o">=</span> <span class="n">description</span>
-</span><span id="Location-28"><a href="#Location-28"><span class="linenos"> 28</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__items</span> <span class="o">=</span> <span class="n">items</span> <span class="k">if</span> <span class="n">items</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">[]</span>
-</span><span id="Location-29"><a href="#Location-29"><span class="linenos"> 29</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span> <span class="o">=</span> <span class="n">exits</span> <span class="k">if</span> <span class="n">exits</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">{}</span>
-</span><span id="Location-30"><a href="#Location-30"><span class="linenos"> 30</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__npcs</span> <span class="o">=</span> <span class="n">npcs</span> <span class="k">if</span> <span class="n">npcs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">[]</span>
-</span><span id="Location-31"><a href="#Location-31"><span class="linenos"> 31</span></a>
-</span><span id="Location-32"><a href="#Location-32"><span class="linenos"> 32</span></a>    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Location-33"><a href="#Location-33"><span class="linenos"> 33</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the location&#39;s name&quot;&quot;&quot;</span>
-</span><span id="Location-34"><a href="#Location-34"><span class="linenos"> 34</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__name</span>
-</span><span id="Location-35"><a href="#Location-35"><span class="linenos"> 35</span></a>
-</span><span id="Location-36"><a href="#Location-36"><span class="linenos"> 36</span></a>    <span class="k">def</span> <span class="nf">get_items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Location-37"><a href="#Location-37"><span class="linenos"> 37</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the location&#39;s list of items&quot;&quot;&quot;</span>
-</span><span id="Location-38"><a href="#Location-38"><span class="linenos"> 38</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__items</span>
-</span><span id="Location-39"><a href="#Location-39"><span class="linenos"> 39</span></a>
-</span><span id="Location-40"><a href="#Location-40"><span class="linenos"> 40</span></a>    <span class="k">def</span> <span class="nf">get_exits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Location-41"><a href="#Location-41"><span class="linenos"> 41</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the location&#39;s dict of exits&quot;&quot;&quot;</span>
-</span><span id="Location-42"><a href="#Location-42"><span class="linenos"> 42</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span>
-</span><span id="Location-43"><a href="#Location-43"><span class="linenos"> 43</span></a>
-</span><span id="Location-44"><a href="#Location-44"><span class="linenos"> 44</span></a>    <span class="k">def</span> <span class="nf">get_npcs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Location-45"><a href="#Location-45"><span class="linenos"> 45</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the location&#39;s list of NPCs&quot;&quot;&quot;</span>
-</span><span id="Location-46"><a href="#Location-46"><span class="linenos"> 46</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__npcs</span>
-</span><span id="Location-47"><a href="#Location-47"><span class="linenos"> 47</span></a>
-</span><span id="Location-48"><a href="#Location-48"><span class="linenos"> 48</span></a>    <span class="k">def</span> <span class="nf">is_blocked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">destination</span><span class="p">):</span>
-</span><span id="Location-49"><a href="#Location-49"><span class="linenos"> 49</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to determine if movement to a location is blocked.</span>
-</span><span id="Location-50"><a href="#Location-50"><span class="linenos"> 50</span></a>
-</span><span id="Location-51"><a href="#Location-51"><span class="linenos"> 51</span></a><span class="sd">        This method takes in a location specified by destination and checks</span>
-</span><span id="Location-52"><a href="#Location-52"><span class="linenos"> 52</span></a><span class="sd">        if a movement to this location is invalid. If a movement is invalid</span>
-</span><span id="Location-53"><a href="#Location-53"><span class="linenos"> 53</span></a><span class="sd">        this method returns True. If a movement is valid, this method returns</span>
-</span><span id="Location-54"><a href="#Location-54"><span class="linenos"> 54</span></a><span class="sd">        False.</span>
-</span><span id="Location-55"><a href="#Location-55"><span class="linenos"> 55</span></a>
-</span><span id="Location-56"><a href="#Location-56"><span class="linenos"> 56</span></a><span class="sd">        Arguments:</span>
-</span><span id="Location-57"><a href="#Location-57"><span class="linenos"> 57</span></a><span class="sd">            destination (Location): Specifies where the caller wants to move to</span>
-</span><span id="Location-58"><a href="#Location-58"><span class="linenos"> 58</span></a>
-</span><span id="Location-59"><a href="#Location-59"><span class="linenos"> 59</span></a><span class="sd">        Returns:</span>
-</span><span id="Location-60"><a href="#Location-60"><span class="linenos"> 60</span></a><span class="sd">            True if the movement is invalid, False if the movement is valid.</span>
-</span><span id="Location-61"><a href="#Location-61"><span class="linenos"> 61</span></a>
-</span><span id="Location-62"><a href="#Location-62"><span class="linenos"> 62</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Location-63"><a href="#Location-63"><span class="linenos"> 63</span></a>        <span class="c1"># Check if the destination is an exit of this room, if not return false.</span>
-</span><span id="Location-64"><a href="#Location-64"><span class="linenos"> 64</span></a>        <span class="k">if</span> <span class="n">destination</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">:</span>
-</span><span id="Location-65"><a href="#Location-65"><span class="linenos"> 65</span></a>            <span class="c1"># If the exit to the user&#39;s destination is blocked</span>
-</span><span id="Location-66"><a href="#Location-66"><span class="linenos"> 66</span></a>            <span class="c1"># return true. Otherwise return false</span>
-</span><span id="Location-67"><a href="#Location-67"><span class="linenos"> 67</span></a>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">[</span><span class="n">destination</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="Location-68"><a href="#Location-68"><span class="linenos"> 68</span></a>                <span class="k">return</span> <span class="kc">True</span>
-</span><span id="Location-69"><a href="#Location-69"><span class="linenos"> 69</span></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="Location-70"><a href="#Location-70"><span class="linenos"> 70</span></a>                <span class="k">return</span> <span class="kc">False</span>
-</span><span id="Location-71"><a href="#Location-71"><span class="linenos"> 71</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="Location-72"><a href="#Location-72"><span class="linenos"> 72</span></a>            <span class="k">return</span> <span class="kc">True</span>
-</span><span id="Location-73"><a href="#Location-73"><span class="linenos"> 73</span></a>
-</span><span id="Location-74"><a href="#Location-74"><span class="linenos"> 74</span></a>    <span class="k">def</span> <span class="nf">add_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
-</span><span id="Location-75"><a href="#Location-75"><span class="linenos"> 75</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to add an item to the location&#39;s list of items.&quot;&quot;&quot;</span>
-</span><span id="Location-76"><a href="#Location-76"><span class="linenos"> 76</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-</span><span id="Location-77"><a href="#Location-77"><span class="linenos"> 77</span></a>
-</span><span id="Location-78"><a href="#Location-78"><span class="linenos"> 78</span></a>    <span class="k">def</span> <span class="nf">remove_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
-</span><span id="Location-79"><a href="#Location-79"><span class="linenos"> 79</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to remove an item from a location.</span>
-</span><span id="Location-80"><a href="#Location-80"><span class="linenos"> 80</span></a><span class="sd">        Returns True if removed, False if the item was not found.&quot;&quot;&quot;</span>
-</span><span id="Location-81"><a href="#Location-81"><span class="linenos"> 81</span></a>        <span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__items</span><span class="p">:</span>
-</span><span id="Location-82"><a href="#Location-82"><span class="linenos"> 82</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">__items</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-</span><span id="Location-83"><a href="#Location-83"><span class="linenos"> 83</span></a>            <span class="k">return</span> <span class="kc">True</span>
-</span><span id="Location-84"><a href="#Location-84"><span class="linenos"> 84</span></a>        <span class="k">return</span> <span class="kc">False</span>
-</span><span id="Location-85"><a href="#Location-85"><span class="linenos"> 85</span></a>
-</span><span id="Location-86"><a href="#Location-86"><span class="linenos"> 86</span></a>    <span class="k">def</span> <span class="nf">add_npc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">npc</span><span class="p">):</span>
-</span><span id="Location-87"><a href="#Location-87"><span class="linenos"> 87</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to add an NPC to the location&#39;s list of NPCs.&quot;&quot;&quot;</span>
-</span><span id="Location-88"><a href="#Location-88"><span class="linenos"> 88</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__npcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">npc</span><span class="p">)</span>
-</span><span id="Location-89"><a href="#Location-89"><span class="linenos"> 89</span></a>
-</span><span id="Location-90"><a href="#Location-90"><span class="linenos"> 90</span></a>    <span class="k">def</span> <span class="nf">remove_npc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">npc</span><span class="p">):</span>
-</span><span id="Location-91"><a href="#Location-91"><span class="linenos"> 91</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to remove an NPC from a location.</span>
-</span><span id="Location-92"><a href="#Location-92"><span class="linenos"> 92</span></a><span class="sd">        Returns True if removed, False if the NPC was not found.&quot;&quot;&quot;</span>
-</span><span id="Location-93"><a href="#Location-93"><span class="linenos"> 93</span></a>        <span class="k">if</span> <span class="n">npc</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__npcs</span><span class="p">:</span>
-</span><span id="Location-94"><a href="#Location-94"><span class="linenos"> 94</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">__npcs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">npc</span><span class="p">)</span>
-</span><span id="Location-95"><a href="#Location-95"><span class="linenos"> 95</span></a>            <span class="k">return</span> <span class="kc">True</span>
-</span><span id="Location-96"><a href="#Location-96"><span class="linenos"> 96</span></a>        <span class="k">return</span> <span class="kc">False</span>
-</span><span id="Location-97"><a href="#Location-97"><span class="linenos"> 97</span></a>
-</span><span id="Location-98"><a href="#Location-98"><span class="linenos"> 98</span></a>    <span class="k">def</span> <span class="nf">add_exit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">block_state</span><span class="p">):</span>
-</span><span id="Location-99"><a href="#Location-99"><span class="linenos"> 99</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A method to add an exit to our location&#39;s list of exits</span>
-</span><span id="Location-100"><a href="#Location-100"><span class="linenos">100</span></a>
-</span><span id="Location-101"><a href="#Location-101"><span class="linenos">101</span></a><span class="sd">        This method takes in a Location and an integer specifying whether</span>
-</span><span id="Location-102"><a href="#Location-102"><span class="linenos">102</span></a><span class="sd">        the location is blocked (0) or not (1) and adds it to the calling</span>
-</span><span id="Location-103"><a href="#Location-103"><span class="linenos">103</span></a><span class="sd">        location&#39;s dictionary of exits.</span>
-</span><span id="Location-104"><a href="#Location-104"><span class="linenos">104</span></a>
-</span><span id="Location-105"><a href="#Location-105"><span class="linenos">105</span></a><span class="sd">        Arguments:</span>
-</span><span id="Location-106"><a href="#Location-106"><span class="linenos">106</span></a><span class="sd">            location (Location): A location to add to our list of exits</span>
-</span><span id="Location-107"><a href="#Location-107"><span class="linenos">107</span></a><span class="sd">            block_state (int): An int specifying if the location is blocked</span>
-</span><span id="Location-108"><a href="#Location-108"><span class="linenos">108</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Location-109"><a href="#Location-109"><span class="linenos">109</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">[</span><span class="n">location</span><span class="p">]</span> <span class="o">=</span> <span class="n">block_state</span>
-</span><span id="Location-110"><a href="#Location-110"><span class="linenos">110</span></a>
-</span><span id="Location-111"><a href="#Location-111"><span class="linenos">111</span></a>    <span class="k">def</span> <span class="nf">add_mult_exit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exit_dict</span><span class="p">):</span>
-</span><span id="Location-112"><a href="#Location-112"><span class="linenos">112</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A method that allows defining multiple exits simultaneously</span>
-</span><span id="Location-113"><a href="#Location-113"><span class="linenos">113</span></a>
-</span><span id="Location-114"><a href="#Location-114"><span class="linenos">114</span></a><span class="sd">        This method is intended to be used when adding individual exits to a</span>
-</span><span id="Location-115"><a href="#Location-115"><span class="linenos">115</span></a><span class="sd">        location would be too slow or tedious. It takes in a dictionary of</span>
-</span><span id="Location-116"><a href="#Location-116"><span class="linenos">116</span></a><span class="sd">        Location and int pairs and adds them to the location&#39;s list of exits.</span>
-</span><span id="Location-117"><a href="#Location-117"><span class="linenos">117</span></a>
-</span><span id="Location-118"><a href="#Location-118"><span class="linenos">118</span></a><span class="sd">        Arguments:</span>
-</span><span id="Location-119"><a href="#Location-119"><span class="linenos">119</span></a><span class="sd">            exit_dict (dict): A dictionary of Location and block state pairs</span>
-</span><span id="Location-120"><a href="#Location-120"><span class="linenos">120</span></a>
-</span><span id="Location-121"><a href="#Location-121"><span class="linenos">121</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Location-122"><a href="#Location-122"><span class="linenos">122</span></a>        <span class="k">for</span> <span class="n">exits</span> <span class="ow">in</span> <span class="n">exit_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-</span><span id="Location-123"><a href="#Location-123"><span class="linenos">123</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">[</span><span class="n">exits</span><span class="p">]</span> <span class="o">=</span> <span class="n">exit_dict</span><span class="p">[</span><span class="n">exits</span><span class="p">]</span>
-</span><span id="Location-124"><a href="#Location-124"><span class="linenos">124</span></a>
-</span><span id="Location-125"><a href="#Location-125"><span class="linenos">125</span></a>    <span class="k">def</span> <span class="nf">set_exit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exit_to_alter</span><span class="p">,</span> <span class="n">block_state</span><span class="p">):</span>
-</span><span id="Location-126"><a href="#Location-126"><span class="linenos">126</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Setter function used to alter whether an exit is blocked or not.</span>
-</span><span id="Location-127"><a href="#Location-127"><span class="linenos">127</span></a>
-</span><span id="Location-128"><a href="#Location-128"><span class="linenos">128</span></a><span class="sd">        This method takes in a location specified by exit_to_alter and checks if it</span>
-</span><span id="Location-129"><a href="#Location-129"><span class="linenos">129</span></a><span class="sd">        is an exit to the current location. If it is, we set the block state of</span>
-</span><span id="Location-130"><a href="#Location-130"><span class="linenos">130</span></a><span class="sd">        the exit to the int passed in by block_state. If it isn&#39;t, we print a</span>
-</span><span id="Location-131"><a href="#Location-131"><span class="linenos">131</span></a><span class="sd">        message indicating that the set attempt failed.</span>
-</span><span id="Location-132"><a href="#Location-132"><span class="linenos">132</span></a>
-</span><span id="Location-133"><a href="#Location-133"><span class="linenos">133</span></a><span class="sd">        Arguments:</span>
-</span><span id="Location-134"><a href="#Location-134"><span class="linenos">134</span></a><span class="sd">            exit_to_alter (Location): An exit of the current location to alter</span>
-</span><span id="Location-135"><a href="#Location-135"><span class="linenos">135</span></a><span class="sd">            block_state (int): Value to set the chosen exit&#39;s block state to</span>
-</span><span id="Location-136"><a href="#Location-136"><span class="linenos">136</span></a>
-</span><span id="Location-137"><a href="#Location-137"><span class="linenos">137</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Location-138"><a href="#Location-138"><span class="linenos">138</span></a>        <span class="k">if</span> <span class="n">block_state</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="Location-139"><a href="#Location-139"><span class="linenos">139</span></a>            <span class="n">block_state</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="Location-140"><a href="#Location-140"><span class="linenos">140</span></a>
-</span><span id="Location-141"><a href="#Location-141"><span class="linenos">141</span></a>        <span class="k">if</span> <span class="n">exit_to_alter</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">:</span>
-</span><span id="Location-142"><a href="#Location-142"><span class="linenos">142</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">[</span><span class="n">exit_to_alter</span><span class="p">]</span> <span class="o">=</span> <span class="n">block_state</span>
-</span><span id="Location-143"><a href="#Location-143"><span class="linenos">143</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="Location-144"><a href="#Location-144"><span class="linenos">144</span></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2"> has no exit named </span><span class="si">{</span><span class="n">exit_to_alter</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="Location-145"><a href="#Location-145"><span class="linenos">145</span></a>
-</span><span id="Location-146"><a href="#Location-146"><span class="linenos">146</span></a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Location-147"><a href="#Location-147"><span class="linenos">147</span></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__description</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="Location-26"><a href="#Location-26"><span class="linenos"> 26</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialization function for the location&quot;&quot;&quot;</span>
+</span><span id="Location-27"><a href="#Location-27"><span class="linenos"> 27</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__name</span> <span class="o">=</span> <span class="n">name</span>
+</span><span id="Location-28"><a href="#Location-28"><span class="linenos"> 28</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__description</span> <span class="o">=</span> <span class="n">description</span>
+</span><span id="Location-29"><a href="#Location-29"><span class="linenos"> 29</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__items</span> <span class="o">=</span> <span class="n">items</span> <span class="k">if</span> <span class="n">items</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">[]</span>
+</span><span id="Location-30"><a href="#Location-30"><span class="linenos"> 30</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span> <span class="o">=</span> <span class="n">exits</span> <span class="k">if</span> <span class="n">exits</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">{}</span>
+</span><span id="Location-31"><a href="#Location-31"><span class="linenos"> 31</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__npcs</span> <span class="o">=</span> <span class="n">npcs</span> <span class="k">if</span> <span class="n">npcs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">[]</span>
+</span><span id="Location-32"><a href="#Location-32"><span class="linenos"> 32</span></a>
+</span><span id="Location-33"><a href="#Location-33"><span class="linenos"> 33</span></a>    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Location-34"><a href="#Location-34"><span class="linenos"> 34</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the location&#39;s name&quot;&quot;&quot;</span>
+</span><span id="Location-35"><a href="#Location-35"><span class="linenos"> 35</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__name</span>
+</span><span id="Location-36"><a href="#Location-36"><span class="linenos"> 36</span></a>
+</span><span id="Location-37"><a href="#Location-37"><span class="linenos"> 37</span></a>    <span class="k">def</span> <span class="nf">get_items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Location-38"><a href="#Location-38"><span class="linenos"> 38</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the location&#39;s list of items&quot;&quot;&quot;</span>
+</span><span id="Location-39"><a href="#Location-39"><span class="linenos"> 39</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__items</span>
+</span><span id="Location-40"><a href="#Location-40"><span class="linenos"> 40</span></a>
+</span><span id="Location-41"><a href="#Location-41"><span class="linenos"> 41</span></a>    <span class="k">def</span> <span class="nf">get_exits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Location-42"><a href="#Location-42"><span class="linenos"> 42</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the location&#39;s dict of exits&quot;&quot;&quot;</span>
+</span><span id="Location-43"><a href="#Location-43"><span class="linenos"> 43</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span>
+</span><span id="Location-44"><a href="#Location-44"><span class="linenos"> 44</span></a>
+</span><span id="Location-45"><a href="#Location-45"><span class="linenos"> 45</span></a>    <span class="k">def</span> <span class="nf">get_npcs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Location-46"><a href="#Location-46"><span class="linenos"> 46</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the location&#39;s list of NPCs&quot;&quot;&quot;</span>
+</span><span id="Location-47"><a href="#Location-47"><span class="linenos"> 47</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__npcs</span>
+</span><span id="Location-48"><a href="#Location-48"><span class="linenos"> 48</span></a>
+</span><span id="Location-49"><a href="#Location-49"><span class="linenos"> 49</span></a>    <span class="k">def</span> <span class="nf">is_blocked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">destination</span><span class="p">):</span>
+</span><span id="Location-50"><a href="#Location-50"><span class="linenos"> 50</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to determine if movement to a location is blocked.</span>
+</span><span id="Location-51"><a href="#Location-51"><span class="linenos"> 51</span></a>
+</span><span id="Location-52"><a href="#Location-52"><span class="linenos"> 52</span></a><span class="sd">        This method takes in a location specified by destination and checks</span>
+</span><span id="Location-53"><a href="#Location-53"><span class="linenos"> 53</span></a><span class="sd">        if a movement to this location is invalid. If a movement is invalid</span>
+</span><span id="Location-54"><a href="#Location-54"><span class="linenos"> 54</span></a><span class="sd">        this method returns True. If a movement is valid, this method returns</span>
+</span><span id="Location-55"><a href="#Location-55"><span class="linenos"> 55</span></a><span class="sd">        False.</span>
+</span><span id="Location-56"><a href="#Location-56"><span class="linenos"> 56</span></a>
+</span><span id="Location-57"><a href="#Location-57"><span class="linenos"> 57</span></a><span class="sd">        Arguments:</span>
+</span><span id="Location-58"><a href="#Location-58"><span class="linenos"> 58</span></a><span class="sd">            destination (Location): Specifies where the caller wants to move to</span>
+</span><span id="Location-59"><a href="#Location-59"><span class="linenos"> 59</span></a>
+</span><span id="Location-60"><a href="#Location-60"><span class="linenos"> 60</span></a><span class="sd">        Returns:</span>
+</span><span id="Location-61"><a href="#Location-61"><span class="linenos"> 61</span></a><span class="sd">            True if the movement is invalid, False if the movement is valid.</span>
+</span><span id="Location-62"><a href="#Location-62"><span class="linenos"> 62</span></a>
+</span><span id="Location-63"><a href="#Location-63"><span class="linenos"> 63</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Location-64"><a href="#Location-64"><span class="linenos"> 64</span></a>        <span class="c1"># Check if the destination is an exit of this room, if not return false.</span>
+</span><span id="Location-65"><a href="#Location-65"><span class="linenos"> 65</span></a>        <span class="k">if</span> <span class="n">destination</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">:</span>
+</span><span id="Location-66"><a href="#Location-66"><span class="linenos"> 66</span></a>            <span class="c1"># If the exit to the user&#39;s destination is blocked</span>
+</span><span id="Location-67"><a href="#Location-67"><span class="linenos"> 67</span></a>            <span class="c1"># return true. Otherwise return false</span>
+</span><span id="Location-68"><a href="#Location-68"><span class="linenos"> 68</span></a>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">[</span><span class="n">destination</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="Location-69"><a href="#Location-69"><span class="linenos"> 69</span></a>                <span class="k">return</span> <span class="kc">True</span>
+</span><span id="Location-70"><a href="#Location-70"><span class="linenos"> 70</span></a>            <span class="k">else</span><span class="p">:</span>
+</span><span id="Location-71"><a href="#Location-71"><span class="linenos"> 71</span></a>                <span class="k">return</span> <span class="kc">False</span>
+</span><span id="Location-72"><a href="#Location-72"><span class="linenos"> 72</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="Location-73"><a href="#Location-73"><span class="linenos"> 73</span></a>            <span class="k">return</span> <span class="kc">True</span>
+</span><span id="Location-74"><a href="#Location-74"><span class="linenos"> 74</span></a>
+</span><span id="Location-75"><a href="#Location-75"><span class="linenos"> 75</span></a>    <span class="k">def</span> <span class="nf">add_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+</span><span id="Location-76"><a href="#Location-76"><span class="linenos"> 76</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to add an item to the location&#39;s list of items.&quot;&quot;&quot;</span>
+</span><span id="Location-77"><a href="#Location-77"><span class="linenos"> 77</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</span><span id="Location-78"><a href="#Location-78"><span class="linenos"> 78</span></a>
+</span><span id="Location-79"><a href="#Location-79"><span class="linenos"> 79</span></a>    <span class="k">def</span> <span class="nf">remove_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+</span><span id="Location-80"><a href="#Location-80"><span class="linenos"> 80</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to remove an item from a location.</span>
+</span><span id="Location-81"><a href="#Location-81"><span class="linenos"> 81</span></a><span class="sd">        Returns True if removed, False if the item was not found.&quot;&quot;&quot;</span>
+</span><span id="Location-82"><a href="#Location-82"><span class="linenos"> 82</span></a>        <span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__items</span><span class="p">:</span>
+</span><span id="Location-83"><a href="#Location-83"><span class="linenos"> 83</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">__items</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</span><span id="Location-84"><a href="#Location-84"><span class="linenos"> 84</span></a>            <span class="k">return</span> <span class="kc">True</span>
+</span><span id="Location-85"><a href="#Location-85"><span class="linenos"> 85</span></a>        <span class="k">return</span> <span class="kc">False</span>
+</span><span id="Location-86"><a href="#Location-86"><span class="linenos"> 86</span></a>
+</span><span id="Location-87"><a href="#Location-87"><span class="linenos"> 87</span></a>    <span class="k">def</span> <span class="nf">add_npc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">npc</span><span class="p">):</span>
+</span><span id="Location-88"><a href="#Location-88"><span class="linenos"> 88</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to add an NPC to the location&#39;s list of NPCs.&quot;&quot;&quot;</span>
+</span><span id="Location-89"><a href="#Location-89"><span class="linenos"> 89</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__npcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">npc</span><span class="p">)</span>
+</span><span id="Location-90"><a href="#Location-90"><span class="linenos"> 90</span></a>
+</span><span id="Location-91"><a href="#Location-91"><span class="linenos"> 91</span></a>    <span class="k">def</span> <span class="nf">remove_npc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">npc</span><span class="p">):</span>
+</span><span id="Location-92"><a href="#Location-92"><span class="linenos"> 92</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to remove an NPC from a location.</span>
+</span><span id="Location-93"><a href="#Location-93"><span class="linenos"> 93</span></a><span class="sd">        Returns True if removed, False if the NPC was not found.&quot;&quot;&quot;</span>
+</span><span id="Location-94"><a href="#Location-94"><span class="linenos"> 94</span></a>        <span class="k">if</span> <span class="n">npc</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__npcs</span><span class="p">:</span>
+</span><span id="Location-95"><a href="#Location-95"><span class="linenos"> 95</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">__npcs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">npc</span><span class="p">)</span>
+</span><span id="Location-96"><a href="#Location-96"><span class="linenos"> 96</span></a>            <span class="k">return</span> <span class="kc">True</span>
+</span><span id="Location-97"><a href="#Location-97"><span class="linenos"> 97</span></a>        <span class="k">return</span> <span class="kc">False</span>
+</span><span id="Location-98"><a href="#Location-98"><span class="linenos"> 98</span></a>
+</span><span id="Location-99"><a href="#Location-99"><span class="linenos"> 99</span></a>    <span class="k">def</span> <span class="nf">add_exit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">block_state</span><span class="p">):</span>
+</span><span id="Location-100"><a href="#Location-100"><span class="linenos">100</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A method to add an exit to our location&#39;s list of exits</span>
+</span><span id="Location-101"><a href="#Location-101"><span class="linenos">101</span></a>
+</span><span id="Location-102"><a href="#Location-102"><span class="linenos">102</span></a><span class="sd">        This method takes in a Location and an integer specifying whether</span>
+</span><span id="Location-103"><a href="#Location-103"><span class="linenos">103</span></a><span class="sd">        the location is blocked (0) or not (1) and adds it to the calling</span>
+</span><span id="Location-104"><a href="#Location-104"><span class="linenos">104</span></a><span class="sd">        location&#39;s dictionary of exits.</span>
+</span><span id="Location-105"><a href="#Location-105"><span class="linenos">105</span></a>
+</span><span id="Location-106"><a href="#Location-106"><span class="linenos">106</span></a><span class="sd">        Arguments:</span>
+</span><span id="Location-107"><a href="#Location-107"><span class="linenos">107</span></a><span class="sd">            location (Location): A location to add to our list of exits</span>
+</span><span id="Location-108"><a href="#Location-108"><span class="linenos">108</span></a><span class="sd">            block_state (int): An int specifying if the location is blocked</span>
+</span><span id="Location-109"><a href="#Location-109"><span class="linenos">109</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Location-110"><a href="#Location-110"><span class="linenos">110</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">[</span><span class="n">location</span><span class="p">]</span> <span class="o">=</span> <span class="n">block_state</span>
+</span><span id="Location-111"><a href="#Location-111"><span class="linenos">111</span></a>
+</span><span id="Location-112"><a href="#Location-112"><span class="linenos">112</span></a>    <span class="k">def</span> <span class="nf">add_mult_exit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exit_dict</span><span class="p">):</span>
+</span><span id="Location-113"><a href="#Location-113"><span class="linenos">113</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A method that allows defining multiple exits simultaneously</span>
+</span><span id="Location-114"><a href="#Location-114"><span class="linenos">114</span></a>
+</span><span id="Location-115"><a href="#Location-115"><span class="linenos">115</span></a><span class="sd">        This method is intended to be used when adding individual exits to a</span>
+</span><span id="Location-116"><a href="#Location-116"><span class="linenos">116</span></a><span class="sd">        location would be too slow or tedious. It takes in a dictionary of</span>
+</span><span id="Location-117"><a href="#Location-117"><span class="linenos">117</span></a><span class="sd">        Location and int pairs and adds them to the location&#39;s list of exits.</span>
+</span><span id="Location-118"><a href="#Location-118"><span class="linenos">118</span></a>
+</span><span id="Location-119"><a href="#Location-119"><span class="linenos">119</span></a><span class="sd">        Arguments:</span>
+</span><span id="Location-120"><a href="#Location-120"><span class="linenos">120</span></a><span class="sd">            exit_dict (dict): A dictionary of Location and block state pairs</span>
+</span><span id="Location-121"><a href="#Location-121"><span class="linenos">121</span></a>
+</span><span id="Location-122"><a href="#Location-122"><span class="linenos">122</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Location-123"><a href="#Location-123"><span class="linenos">123</span></a>        <span class="k">for</span> <span class="n">exits</span> <span class="ow">in</span> <span class="n">exit_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+</span><span id="Location-124"><a href="#Location-124"><span class="linenos">124</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">[</span><span class="n">exits</span><span class="p">]</span> <span class="o">=</span> <span class="n">exit_dict</span><span class="p">[</span><span class="n">exits</span><span class="p">]</span>
+</span><span id="Location-125"><a href="#Location-125"><span class="linenos">125</span></a>
+</span><span id="Location-126"><a href="#Location-126"><span class="linenos">126</span></a>    <span class="k">def</span> <span class="nf">set_exit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exit_to_alter</span><span class="p">,</span> <span class="n">block_state</span><span class="p">):</span>
+</span><span id="Location-127"><a href="#Location-127"><span class="linenos">127</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Setter function used to alter whether an exit is blocked or not.</span>
+</span><span id="Location-128"><a href="#Location-128"><span class="linenos">128</span></a>
+</span><span id="Location-129"><a href="#Location-129"><span class="linenos">129</span></a><span class="sd">        This method takes in a location specified by exit_to_alter and checks if it</span>
+</span><span id="Location-130"><a href="#Location-130"><span class="linenos">130</span></a><span class="sd">        is an exit to the current location. If it is, we set the block state of</span>
+</span><span id="Location-131"><a href="#Location-131"><span class="linenos">131</span></a><span class="sd">        the exit to the int passed in by block_state. If it isn&#39;t, we print a</span>
+</span><span id="Location-132"><a href="#Location-132"><span class="linenos">132</span></a><span class="sd">        message indicating that the set attempt failed.</span>
+</span><span id="Location-133"><a href="#Location-133"><span class="linenos">133</span></a>
+</span><span id="Location-134"><a href="#Location-134"><span class="linenos">134</span></a><span class="sd">        Arguments:</span>
+</span><span id="Location-135"><a href="#Location-135"><span class="linenos">135</span></a><span class="sd">            exit_to_alter (Location): An exit of the current location to alter</span>
+</span><span id="Location-136"><a href="#Location-136"><span class="linenos">136</span></a><span class="sd">            block_state (int): Value to set the chosen exit&#39;s block state to</span>
+</span><span id="Location-137"><a href="#Location-137"><span class="linenos">137</span></a>
+</span><span id="Location-138"><a href="#Location-138"><span class="linenos">138</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Location-139"><a href="#Location-139"><span class="linenos">139</span></a>        <span class="k">if</span> <span class="n">block_state</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="Location-140"><a href="#Location-140"><span class="linenos">140</span></a>            <span class="n">block_state</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="Location-141"><a href="#Location-141"><span class="linenos">141</span></a>
+</span><span id="Location-142"><a href="#Location-142"><span class="linenos">142</span></a>        <span class="k">if</span> <span class="n">exit_to_alter</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">:</span>
+</span><span id="Location-143"><a href="#Location-143"><span class="linenos">143</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">[</span><span class="n">exit_to_alter</span><span class="p">]</span> <span class="o">=</span> <span class="n">block_state</span>
+</span><span id="Location-144"><a href="#Location-144"><span class="linenos">144</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="Location-145"><a href="#Location-145"><span class="linenos">145</span></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2"> has no exit named </span><span class="si">{</span><span class="n">exit_to_alter</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="Location-146"><a href="#Location-146"><span class="linenos">146</span></a>
+</span><span id="Location-147"><a href="#Location-147"><span class="linenos">147</span></a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Location-148"><a href="#Location-148"><span class="linenos">148</span></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__description</span><span class="si">}</span><span class="s2">&quot;</span>
 </span></pre></div>
 
 
@@ -432,15 +434,18 @@ reached from this location (exits).</p>
     </div>
     <a class="headerlink" href="#Location.__init__"></a>
             <div class="pdoc-code codehilite"><pre><span></span><span id="Location.__init__-25"><a href="#Location.__init__-25"><span class="linenos">25</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">items</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">exits</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">npcs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-</span><span id="Location.__init__-26"><a href="#Location.__init__-26"><span class="linenos">26</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__name</span> <span class="o">=</span> <span class="n">name</span>
-</span><span id="Location.__init__-27"><a href="#Location.__init__-27"><span class="linenos">27</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__description</span> <span class="o">=</span> <span class="n">description</span>
-</span><span id="Location.__init__-28"><a href="#Location.__init__-28"><span class="linenos">28</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__items</span> <span class="o">=</span> <span class="n">items</span> <span class="k">if</span> <span class="n">items</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">[]</span>
-</span><span id="Location.__init__-29"><a href="#Location.__init__-29"><span class="linenos">29</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span> <span class="o">=</span> <span class="n">exits</span> <span class="k">if</span> <span class="n">exits</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">{}</span>
-</span><span id="Location.__init__-30"><a href="#Location.__init__-30"><span class="linenos">30</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__npcs</span> <span class="o">=</span> <span class="n">npcs</span> <span class="k">if</span> <span class="n">npcs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">[]</span>
+</span><span id="Location.__init__-26"><a href="#Location.__init__-26"><span class="linenos">26</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialization function for the location&quot;&quot;&quot;</span>
+</span><span id="Location.__init__-27"><a href="#Location.__init__-27"><span class="linenos">27</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__name</span> <span class="o">=</span> <span class="n">name</span>
+</span><span id="Location.__init__-28"><a href="#Location.__init__-28"><span class="linenos">28</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__description</span> <span class="o">=</span> <span class="n">description</span>
+</span><span id="Location.__init__-29"><a href="#Location.__init__-29"><span class="linenos">29</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__items</span> <span class="o">=</span> <span class="n">items</span> <span class="k">if</span> <span class="n">items</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">[]</span>
+</span><span id="Location.__init__-30"><a href="#Location.__init__-30"><span class="linenos">30</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span> <span class="o">=</span> <span class="n">exits</span> <span class="k">if</span> <span class="n">exits</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">{}</span>
+</span><span id="Location.__init__-31"><a href="#Location.__init__-31"><span class="linenos">31</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__npcs</span> <span class="o">=</span> <span class="n">npcs</span> <span class="k">if</span> <span class="n">npcs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">[]</span>
 </span></pre></div>
 
 
-    
+            <div class="docstring"><p>Initialization function for the location</p>
+</div>
+
 
                             </div>
                             <div id="Location.get_name" class="classattr">
@@ -454,9 +459,9 @@ reached from this location (exits).</p>
 
     </div>
     <a class="headerlink" href="#Location.get_name"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Location.get_name-32"><a href="#Location.get_name-32"><span class="linenos">32</span></a>    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Location.get_name-33"><a href="#Location.get_name-33"><span class="linenos">33</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the location&#39;s name&quot;&quot;&quot;</span>
-</span><span id="Location.get_name-34"><a href="#Location.get_name-34"><span class="linenos">34</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__name</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Location.get_name-33"><a href="#Location.get_name-33"><span class="linenos">33</span></a>    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Location.get_name-34"><a href="#Location.get_name-34"><span class="linenos">34</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the location&#39;s name&quot;&quot;&quot;</span>
+</span><span id="Location.get_name-35"><a href="#Location.get_name-35"><span class="linenos">35</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__name</span>
 </span></pre></div>
 
 
@@ -476,9 +481,9 @@ reached from this location (exits).</p>
 
     </div>
     <a class="headerlink" href="#Location.get_items"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Location.get_items-36"><a href="#Location.get_items-36"><span class="linenos">36</span></a>    <span class="k">def</span> <span class="nf">get_items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Location.get_items-37"><a href="#Location.get_items-37"><span class="linenos">37</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the location&#39;s list of items&quot;&quot;&quot;</span>
-</span><span id="Location.get_items-38"><a href="#Location.get_items-38"><span class="linenos">38</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__items</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Location.get_items-37"><a href="#Location.get_items-37"><span class="linenos">37</span></a>    <span class="k">def</span> <span class="nf">get_items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Location.get_items-38"><a href="#Location.get_items-38"><span class="linenos">38</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the location&#39;s list of items&quot;&quot;&quot;</span>
+</span><span id="Location.get_items-39"><a href="#Location.get_items-39"><span class="linenos">39</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__items</span>
 </span></pre></div>
 
 
@@ -498,9 +503,9 @@ reached from this location (exits).</p>
 
     </div>
     <a class="headerlink" href="#Location.get_exits"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Location.get_exits-40"><a href="#Location.get_exits-40"><span class="linenos">40</span></a>    <span class="k">def</span> <span class="nf">get_exits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Location.get_exits-41"><a href="#Location.get_exits-41"><span class="linenos">41</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the location&#39;s dict of exits&quot;&quot;&quot;</span>
-</span><span id="Location.get_exits-42"><a href="#Location.get_exits-42"><span class="linenos">42</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Location.get_exits-41"><a href="#Location.get_exits-41"><span class="linenos">41</span></a>    <span class="k">def</span> <span class="nf">get_exits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Location.get_exits-42"><a href="#Location.get_exits-42"><span class="linenos">42</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the location&#39;s dict of exits&quot;&quot;&quot;</span>
+</span><span id="Location.get_exits-43"><a href="#Location.get_exits-43"><span class="linenos">43</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span>
 </span></pre></div>
 
 
@@ -520,9 +525,9 @@ reached from this location (exits).</p>
 
     </div>
     <a class="headerlink" href="#Location.get_npcs"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Location.get_npcs-44"><a href="#Location.get_npcs-44"><span class="linenos">44</span></a>    <span class="k">def</span> <span class="nf">get_npcs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Location.get_npcs-45"><a href="#Location.get_npcs-45"><span class="linenos">45</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the location&#39;s list of NPCs&quot;&quot;&quot;</span>
-</span><span id="Location.get_npcs-46"><a href="#Location.get_npcs-46"><span class="linenos">46</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__npcs</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Location.get_npcs-45"><a href="#Location.get_npcs-45"><span class="linenos">45</span></a>    <span class="k">def</span> <span class="nf">get_npcs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Location.get_npcs-46"><a href="#Location.get_npcs-46"><span class="linenos">46</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the location&#39;s list of NPCs&quot;&quot;&quot;</span>
+</span><span id="Location.get_npcs-47"><a href="#Location.get_npcs-47"><span class="linenos">47</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__npcs</span>
 </span></pre></div>
 
 
@@ -542,31 +547,31 @@ reached from this location (exits).</p>
 
     </div>
     <a class="headerlink" href="#Location.is_blocked"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Location.is_blocked-48"><a href="#Location.is_blocked-48"><span class="linenos">48</span></a>    <span class="k">def</span> <span class="nf">is_blocked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">destination</span><span class="p">):</span>
-</span><span id="Location.is_blocked-49"><a href="#Location.is_blocked-49"><span class="linenos">49</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to determine if movement to a location is blocked.</span>
-</span><span id="Location.is_blocked-50"><a href="#Location.is_blocked-50"><span class="linenos">50</span></a>
-</span><span id="Location.is_blocked-51"><a href="#Location.is_blocked-51"><span class="linenos">51</span></a><span class="sd">        This method takes in a location specified by destination and checks</span>
-</span><span id="Location.is_blocked-52"><a href="#Location.is_blocked-52"><span class="linenos">52</span></a><span class="sd">        if a movement to this location is invalid. If a movement is invalid</span>
-</span><span id="Location.is_blocked-53"><a href="#Location.is_blocked-53"><span class="linenos">53</span></a><span class="sd">        this method returns True. If a movement is valid, this method returns</span>
-</span><span id="Location.is_blocked-54"><a href="#Location.is_blocked-54"><span class="linenos">54</span></a><span class="sd">        False.</span>
-</span><span id="Location.is_blocked-55"><a href="#Location.is_blocked-55"><span class="linenos">55</span></a>
-</span><span id="Location.is_blocked-56"><a href="#Location.is_blocked-56"><span class="linenos">56</span></a><span class="sd">        Arguments:</span>
-</span><span id="Location.is_blocked-57"><a href="#Location.is_blocked-57"><span class="linenos">57</span></a><span class="sd">            destination (Location): Specifies where the caller wants to move to</span>
-</span><span id="Location.is_blocked-58"><a href="#Location.is_blocked-58"><span class="linenos">58</span></a>
-</span><span id="Location.is_blocked-59"><a href="#Location.is_blocked-59"><span class="linenos">59</span></a><span class="sd">        Returns:</span>
-</span><span id="Location.is_blocked-60"><a href="#Location.is_blocked-60"><span class="linenos">60</span></a><span class="sd">            True if the movement is invalid, False if the movement is valid.</span>
-</span><span id="Location.is_blocked-61"><a href="#Location.is_blocked-61"><span class="linenos">61</span></a>
-</span><span id="Location.is_blocked-62"><a href="#Location.is_blocked-62"><span class="linenos">62</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Location.is_blocked-63"><a href="#Location.is_blocked-63"><span class="linenos">63</span></a>        <span class="c1"># Check if the destination is an exit of this room, if not return false.</span>
-</span><span id="Location.is_blocked-64"><a href="#Location.is_blocked-64"><span class="linenos">64</span></a>        <span class="k">if</span> <span class="n">destination</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">:</span>
-</span><span id="Location.is_blocked-65"><a href="#Location.is_blocked-65"><span class="linenos">65</span></a>            <span class="c1"># If the exit to the user&#39;s destination is blocked</span>
-</span><span id="Location.is_blocked-66"><a href="#Location.is_blocked-66"><span class="linenos">66</span></a>            <span class="c1"># return true. Otherwise return false</span>
-</span><span id="Location.is_blocked-67"><a href="#Location.is_blocked-67"><span class="linenos">67</span></a>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">[</span><span class="n">destination</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="Location.is_blocked-68"><a href="#Location.is_blocked-68"><span class="linenos">68</span></a>                <span class="k">return</span> <span class="kc">True</span>
-</span><span id="Location.is_blocked-69"><a href="#Location.is_blocked-69"><span class="linenos">69</span></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="Location.is_blocked-70"><a href="#Location.is_blocked-70"><span class="linenos">70</span></a>                <span class="k">return</span> <span class="kc">False</span>
-</span><span id="Location.is_blocked-71"><a href="#Location.is_blocked-71"><span class="linenos">71</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="Location.is_blocked-72"><a href="#Location.is_blocked-72"><span class="linenos">72</span></a>            <span class="k">return</span> <span class="kc">True</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Location.is_blocked-49"><a href="#Location.is_blocked-49"><span class="linenos">49</span></a>    <span class="k">def</span> <span class="nf">is_blocked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">destination</span><span class="p">):</span>
+</span><span id="Location.is_blocked-50"><a href="#Location.is_blocked-50"><span class="linenos">50</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to determine if movement to a location is blocked.</span>
+</span><span id="Location.is_blocked-51"><a href="#Location.is_blocked-51"><span class="linenos">51</span></a>
+</span><span id="Location.is_blocked-52"><a href="#Location.is_blocked-52"><span class="linenos">52</span></a><span class="sd">        This method takes in a location specified by destination and checks</span>
+</span><span id="Location.is_blocked-53"><a href="#Location.is_blocked-53"><span class="linenos">53</span></a><span class="sd">        if a movement to this location is invalid. If a movement is invalid</span>
+</span><span id="Location.is_blocked-54"><a href="#Location.is_blocked-54"><span class="linenos">54</span></a><span class="sd">        this method returns True. If a movement is valid, this method returns</span>
+</span><span id="Location.is_blocked-55"><a href="#Location.is_blocked-55"><span class="linenos">55</span></a><span class="sd">        False.</span>
+</span><span id="Location.is_blocked-56"><a href="#Location.is_blocked-56"><span class="linenos">56</span></a>
+</span><span id="Location.is_blocked-57"><a href="#Location.is_blocked-57"><span class="linenos">57</span></a><span class="sd">        Arguments:</span>
+</span><span id="Location.is_blocked-58"><a href="#Location.is_blocked-58"><span class="linenos">58</span></a><span class="sd">            destination (Location): Specifies where the caller wants to move to</span>
+</span><span id="Location.is_blocked-59"><a href="#Location.is_blocked-59"><span class="linenos">59</span></a>
+</span><span id="Location.is_blocked-60"><a href="#Location.is_blocked-60"><span class="linenos">60</span></a><span class="sd">        Returns:</span>
+</span><span id="Location.is_blocked-61"><a href="#Location.is_blocked-61"><span class="linenos">61</span></a><span class="sd">            True if the movement is invalid, False if the movement is valid.</span>
+</span><span id="Location.is_blocked-62"><a href="#Location.is_blocked-62"><span class="linenos">62</span></a>
+</span><span id="Location.is_blocked-63"><a href="#Location.is_blocked-63"><span class="linenos">63</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Location.is_blocked-64"><a href="#Location.is_blocked-64"><span class="linenos">64</span></a>        <span class="c1"># Check if the destination is an exit of this room, if not return false.</span>
+</span><span id="Location.is_blocked-65"><a href="#Location.is_blocked-65"><span class="linenos">65</span></a>        <span class="k">if</span> <span class="n">destination</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">:</span>
+</span><span id="Location.is_blocked-66"><a href="#Location.is_blocked-66"><span class="linenos">66</span></a>            <span class="c1"># If the exit to the user&#39;s destination is blocked</span>
+</span><span id="Location.is_blocked-67"><a href="#Location.is_blocked-67"><span class="linenos">67</span></a>            <span class="c1"># return true. Otherwise return false</span>
+</span><span id="Location.is_blocked-68"><a href="#Location.is_blocked-68"><span class="linenos">68</span></a>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">[</span><span class="n">destination</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="Location.is_blocked-69"><a href="#Location.is_blocked-69"><span class="linenos">69</span></a>                <span class="k">return</span> <span class="kc">True</span>
+</span><span id="Location.is_blocked-70"><a href="#Location.is_blocked-70"><span class="linenos">70</span></a>            <span class="k">else</span><span class="p">:</span>
+</span><span id="Location.is_blocked-71"><a href="#Location.is_blocked-71"><span class="linenos">71</span></a>                <span class="k">return</span> <span class="kc">False</span>
+</span><span id="Location.is_blocked-72"><a href="#Location.is_blocked-72"><span class="linenos">72</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="Location.is_blocked-73"><a href="#Location.is_blocked-73"><span class="linenos">73</span></a>            <span class="k">return</span> <span class="kc">True</span>
 </span></pre></div>
 
 
@@ -597,9 +602,9 @@ False.</p>
 
     </div>
     <a class="headerlink" href="#Location.add_item"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Location.add_item-74"><a href="#Location.add_item-74"><span class="linenos">74</span></a>    <span class="k">def</span> <span class="nf">add_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
-</span><span id="Location.add_item-75"><a href="#Location.add_item-75"><span class="linenos">75</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to add an item to the location&#39;s list of items.&quot;&quot;&quot;</span>
-</span><span id="Location.add_item-76"><a href="#Location.add_item-76"><span class="linenos">76</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Location.add_item-75"><a href="#Location.add_item-75"><span class="linenos">75</span></a>    <span class="k">def</span> <span class="nf">add_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+</span><span id="Location.add_item-76"><a href="#Location.add_item-76"><span class="linenos">76</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to add an item to the location&#39;s list of items.&quot;&quot;&quot;</span>
+</span><span id="Location.add_item-77"><a href="#Location.add_item-77"><span class="linenos">77</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -619,13 +624,13 @@ False.</p>
 
     </div>
     <a class="headerlink" href="#Location.remove_item"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Location.remove_item-78"><a href="#Location.remove_item-78"><span class="linenos">78</span></a>    <span class="k">def</span> <span class="nf">remove_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
-</span><span id="Location.remove_item-79"><a href="#Location.remove_item-79"><span class="linenos">79</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to remove an item from a location.</span>
-</span><span id="Location.remove_item-80"><a href="#Location.remove_item-80"><span class="linenos">80</span></a><span class="sd">        Returns True if removed, False if the item was not found.&quot;&quot;&quot;</span>
-</span><span id="Location.remove_item-81"><a href="#Location.remove_item-81"><span class="linenos">81</span></a>        <span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__items</span><span class="p">:</span>
-</span><span id="Location.remove_item-82"><a href="#Location.remove_item-82"><span class="linenos">82</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">__items</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-</span><span id="Location.remove_item-83"><a href="#Location.remove_item-83"><span class="linenos">83</span></a>            <span class="k">return</span> <span class="kc">True</span>
-</span><span id="Location.remove_item-84"><a href="#Location.remove_item-84"><span class="linenos">84</span></a>        <span class="k">return</span> <span class="kc">False</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Location.remove_item-79"><a href="#Location.remove_item-79"><span class="linenos">79</span></a>    <span class="k">def</span> <span class="nf">remove_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+</span><span id="Location.remove_item-80"><a href="#Location.remove_item-80"><span class="linenos">80</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to remove an item from a location.</span>
+</span><span id="Location.remove_item-81"><a href="#Location.remove_item-81"><span class="linenos">81</span></a><span class="sd">        Returns True if removed, False if the item was not found.&quot;&quot;&quot;</span>
+</span><span id="Location.remove_item-82"><a href="#Location.remove_item-82"><span class="linenos">82</span></a>        <span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__items</span><span class="p">:</span>
+</span><span id="Location.remove_item-83"><a href="#Location.remove_item-83"><span class="linenos">83</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">__items</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</span><span id="Location.remove_item-84"><a href="#Location.remove_item-84"><span class="linenos">84</span></a>            <span class="k">return</span> <span class="kc">True</span>
+</span><span id="Location.remove_item-85"><a href="#Location.remove_item-85"><span class="linenos">85</span></a>        <span class="k">return</span> <span class="kc">False</span>
 </span></pre></div>
 
 
@@ -646,9 +651,9 @@ Returns True if removed, False if the item was not found.</p>
 
     </div>
     <a class="headerlink" href="#Location.add_npc"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Location.add_npc-86"><a href="#Location.add_npc-86"><span class="linenos">86</span></a>    <span class="k">def</span> <span class="nf">add_npc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">npc</span><span class="p">):</span>
-</span><span id="Location.add_npc-87"><a href="#Location.add_npc-87"><span class="linenos">87</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to add an NPC to the location&#39;s list of NPCs.&quot;&quot;&quot;</span>
-</span><span id="Location.add_npc-88"><a href="#Location.add_npc-88"><span class="linenos">88</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__npcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">npc</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Location.add_npc-87"><a href="#Location.add_npc-87"><span class="linenos">87</span></a>    <span class="k">def</span> <span class="nf">add_npc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">npc</span><span class="p">):</span>
+</span><span id="Location.add_npc-88"><a href="#Location.add_npc-88"><span class="linenos">88</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to add an NPC to the location&#39;s list of NPCs.&quot;&quot;&quot;</span>
+</span><span id="Location.add_npc-89"><a href="#Location.add_npc-89"><span class="linenos">89</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__npcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">npc</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -668,13 +673,13 @@ Returns True if removed, False if the item was not found.</p>
 
     </div>
     <a class="headerlink" href="#Location.remove_npc"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Location.remove_npc-90"><a href="#Location.remove_npc-90"><span class="linenos">90</span></a>    <span class="k">def</span> <span class="nf">remove_npc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">npc</span><span class="p">):</span>
-</span><span id="Location.remove_npc-91"><a href="#Location.remove_npc-91"><span class="linenos">91</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to remove an NPC from a location.</span>
-</span><span id="Location.remove_npc-92"><a href="#Location.remove_npc-92"><span class="linenos">92</span></a><span class="sd">        Returns True if removed, False if the NPC was not found.&quot;&quot;&quot;</span>
-</span><span id="Location.remove_npc-93"><a href="#Location.remove_npc-93"><span class="linenos">93</span></a>        <span class="k">if</span> <span class="n">npc</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__npcs</span><span class="p">:</span>
-</span><span id="Location.remove_npc-94"><a href="#Location.remove_npc-94"><span class="linenos">94</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">__npcs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">npc</span><span class="p">)</span>
-</span><span id="Location.remove_npc-95"><a href="#Location.remove_npc-95"><span class="linenos">95</span></a>            <span class="k">return</span> <span class="kc">True</span>
-</span><span id="Location.remove_npc-96"><a href="#Location.remove_npc-96"><span class="linenos">96</span></a>        <span class="k">return</span> <span class="kc">False</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Location.remove_npc-91"><a href="#Location.remove_npc-91"><span class="linenos">91</span></a>    <span class="k">def</span> <span class="nf">remove_npc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">npc</span><span class="p">):</span>
+</span><span id="Location.remove_npc-92"><a href="#Location.remove_npc-92"><span class="linenos">92</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to remove an NPC from a location.</span>
+</span><span id="Location.remove_npc-93"><a href="#Location.remove_npc-93"><span class="linenos">93</span></a><span class="sd">        Returns True if removed, False if the NPC was not found.&quot;&quot;&quot;</span>
+</span><span id="Location.remove_npc-94"><a href="#Location.remove_npc-94"><span class="linenos">94</span></a>        <span class="k">if</span> <span class="n">npc</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__npcs</span><span class="p">:</span>
+</span><span id="Location.remove_npc-95"><a href="#Location.remove_npc-95"><span class="linenos">95</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">__npcs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">npc</span><span class="p">)</span>
+</span><span id="Location.remove_npc-96"><a href="#Location.remove_npc-96"><span class="linenos">96</span></a>            <span class="k">return</span> <span class="kc">True</span>
+</span><span id="Location.remove_npc-97"><a href="#Location.remove_npc-97"><span class="linenos">97</span></a>        <span class="k">return</span> <span class="kc">False</span>
 </span></pre></div>
 
 
@@ -695,18 +700,18 @@ Returns True if removed, False if the NPC was not found.</p>
 
     </div>
     <a class="headerlink" href="#Location.add_exit"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Location.add_exit-98"><a href="#Location.add_exit-98"><span class="linenos"> 98</span></a>    <span class="k">def</span> <span class="nf">add_exit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">block_state</span><span class="p">):</span>
-</span><span id="Location.add_exit-99"><a href="#Location.add_exit-99"><span class="linenos"> 99</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A method to add an exit to our location&#39;s list of exits</span>
-</span><span id="Location.add_exit-100"><a href="#Location.add_exit-100"><span class="linenos">100</span></a>
-</span><span id="Location.add_exit-101"><a href="#Location.add_exit-101"><span class="linenos">101</span></a><span class="sd">        This method takes in a Location and an integer specifying whether</span>
-</span><span id="Location.add_exit-102"><a href="#Location.add_exit-102"><span class="linenos">102</span></a><span class="sd">        the location is blocked (0) or not (1) and adds it to the calling</span>
-</span><span id="Location.add_exit-103"><a href="#Location.add_exit-103"><span class="linenos">103</span></a><span class="sd">        location&#39;s dictionary of exits.</span>
-</span><span id="Location.add_exit-104"><a href="#Location.add_exit-104"><span class="linenos">104</span></a>
-</span><span id="Location.add_exit-105"><a href="#Location.add_exit-105"><span class="linenos">105</span></a><span class="sd">        Arguments:</span>
-</span><span id="Location.add_exit-106"><a href="#Location.add_exit-106"><span class="linenos">106</span></a><span class="sd">            location (Location): A location to add to our list of exits</span>
-</span><span id="Location.add_exit-107"><a href="#Location.add_exit-107"><span class="linenos">107</span></a><span class="sd">            block_state (int): An int specifying if the location is blocked</span>
-</span><span id="Location.add_exit-108"><a href="#Location.add_exit-108"><span class="linenos">108</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Location.add_exit-109"><a href="#Location.add_exit-109"><span class="linenos">109</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">[</span><span class="n">location</span><span class="p">]</span> <span class="o">=</span> <span class="n">block_state</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Location.add_exit-99"><a href="#Location.add_exit-99"><span class="linenos"> 99</span></a>    <span class="k">def</span> <span class="nf">add_exit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">block_state</span><span class="p">):</span>
+</span><span id="Location.add_exit-100"><a href="#Location.add_exit-100"><span class="linenos">100</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A method to add an exit to our location&#39;s list of exits</span>
+</span><span id="Location.add_exit-101"><a href="#Location.add_exit-101"><span class="linenos">101</span></a>
+</span><span id="Location.add_exit-102"><a href="#Location.add_exit-102"><span class="linenos">102</span></a><span class="sd">        This method takes in a Location and an integer specifying whether</span>
+</span><span id="Location.add_exit-103"><a href="#Location.add_exit-103"><span class="linenos">103</span></a><span class="sd">        the location is blocked (0) or not (1) and adds it to the calling</span>
+</span><span id="Location.add_exit-104"><a href="#Location.add_exit-104"><span class="linenos">104</span></a><span class="sd">        location&#39;s dictionary of exits.</span>
+</span><span id="Location.add_exit-105"><a href="#Location.add_exit-105"><span class="linenos">105</span></a>
+</span><span id="Location.add_exit-106"><a href="#Location.add_exit-106"><span class="linenos">106</span></a><span class="sd">        Arguments:</span>
+</span><span id="Location.add_exit-107"><a href="#Location.add_exit-107"><span class="linenos">107</span></a><span class="sd">            location (Location): A location to add to our list of exits</span>
+</span><span id="Location.add_exit-108"><a href="#Location.add_exit-108"><span class="linenos">108</span></a><span class="sd">            block_state (int): An int specifying if the location is blocked</span>
+</span><span id="Location.add_exit-109"><a href="#Location.add_exit-109"><span class="linenos">109</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Location.add_exit-110"><a href="#Location.add_exit-110"><span class="linenos">110</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">[</span><span class="n">location</span><span class="p">]</span> <span class="o">=</span> <span class="n">block_state</span>
 </span></pre></div>
 
 
@@ -734,19 +739,19 @@ location's dictionary of exits.</p>
 
     </div>
     <a class="headerlink" href="#Location.add_mult_exit"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Location.add_mult_exit-111"><a href="#Location.add_mult_exit-111"><span class="linenos">111</span></a>    <span class="k">def</span> <span class="nf">add_mult_exit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exit_dict</span><span class="p">):</span>
-</span><span id="Location.add_mult_exit-112"><a href="#Location.add_mult_exit-112"><span class="linenos">112</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A method that allows defining multiple exits simultaneously</span>
-</span><span id="Location.add_mult_exit-113"><a href="#Location.add_mult_exit-113"><span class="linenos">113</span></a>
-</span><span id="Location.add_mult_exit-114"><a href="#Location.add_mult_exit-114"><span class="linenos">114</span></a><span class="sd">        This method is intended to be used when adding individual exits to a</span>
-</span><span id="Location.add_mult_exit-115"><a href="#Location.add_mult_exit-115"><span class="linenos">115</span></a><span class="sd">        location would be too slow or tedious. It takes in a dictionary of</span>
-</span><span id="Location.add_mult_exit-116"><a href="#Location.add_mult_exit-116"><span class="linenos">116</span></a><span class="sd">        Location and int pairs and adds them to the location&#39;s list of exits.</span>
-</span><span id="Location.add_mult_exit-117"><a href="#Location.add_mult_exit-117"><span class="linenos">117</span></a>
-</span><span id="Location.add_mult_exit-118"><a href="#Location.add_mult_exit-118"><span class="linenos">118</span></a><span class="sd">        Arguments:</span>
-</span><span id="Location.add_mult_exit-119"><a href="#Location.add_mult_exit-119"><span class="linenos">119</span></a><span class="sd">            exit_dict (dict): A dictionary of Location and block state pairs</span>
-</span><span id="Location.add_mult_exit-120"><a href="#Location.add_mult_exit-120"><span class="linenos">120</span></a>
-</span><span id="Location.add_mult_exit-121"><a href="#Location.add_mult_exit-121"><span class="linenos">121</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Location.add_mult_exit-122"><a href="#Location.add_mult_exit-122"><span class="linenos">122</span></a>        <span class="k">for</span> <span class="n">exits</span> <span class="ow">in</span> <span class="n">exit_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-</span><span id="Location.add_mult_exit-123"><a href="#Location.add_mult_exit-123"><span class="linenos">123</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">[</span><span class="n">exits</span><span class="p">]</span> <span class="o">=</span> <span class="n">exit_dict</span><span class="p">[</span><span class="n">exits</span><span class="p">]</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Location.add_mult_exit-112"><a href="#Location.add_mult_exit-112"><span class="linenos">112</span></a>    <span class="k">def</span> <span class="nf">add_mult_exit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exit_dict</span><span class="p">):</span>
+</span><span id="Location.add_mult_exit-113"><a href="#Location.add_mult_exit-113"><span class="linenos">113</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A method that allows defining multiple exits simultaneously</span>
+</span><span id="Location.add_mult_exit-114"><a href="#Location.add_mult_exit-114"><span class="linenos">114</span></a>
+</span><span id="Location.add_mult_exit-115"><a href="#Location.add_mult_exit-115"><span class="linenos">115</span></a><span class="sd">        This method is intended to be used when adding individual exits to a</span>
+</span><span id="Location.add_mult_exit-116"><a href="#Location.add_mult_exit-116"><span class="linenos">116</span></a><span class="sd">        location would be too slow or tedious. It takes in a dictionary of</span>
+</span><span id="Location.add_mult_exit-117"><a href="#Location.add_mult_exit-117"><span class="linenos">117</span></a><span class="sd">        Location and int pairs and adds them to the location&#39;s list of exits.</span>
+</span><span id="Location.add_mult_exit-118"><a href="#Location.add_mult_exit-118"><span class="linenos">118</span></a>
+</span><span id="Location.add_mult_exit-119"><a href="#Location.add_mult_exit-119"><span class="linenos">119</span></a><span class="sd">        Arguments:</span>
+</span><span id="Location.add_mult_exit-120"><a href="#Location.add_mult_exit-120"><span class="linenos">120</span></a><span class="sd">            exit_dict (dict): A dictionary of Location and block state pairs</span>
+</span><span id="Location.add_mult_exit-121"><a href="#Location.add_mult_exit-121"><span class="linenos">121</span></a>
+</span><span id="Location.add_mult_exit-122"><a href="#Location.add_mult_exit-122"><span class="linenos">122</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Location.add_mult_exit-123"><a href="#Location.add_mult_exit-123"><span class="linenos">123</span></a>        <span class="k">for</span> <span class="n">exits</span> <span class="ow">in</span> <span class="n">exit_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+</span><span id="Location.add_mult_exit-124"><a href="#Location.add_mult_exit-124"><span class="linenos">124</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">[</span><span class="n">exits</span><span class="p">]</span> <span class="o">=</span> <span class="n">exit_dict</span><span class="p">[</span><span class="n">exits</span><span class="p">]</span>
 </span></pre></div>
 
 
@@ -773,26 +778,26 @@ Location and int pairs and adds them to the location's list of exits.</p>
 
     </div>
     <a class="headerlink" href="#Location.set_exit"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Location.set_exit-125"><a href="#Location.set_exit-125"><span class="linenos">125</span></a>    <span class="k">def</span> <span class="nf">set_exit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exit_to_alter</span><span class="p">,</span> <span class="n">block_state</span><span class="p">):</span>
-</span><span id="Location.set_exit-126"><a href="#Location.set_exit-126"><span class="linenos">126</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Setter function used to alter whether an exit is blocked or not.</span>
-</span><span id="Location.set_exit-127"><a href="#Location.set_exit-127"><span class="linenos">127</span></a>
-</span><span id="Location.set_exit-128"><a href="#Location.set_exit-128"><span class="linenos">128</span></a><span class="sd">        This method takes in a location specified by exit_to_alter and checks if it</span>
-</span><span id="Location.set_exit-129"><a href="#Location.set_exit-129"><span class="linenos">129</span></a><span class="sd">        is an exit to the current location. If it is, we set the block state of</span>
-</span><span id="Location.set_exit-130"><a href="#Location.set_exit-130"><span class="linenos">130</span></a><span class="sd">        the exit to the int passed in by block_state. If it isn&#39;t, we print a</span>
-</span><span id="Location.set_exit-131"><a href="#Location.set_exit-131"><span class="linenos">131</span></a><span class="sd">        message indicating that the set attempt failed.</span>
-</span><span id="Location.set_exit-132"><a href="#Location.set_exit-132"><span class="linenos">132</span></a>
-</span><span id="Location.set_exit-133"><a href="#Location.set_exit-133"><span class="linenos">133</span></a><span class="sd">        Arguments:</span>
-</span><span id="Location.set_exit-134"><a href="#Location.set_exit-134"><span class="linenos">134</span></a><span class="sd">            exit_to_alter (Location): An exit of the current location to alter</span>
-</span><span id="Location.set_exit-135"><a href="#Location.set_exit-135"><span class="linenos">135</span></a><span class="sd">            block_state (int): Value to set the chosen exit&#39;s block state to</span>
-</span><span id="Location.set_exit-136"><a href="#Location.set_exit-136"><span class="linenos">136</span></a>
-</span><span id="Location.set_exit-137"><a href="#Location.set_exit-137"><span class="linenos">137</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Location.set_exit-138"><a href="#Location.set_exit-138"><span class="linenos">138</span></a>        <span class="k">if</span> <span class="n">block_state</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="Location.set_exit-139"><a href="#Location.set_exit-139"><span class="linenos">139</span></a>            <span class="n">block_state</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="Location.set_exit-140"><a href="#Location.set_exit-140"><span class="linenos">140</span></a>
-</span><span id="Location.set_exit-141"><a href="#Location.set_exit-141"><span class="linenos">141</span></a>        <span class="k">if</span> <span class="n">exit_to_alter</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">:</span>
-</span><span id="Location.set_exit-142"><a href="#Location.set_exit-142"><span class="linenos">142</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">[</span><span class="n">exit_to_alter</span><span class="p">]</span> <span class="o">=</span> <span class="n">block_state</span>
-</span><span id="Location.set_exit-143"><a href="#Location.set_exit-143"><span class="linenos">143</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="Location.set_exit-144"><a href="#Location.set_exit-144"><span class="linenos">144</span></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2"> has no exit named </span><span class="si">{</span><span class="n">exit_to_alter</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Location.set_exit-126"><a href="#Location.set_exit-126"><span class="linenos">126</span></a>    <span class="k">def</span> <span class="nf">set_exit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exit_to_alter</span><span class="p">,</span> <span class="n">block_state</span><span class="p">):</span>
+</span><span id="Location.set_exit-127"><a href="#Location.set_exit-127"><span class="linenos">127</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Setter function used to alter whether an exit is blocked or not.</span>
+</span><span id="Location.set_exit-128"><a href="#Location.set_exit-128"><span class="linenos">128</span></a>
+</span><span id="Location.set_exit-129"><a href="#Location.set_exit-129"><span class="linenos">129</span></a><span class="sd">        This method takes in a location specified by exit_to_alter and checks if it</span>
+</span><span id="Location.set_exit-130"><a href="#Location.set_exit-130"><span class="linenos">130</span></a><span class="sd">        is an exit to the current location. If it is, we set the block state of</span>
+</span><span id="Location.set_exit-131"><a href="#Location.set_exit-131"><span class="linenos">131</span></a><span class="sd">        the exit to the int passed in by block_state. If it isn&#39;t, we print a</span>
+</span><span id="Location.set_exit-132"><a href="#Location.set_exit-132"><span class="linenos">132</span></a><span class="sd">        message indicating that the set attempt failed.</span>
+</span><span id="Location.set_exit-133"><a href="#Location.set_exit-133"><span class="linenos">133</span></a>
+</span><span id="Location.set_exit-134"><a href="#Location.set_exit-134"><span class="linenos">134</span></a><span class="sd">        Arguments:</span>
+</span><span id="Location.set_exit-135"><a href="#Location.set_exit-135"><span class="linenos">135</span></a><span class="sd">            exit_to_alter (Location): An exit of the current location to alter</span>
+</span><span id="Location.set_exit-136"><a href="#Location.set_exit-136"><span class="linenos">136</span></a><span class="sd">            block_state (int): Value to set the chosen exit&#39;s block state to</span>
+</span><span id="Location.set_exit-137"><a href="#Location.set_exit-137"><span class="linenos">137</span></a>
+</span><span id="Location.set_exit-138"><a href="#Location.set_exit-138"><span class="linenos">138</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Location.set_exit-139"><a href="#Location.set_exit-139"><span class="linenos">139</span></a>        <span class="k">if</span> <span class="n">block_state</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="Location.set_exit-140"><a href="#Location.set_exit-140"><span class="linenos">140</span></a>            <span class="n">block_state</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="Location.set_exit-141"><a href="#Location.set_exit-141"><span class="linenos">141</span></a>
+</span><span id="Location.set_exit-142"><a href="#Location.set_exit-142"><span class="linenos">142</span></a>        <span class="k">if</span> <span class="n">exit_to_alter</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">:</span>
+</span><span id="Location.set_exit-143"><a href="#Location.set_exit-143"><span class="linenos">143</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">__exits</span><span class="p">[</span><span class="n">exit_to_alter</span><span class="p">]</span> <span class="o">=</span> <span class="n">block_state</span>
+</span><span id="Location.set_exit-144"><a href="#Location.set_exit-144"><span class="linenos">144</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="Location.set_exit-145"><a href="#Location.set_exit-145"><span class="linenos">145</span></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2"> has no exit named </span><span class="si">{</span><span class="n">exit_to_alter</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span></pre></div>
 
 

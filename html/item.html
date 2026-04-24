@@ -144,100 +144,102 @@ item    </h1>
 </span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">can_be_taken</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">evidence</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 </span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a>                 <span class="n">required_location</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_exit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">consumable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 </span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a>                 <span class="n">effect_type</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">container</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">block_msg</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">unblock_item</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__name</span> <span class="o">=</span> <span class="n">name</span>
-</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__description</span> <span class="o">=</span> <span class="n">description</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__location</span> <span class="o">=</span> <span class="n">location</span>
-</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__can_be_taken</span> <span class="o">=</span> <span class="n">can_be_taken</span>
-</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__evidence</span> <span class="o">=</span> <span class="n">evidence</span>
-</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__required_location</span> <span class="o">=</span> <span class="n">required_location</span>
-</span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__container</span> <span class="o">=</span> <span class="n">container</span>
-</span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__block_msg</span> <span class="o">=</span> <span class="n">block_msg</span>
-</span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__unblock_item</span> <span class="o">=</span> <span class="n">unblock_item</span>
-</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__target_exit</span> <span class="o">=</span> <span class="n">target_exit</span>
-</span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__is_barred</span> <span class="o">=</span> <span class="kc">False</span>
-</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__consumable</span> <span class="o">=</span> <span class="n">consumable</span>
-</span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__effect_type</span> <span class="o">=</span> <span class="n">effect_type</span>
-</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a>
-</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a>    <span class="k">def</span> <span class="nf">is_consumable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to check if the item will remain in the player&#39;s inventory after usage&quot;&quot;&quot;</span>
-</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__consumable</span>
-</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a>
-</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a>    <span class="k">def</span> <span class="nf">get_container</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the Item&#39;s container&quot;&quot;&quot;</span>
-</span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__container</span>
-</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a>
-</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a>    <span class="k">def</span> <span class="nf">get_unblock_item</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the Item&#39;s unblock item&quot;&quot;&quot;</span>
-</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__unblock_item</span>
-</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a>
-</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a>    <span class="k">def</span> <span class="nf">get_block_msg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter for the Item&#39;s block message&quot;&quot;&quot;</span>
-</span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__block_msg</span>
-</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a>
-</span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a>    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the Item&#39;s name&quot;&quot;&quot;</span>
-</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__name</span>
-</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a>
-</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a>    <span class="k">def</span> <span class="nf">can_be_taken</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to check if an item can be picked up&quot;&quot;&quot;</span>
-</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__can_be_taken</span>
-</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a>
-</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a>    <span class="k">def</span> <span class="nf">is_barred</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to check if the item is blocked from being picked up&quot;&quot;&quot;</span>
-</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__is_barred</span>
-</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a>
-</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a>    <span class="k">def</span> <span class="nf">is_evidence</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to check if an item is a key item&quot;&quot;&quot;</span>
-</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__evidence</span>
-</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a>
-</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a>    <span class="k">def</span> <span class="nf">get_location</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the item&#39;s current location&quot;&quot;&quot;</span>
-</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__location</span>
-</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a>
-</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a>    <span class="k">def</span> <span class="nf">set_unblock_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unblock_item</span><span class="p">):</span>
-</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Setter method for the Item&#39;s unblock Item&quot;&quot;&quot;</span>
-</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__unblock_item</span> <span class="o">=</span> <span class="n">unblock_item</span>
-</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>
-</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>    <span class="k">def</span> <span class="nf">set_target_exit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_exit</span><span class="p">):</span>
-</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Setter method for the exit this item unblocks&quot;&quot;&quot;</span>
-</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__target_exit</span> <span class="o">=</span> <span class="n">target_exit</span>
-</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>
-</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>    <span class="k">def</span> <span class="nf">use</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_location</span><span class="p">):</span>
-</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A method to allow the caller to use an item.</span>
-</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a>
-</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a><span class="sd">        This method takes in a location, checks if the item can</span>
-</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a><span class="sd">        be used there, and applies the Item&#39;s effect.</span>
-</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a>
-</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a><span class="sd">        Arguments:</span>
-</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a><span class="sd">            current_location (Location): The caller&#39;s current Location</span>
-</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a>
-</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a><span class="sd">        Returns:</span>
-</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a><span class="sd">            True if the item was successfully used, False if not.</span>
-</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a>        <span class="c1"># Check if the item requires a specific location to be used</span>
-</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a>        <span class="k">if</span> <span class="n">current_location</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__required_location</span><span class="p">:</span>
-</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2"> can&#39;t be used here.&quot;</span><span class="p">)</span>
-</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a>            <span class="k">return</span> <span class="kc">False</span>
-</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a>
-</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You used the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__apply_effect</span><span class="p">(</span><span class="n">current_location</span><span class="p">)</span>
-</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a>        <span class="k">return</span> <span class="kc">True</span>
-</span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a>
-</span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a>    <span class="k">def</span> <span class="nf">__apply_effect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_location</span><span class="p">):</span>
-</span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__effect_type</span> <span class="o">==</span> <span class="s2">&quot;unblock&quot;</span><span class="p">:</span>
-</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__target_exit</span><span class="p">:</span>
-</span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a>                <span class="c1"># 1 represents the &quot;unblocked&quot; state in the Location class</span>
-</span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a>                <span class="n">current_location</span><span class="o">.</span><span class="n">set_exit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__target_exit</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a>                <span class="c1"># Exits are blocked both ways by default, so we must unblock both sides</span>
-</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">__target_exit</span><span class="o">.</span><span class="n">set_exit</span><span class="p">(</span><span class="n">current_location</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-</span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The way to the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__target_exit</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="si">}</span><span class="s2"> has been unblocked!&quot;</span><span class="p">)</span>
-</span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a>        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">__effect_type</span> <span class="o">==</span> <span class="s2">&quot;distract&quot;</span><span class="p">:</span>
-</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You used the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2"> to create a distraction.&quot;</span><span class="p">)</span>
-</span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a>        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">__effect_type</span> <span class="o">==</span> <span class="s2">&quot;disguise&quot;</span><span class="p">:</span>
-</span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You put on the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2">. You look less suspicious.&quot;</span><span class="p">)</span>
-</span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a>
-</span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__description</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialization function for the item class&quot;&quot;&quot;</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__name</span> <span class="o">=</span> <span class="n">name</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__description</span> <span class="o">=</span> <span class="n">description</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__location</span> <span class="o">=</span> <span class="n">location</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__can_be_taken</span> <span class="o">=</span> <span class="n">can_be_taken</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__evidence</span> <span class="o">=</span> <span class="n">evidence</span>
+</span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__required_location</span> <span class="o">=</span> <span class="n">required_location</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__container</span> <span class="o">=</span> <span class="n">container</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__block_msg</span> <span class="o">=</span> <span class="n">block_msg</span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__unblock_item</span> <span class="o">=</span> <span class="n">unblock_item</span>
+</span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__target_exit</span> <span class="o">=</span> <span class="n">target_exit</span>
+</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__is_barred</span> <span class="o">=</span> <span class="kc">False</span>
+</span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__consumable</span> <span class="o">=</span> <span class="n">consumable</span>
+</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__effect_type</span> <span class="o">=</span> <span class="n">effect_type</span>
+</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a>
+</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a>    <span class="k">def</span> <span class="nf">is_consumable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to check if the item will remain in the player&#39;s inventory after usage&quot;&quot;&quot;</span>
+</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__consumable</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a>
+</span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a>    <span class="k">def</span> <span class="nf">get_container</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the Item&#39;s container&quot;&quot;&quot;</span>
+</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__container</span>
+</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a>
+</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a>    <span class="k">def</span> <span class="nf">get_unblock_item</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the Item&#39;s unblock item&quot;&quot;&quot;</span>
+</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__unblock_item</span>
+</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a>
+</span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a>    <span class="k">def</span> <span class="nf">get_block_msg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter for the Item&#39;s block message&quot;&quot;&quot;</span>
+</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__block_msg</span>
+</span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a>
+</span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a>    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the Item&#39;s name&quot;&quot;&quot;</span>
+</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__name</span>
+</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a>
+</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a>    <span class="k">def</span> <span class="nf">can_be_taken</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to check if an item can be picked up&quot;&quot;&quot;</span>
+</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__can_be_taken</span>
+</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a>
+</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a>    <span class="k">def</span> <span class="nf">is_barred</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to check if the item is blocked from being picked up&quot;&quot;&quot;</span>
+</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__is_barred</span>
+</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a>
+</span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a>    <span class="k">def</span> <span class="nf">is_evidence</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to check if an item is a key item&quot;&quot;&quot;</span>
+</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__evidence</span>
+</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a>
+</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a>    <span class="k">def</span> <span class="nf">get_location</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the item&#39;s current location&quot;&quot;&quot;</span>
+</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__location</span>
+</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a>
+</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a>    <span class="k">def</span> <span class="nf">set_unblock_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unblock_item</span><span class="p">):</span>
+</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Setter method for the Item&#39;s unblock Item&quot;&quot;&quot;</span>
+</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__unblock_item</span> <span class="o">=</span> <span class="n">unblock_item</span>
+</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>
+</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a>    <span class="k">def</span> <span class="nf">set_target_exit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_exit</span><span class="p">):</span>
+</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Setter method for the exit this item unblocks&quot;&quot;&quot;</span>
+</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__target_exit</span> <span class="o">=</span> <span class="n">target_exit</span>
+</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>
+</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>    <span class="k">def</span> <span class="nf">use</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_location</span><span class="p">):</span>
+</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A method to allow the caller to use an item.</span>
+</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a>
+</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a><span class="sd">        This method takes in a location, checks if the item can</span>
+</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a><span class="sd">        be used there, and applies the Item&#39;s effect.</span>
+</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a>
+</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a><span class="sd">        Arguments:</span>
+</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a><span class="sd">            current_location (Location): The caller&#39;s current Location</span>
+</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a>
+</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a><span class="sd">        Returns:</span>
+</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a><span class="sd">            True if the item was successfully used, False if not.</span>
+</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a>        <span class="c1"># Check if the item requires a specific location to be used</span>
+</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a>        <span class="k">if</span> <span class="n">current_location</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__required_location</span><span class="p">:</span>
+</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2"> can&#39;t be used here.&quot;</span><span class="p">)</span>
+</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a>            <span class="k">return</span> <span class="kc">False</span>
+</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a>
+</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You used the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__apply_effect</span><span class="p">(</span><span class="n">current_location</span><span class="p">)</span>
+</span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a>        <span class="k">return</span> <span class="kc">True</span>
+</span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a>
+</span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a>    <span class="k">def</span> <span class="nf">__apply_effect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_location</span><span class="p">):</span>
+</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a>        <span class="c1"># Helper method to apply an item&#39;s effect</span>
+</span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__effect_type</span> <span class="o">==</span> <span class="s2">&quot;unblock&quot;</span><span class="p">:</span>
+</span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__target_exit</span><span class="p">:</span>
+</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a>                <span class="c1"># 1 represents the &quot;unblocked&quot; state in the Location class</span>
+</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a>                <span class="n">current_location</span><span class="o">.</span><span class="n">set_exit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__target_exit</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a>                <span class="c1"># Exits are blocked both ways by default, so we must unblock both sides</span>
+</span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">__target_exit</span><span class="o">.</span><span class="n">set_exit</span><span class="p">(</span><span class="n">current_location</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The way to the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__target_exit</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="si">}</span><span class="s2"> has been unblocked!&quot;</span><span class="p">)</span>
+</span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a>        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">__effect_type</span> <span class="o">==</span> <span class="s2">&quot;distract&quot;</span><span class="p">:</span>
+</span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You used the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2"> to create a distraction.&quot;</span><span class="p">)</span>
+</span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a>        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">__effect_type</span> <span class="o">==</span> <span class="s2">&quot;disguise&quot;</span><span class="p">:</span>
+</span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You put on the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2">. You look less suspicious.&quot;</span><span class="p">)</span>
+</span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a>
+</span><span id="L-136"><a href="#L-136"><span class="linenos">136</span></a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="L-137"><a href="#L-137"><span class="linenos">137</span></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__description</span><span class="si">}</span><span class="s2">&quot;</span>
 </span></pre></div>
 
 
@@ -286,100 +288,102 @@ item    </h1>
 </span><span id="Item-40"><a href="#Item-40"><span class="linenos"> 40</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">can_be_taken</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">evidence</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 </span><span id="Item-41"><a href="#Item-41"><span class="linenos"> 41</span></a>                 <span class="n">required_location</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_exit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">consumable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 </span><span id="Item-42"><a href="#Item-42"><span class="linenos"> 42</span></a>                 <span class="n">effect_type</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">container</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">block_msg</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">unblock_item</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-</span><span id="Item-43"><a href="#Item-43"><span class="linenos"> 43</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__name</span> <span class="o">=</span> <span class="n">name</span>
-</span><span id="Item-44"><a href="#Item-44"><span class="linenos"> 44</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__description</span> <span class="o">=</span> <span class="n">description</span>
-</span><span id="Item-45"><a href="#Item-45"><span class="linenos"> 45</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__location</span> <span class="o">=</span> <span class="n">location</span>
-</span><span id="Item-46"><a href="#Item-46"><span class="linenos"> 46</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__can_be_taken</span> <span class="o">=</span> <span class="n">can_be_taken</span>
-</span><span id="Item-47"><a href="#Item-47"><span class="linenos"> 47</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__evidence</span> <span class="o">=</span> <span class="n">evidence</span>
-</span><span id="Item-48"><a href="#Item-48"><span class="linenos"> 48</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__required_location</span> <span class="o">=</span> <span class="n">required_location</span>
-</span><span id="Item-49"><a href="#Item-49"><span class="linenos"> 49</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__container</span> <span class="o">=</span> <span class="n">container</span>
-</span><span id="Item-50"><a href="#Item-50"><span class="linenos"> 50</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__block_msg</span> <span class="o">=</span> <span class="n">block_msg</span>
-</span><span id="Item-51"><a href="#Item-51"><span class="linenos"> 51</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__unblock_item</span> <span class="o">=</span> <span class="n">unblock_item</span>
-</span><span id="Item-52"><a href="#Item-52"><span class="linenos"> 52</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__target_exit</span> <span class="o">=</span> <span class="n">target_exit</span>
-</span><span id="Item-53"><a href="#Item-53"><span class="linenos"> 53</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__is_barred</span> <span class="o">=</span> <span class="kc">False</span>
-</span><span id="Item-54"><a href="#Item-54"><span class="linenos"> 54</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__consumable</span> <span class="o">=</span> <span class="n">consumable</span>
-</span><span id="Item-55"><a href="#Item-55"><span class="linenos"> 55</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__effect_type</span> <span class="o">=</span> <span class="n">effect_type</span>
-</span><span id="Item-56"><a href="#Item-56"><span class="linenos"> 56</span></a>
-</span><span id="Item-57"><a href="#Item-57"><span class="linenos"> 57</span></a>    <span class="k">def</span> <span class="nf">is_consumable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Item-58"><a href="#Item-58"><span class="linenos"> 58</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to check if the item will remain in the player&#39;s inventory after usage&quot;&quot;&quot;</span>
-</span><span id="Item-59"><a href="#Item-59"><span class="linenos"> 59</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__consumable</span>
-</span><span id="Item-60"><a href="#Item-60"><span class="linenos"> 60</span></a>
-</span><span id="Item-61"><a href="#Item-61"><span class="linenos"> 61</span></a>    <span class="k">def</span> <span class="nf">get_container</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Item-62"><a href="#Item-62"><span class="linenos"> 62</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the Item&#39;s container&quot;&quot;&quot;</span>
-</span><span id="Item-63"><a href="#Item-63"><span class="linenos"> 63</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__container</span>
-</span><span id="Item-64"><a href="#Item-64"><span class="linenos"> 64</span></a>
-</span><span id="Item-65"><a href="#Item-65"><span class="linenos"> 65</span></a>    <span class="k">def</span> <span class="nf">get_unblock_item</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Item-66"><a href="#Item-66"><span class="linenos"> 66</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the Item&#39;s unblock item&quot;&quot;&quot;</span>
-</span><span id="Item-67"><a href="#Item-67"><span class="linenos"> 67</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__unblock_item</span>
-</span><span id="Item-68"><a href="#Item-68"><span class="linenos"> 68</span></a>
-</span><span id="Item-69"><a href="#Item-69"><span class="linenos"> 69</span></a>    <span class="k">def</span> <span class="nf">get_block_msg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Item-70"><a href="#Item-70"><span class="linenos"> 70</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter for the Item&#39;s block message&quot;&quot;&quot;</span>
-</span><span id="Item-71"><a href="#Item-71"><span class="linenos"> 71</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__block_msg</span>
-</span><span id="Item-72"><a href="#Item-72"><span class="linenos"> 72</span></a>
-</span><span id="Item-73"><a href="#Item-73"><span class="linenos"> 73</span></a>    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Item-74"><a href="#Item-74"><span class="linenos"> 74</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the Item&#39;s name&quot;&quot;&quot;</span>
-</span><span id="Item-75"><a href="#Item-75"><span class="linenos"> 75</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__name</span>
-</span><span id="Item-76"><a href="#Item-76"><span class="linenos"> 76</span></a>
-</span><span id="Item-77"><a href="#Item-77"><span class="linenos"> 77</span></a>    <span class="k">def</span> <span class="nf">can_be_taken</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Item-78"><a href="#Item-78"><span class="linenos"> 78</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to check if an item can be picked up&quot;&quot;&quot;</span>
-</span><span id="Item-79"><a href="#Item-79"><span class="linenos"> 79</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__can_be_taken</span>
-</span><span id="Item-80"><a href="#Item-80"><span class="linenos"> 80</span></a>
-</span><span id="Item-81"><a href="#Item-81"><span class="linenos"> 81</span></a>    <span class="k">def</span> <span class="nf">is_barred</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Item-82"><a href="#Item-82"><span class="linenos"> 82</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to check if the item is blocked from being picked up&quot;&quot;&quot;</span>
-</span><span id="Item-83"><a href="#Item-83"><span class="linenos"> 83</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__is_barred</span>
-</span><span id="Item-84"><a href="#Item-84"><span class="linenos"> 84</span></a>
-</span><span id="Item-85"><a href="#Item-85"><span class="linenos"> 85</span></a>    <span class="k">def</span> <span class="nf">is_evidence</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Item-86"><a href="#Item-86"><span class="linenos"> 86</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to check if an item is a key item&quot;&quot;&quot;</span>
-</span><span id="Item-87"><a href="#Item-87"><span class="linenos"> 87</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__evidence</span>
-</span><span id="Item-88"><a href="#Item-88"><span class="linenos"> 88</span></a>
-</span><span id="Item-89"><a href="#Item-89"><span class="linenos"> 89</span></a>    <span class="k">def</span> <span class="nf">get_location</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Item-90"><a href="#Item-90"><span class="linenos"> 90</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the item&#39;s current location&quot;&quot;&quot;</span>
-</span><span id="Item-91"><a href="#Item-91"><span class="linenos"> 91</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__location</span>
-</span><span id="Item-92"><a href="#Item-92"><span class="linenos"> 92</span></a>
-</span><span id="Item-93"><a href="#Item-93"><span class="linenos"> 93</span></a>    <span class="k">def</span> <span class="nf">set_unblock_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unblock_item</span><span class="p">):</span>
-</span><span id="Item-94"><a href="#Item-94"><span class="linenos"> 94</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Setter method for the Item&#39;s unblock Item&quot;&quot;&quot;</span>
-</span><span id="Item-95"><a href="#Item-95"><span class="linenos"> 95</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__unblock_item</span> <span class="o">=</span> <span class="n">unblock_item</span>
-</span><span id="Item-96"><a href="#Item-96"><span class="linenos"> 96</span></a>
-</span><span id="Item-97"><a href="#Item-97"><span class="linenos"> 97</span></a>    <span class="k">def</span> <span class="nf">set_target_exit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_exit</span><span class="p">):</span>
-</span><span id="Item-98"><a href="#Item-98"><span class="linenos"> 98</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Setter method for the exit this item unblocks&quot;&quot;&quot;</span>
-</span><span id="Item-99"><a href="#Item-99"><span class="linenos"> 99</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__target_exit</span> <span class="o">=</span> <span class="n">target_exit</span>
-</span><span id="Item-100"><a href="#Item-100"><span class="linenos">100</span></a>
-</span><span id="Item-101"><a href="#Item-101"><span class="linenos">101</span></a>    <span class="k">def</span> <span class="nf">use</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_location</span><span class="p">):</span>
-</span><span id="Item-102"><a href="#Item-102"><span class="linenos">102</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A method to allow the caller to use an item.</span>
-</span><span id="Item-103"><a href="#Item-103"><span class="linenos">103</span></a>
-</span><span id="Item-104"><a href="#Item-104"><span class="linenos">104</span></a><span class="sd">        This method takes in a location, checks if the item can</span>
-</span><span id="Item-105"><a href="#Item-105"><span class="linenos">105</span></a><span class="sd">        be used there, and applies the Item&#39;s effect.</span>
-</span><span id="Item-106"><a href="#Item-106"><span class="linenos">106</span></a>
-</span><span id="Item-107"><a href="#Item-107"><span class="linenos">107</span></a><span class="sd">        Arguments:</span>
-</span><span id="Item-108"><a href="#Item-108"><span class="linenos">108</span></a><span class="sd">            current_location (Location): The caller&#39;s current Location</span>
-</span><span id="Item-109"><a href="#Item-109"><span class="linenos">109</span></a>
-</span><span id="Item-110"><a href="#Item-110"><span class="linenos">110</span></a><span class="sd">        Returns:</span>
-</span><span id="Item-111"><a href="#Item-111"><span class="linenos">111</span></a><span class="sd">            True if the item was successfully used, False if not.</span>
-</span><span id="Item-112"><a href="#Item-112"><span class="linenos">112</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Item-113"><a href="#Item-113"><span class="linenos">113</span></a>        <span class="c1"># Check if the item requires a specific location to be used</span>
-</span><span id="Item-114"><a href="#Item-114"><span class="linenos">114</span></a>        <span class="k">if</span> <span class="n">current_location</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__required_location</span><span class="p">:</span>
-</span><span id="Item-115"><a href="#Item-115"><span class="linenos">115</span></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2"> can&#39;t be used here.&quot;</span><span class="p">)</span>
-</span><span id="Item-116"><a href="#Item-116"><span class="linenos">116</span></a>            <span class="k">return</span> <span class="kc">False</span>
-</span><span id="Item-117"><a href="#Item-117"><span class="linenos">117</span></a>
-</span><span id="Item-118"><a href="#Item-118"><span class="linenos">118</span></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You used the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="Item-119"><a href="#Item-119"><span class="linenos">119</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__apply_effect</span><span class="p">(</span><span class="n">current_location</span><span class="p">)</span>
-</span><span id="Item-120"><a href="#Item-120"><span class="linenos">120</span></a>        <span class="k">return</span> <span class="kc">True</span>
-</span><span id="Item-121"><a href="#Item-121"><span class="linenos">121</span></a>
-</span><span id="Item-122"><a href="#Item-122"><span class="linenos">122</span></a>    <span class="k">def</span> <span class="nf">__apply_effect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_location</span><span class="p">):</span>
-</span><span id="Item-123"><a href="#Item-123"><span class="linenos">123</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__effect_type</span> <span class="o">==</span> <span class="s2">&quot;unblock&quot;</span><span class="p">:</span>
-</span><span id="Item-124"><a href="#Item-124"><span class="linenos">124</span></a>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__target_exit</span><span class="p">:</span>
-</span><span id="Item-125"><a href="#Item-125"><span class="linenos">125</span></a>                <span class="c1"># 1 represents the &quot;unblocked&quot; state in the Location class</span>
-</span><span id="Item-126"><a href="#Item-126"><span class="linenos">126</span></a>                <span class="n">current_location</span><span class="o">.</span><span class="n">set_exit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__target_exit</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-</span><span id="Item-127"><a href="#Item-127"><span class="linenos">127</span></a>                <span class="c1"># Exits are blocked both ways by default, so we must unblock both sides</span>
-</span><span id="Item-128"><a href="#Item-128"><span class="linenos">128</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">__target_exit</span><span class="o">.</span><span class="n">set_exit</span><span class="p">(</span><span class="n">current_location</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-</span><span id="Item-129"><a href="#Item-129"><span class="linenos">129</span></a>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The way to the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__target_exit</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="si">}</span><span class="s2"> has been unblocked!&quot;</span><span class="p">)</span>
-</span><span id="Item-130"><a href="#Item-130"><span class="linenos">130</span></a>        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">__effect_type</span> <span class="o">==</span> <span class="s2">&quot;distract&quot;</span><span class="p">:</span>
-</span><span id="Item-131"><a href="#Item-131"><span class="linenos">131</span></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You used the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2"> to create a distraction.&quot;</span><span class="p">)</span>
-</span><span id="Item-132"><a href="#Item-132"><span class="linenos">132</span></a>        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">__effect_type</span> <span class="o">==</span> <span class="s2">&quot;disguise&quot;</span><span class="p">:</span>
-</span><span id="Item-133"><a href="#Item-133"><span class="linenos">133</span></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You put on the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2">. You look less suspicious.&quot;</span><span class="p">)</span>
-</span><span id="Item-134"><a href="#Item-134"><span class="linenos">134</span></a>
-</span><span id="Item-135"><a href="#Item-135"><span class="linenos">135</span></a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Item-136"><a href="#Item-136"><span class="linenos">136</span></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__description</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="Item-43"><a href="#Item-43"><span class="linenos"> 43</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialization function for the item class&quot;&quot;&quot;</span>
+</span><span id="Item-44"><a href="#Item-44"><span class="linenos"> 44</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__name</span> <span class="o">=</span> <span class="n">name</span>
+</span><span id="Item-45"><a href="#Item-45"><span class="linenos"> 45</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__description</span> <span class="o">=</span> <span class="n">description</span>
+</span><span id="Item-46"><a href="#Item-46"><span class="linenos"> 46</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__location</span> <span class="o">=</span> <span class="n">location</span>
+</span><span id="Item-47"><a href="#Item-47"><span class="linenos"> 47</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__can_be_taken</span> <span class="o">=</span> <span class="n">can_be_taken</span>
+</span><span id="Item-48"><a href="#Item-48"><span class="linenos"> 48</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__evidence</span> <span class="o">=</span> <span class="n">evidence</span>
+</span><span id="Item-49"><a href="#Item-49"><span class="linenos"> 49</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__required_location</span> <span class="o">=</span> <span class="n">required_location</span>
+</span><span id="Item-50"><a href="#Item-50"><span class="linenos"> 50</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__container</span> <span class="o">=</span> <span class="n">container</span>
+</span><span id="Item-51"><a href="#Item-51"><span class="linenos"> 51</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__block_msg</span> <span class="o">=</span> <span class="n">block_msg</span>
+</span><span id="Item-52"><a href="#Item-52"><span class="linenos"> 52</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__unblock_item</span> <span class="o">=</span> <span class="n">unblock_item</span>
+</span><span id="Item-53"><a href="#Item-53"><span class="linenos"> 53</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__target_exit</span> <span class="o">=</span> <span class="n">target_exit</span>
+</span><span id="Item-54"><a href="#Item-54"><span class="linenos"> 54</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__is_barred</span> <span class="o">=</span> <span class="kc">False</span>
+</span><span id="Item-55"><a href="#Item-55"><span class="linenos"> 55</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__consumable</span> <span class="o">=</span> <span class="n">consumable</span>
+</span><span id="Item-56"><a href="#Item-56"><span class="linenos"> 56</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__effect_type</span> <span class="o">=</span> <span class="n">effect_type</span>
+</span><span id="Item-57"><a href="#Item-57"><span class="linenos"> 57</span></a>
+</span><span id="Item-58"><a href="#Item-58"><span class="linenos"> 58</span></a>    <span class="k">def</span> <span class="nf">is_consumable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Item-59"><a href="#Item-59"><span class="linenos"> 59</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to check if the item will remain in the player&#39;s inventory after usage&quot;&quot;&quot;</span>
+</span><span id="Item-60"><a href="#Item-60"><span class="linenos"> 60</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__consumable</span>
+</span><span id="Item-61"><a href="#Item-61"><span class="linenos"> 61</span></a>
+</span><span id="Item-62"><a href="#Item-62"><span class="linenos"> 62</span></a>    <span class="k">def</span> <span class="nf">get_container</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Item-63"><a href="#Item-63"><span class="linenos"> 63</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the Item&#39;s container&quot;&quot;&quot;</span>
+</span><span id="Item-64"><a href="#Item-64"><span class="linenos"> 64</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__container</span>
+</span><span id="Item-65"><a href="#Item-65"><span class="linenos"> 65</span></a>
+</span><span id="Item-66"><a href="#Item-66"><span class="linenos"> 66</span></a>    <span class="k">def</span> <span class="nf">get_unblock_item</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Item-67"><a href="#Item-67"><span class="linenos"> 67</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the Item&#39;s unblock item&quot;&quot;&quot;</span>
+</span><span id="Item-68"><a href="#Item-68"><span class="linenos"> 68</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__unblock_item</span>
+</span><span id="Item-69"><a href="#Item-69"><span class="linenos"> 69</span></a>
+</span><span id="Item-70"><a href="#Item-70"><span class="linenos"> 70</span></a>    <span class="k">def</span> <span class="nf">get_block_msg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Item-71"><a href="#Item-71"><span class="linenos"> 71</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter for the Item&#39;s block message&quot;&quot;&quot;</span>
+</span><span id="Item-72"><a href="#Item-72"><span class="linenos"> 72</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__block_msg</span>
+</span><span id="Item-73"><a href="#Item-73"><span class="linenos"> 73</span></a>
+</span><span id="Item-74"><a href="#Item-74"><span class="linenos"> 74</span></a>    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Item-75"><a href="#Item-75"><span class="linenos"> 75</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the Item&#39;s name&quot;&quot;&quot;</span>
+</span><span id="Item-76"><a href="#Item-76"><span class="linenos"> 76</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__name</span>
+</span><span id="Item-77"><a href="#Item-77"><span class="linenos"> 77</span></a>
+</span><span id="Item-78"><a href="#Item-78"><span class="linenos"> 78</span></a>    <span class="k">def</span> <span class="nf">can_be_taken</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Item-79"><a href="#Item-79"><span class="linenos"> 79</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to check if an item can be picked up&quot;&quot;&quot;</span>
+</span><span id="Item-80"><a href="#Item-80"><span class="linenos"> 80</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__can_be_taken</span>
+</span><span id="Item-81"><a href="#Item-81"><span class="linenos"> 81</span></a>
+</span><span id="Item-82"><a href="#Item-82"><span class="linenos"> 82</span></a>    <span class="k">def</span> <span class="nf">is_barred</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Item-83"><a href="#Item-83"><span class="linenos"> 83</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to check if the item is blocked from being picked up&quot;&quot;&quot;</span>
+</span><span id="Item-84"><a href="#Item-84"><span class="linenos"> 84</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__is_barred</span>
+</span><span id="Item-85"><a href="#Item-85"><span class="linenos"> 85</span></a>
+</span><span id="Item-86"><a href="#Item-86"><span class="linenos"> 86</span></a>    <span class="k">def</span> <span class="nf">is_evidence</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Item-87"><a href="#Item-87"><span class="linenos"> 87</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to check if an item is a key item&quot;&quot;&quot;</span>
+</span><span id="Item-88"><a href="#Item-88"><span class="linenos"> 88</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__evidence</span>
+</span><span id="Item-89"><a href="#Item-89"><span class="linenos"> 89</span></a>
+</span><span id="Item-90"><a href="#Item-90"><span class="linenos"> 90</span></a>    <span class="k">def</span> <span class="nf">get_location</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Item-91"><a href="#Item-91"><span class="linenos"> 91</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the item&#39;s current location&quot;&quot;&quot;</span>
+</span><span id="Item-92"><a href="#Item-92"><span class="linenos"> 92</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__location</span>
+</span><span id="Item-93"><a href="#Item-93"><span class="linenos"> 93</span></a>
+</span><span id="Item-94"><a href="#Item-94"><span class="linenos"> 94</span></a>    <span class="k">def</span> <span class="nf">set_unblock_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unblock_item</span><span class="p">):</span>
+</span><span id="Item-95"><a href="#Item-95"><span class="linenos"> 95</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Setter method for the Item&#39;s unblock Item&quot;&quot;&quot;</span>
+</span><span id="Item-96"><a href="#Item-96"><span class="linenos"> 96</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__unblock_item</span> <span class="o">=</span> <span class="n">unblock_item</span>
+</span><span id="Item-97"><a href="#Item-97"><span class="linenos"> 97</span></a>
+</span><span id="Item-98"><a href="#Item-98"><span class="linenos"> 98</span></a>    <span class="k">def</span> <span class="nf">set_target_exit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_exit</span><span class="p">):</span>
+</span><span id="Item-99"><a href="#Item-99"><span class="linenos"> 99</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Setter method for the exit this item unblocks&quot;&quot;&quot;</span>
+</span><span id="Item-100"><a href="#Item-100"><span class="linenos">100</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__target_exit</span> <span class="o">=</span> <span class="n">target_exit</span>
+</span><span id="Item-101"><a href="#Item-101"><span class="linenos">101</span></a>
+</span><span id="Item-102"><a href="#Item-102"><span class="linenos">102</span></a>    <span class="k">def</span> <span class="nf">use</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_location</span><span class="p">):</span>
+</span><span id="Item-103"><a href="#Item-103"><span class="linenos">103</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A method to allow the caller to use an item.</span>
+</span><span id="Item-104"><a href="#Item-104"><span class="linenos">104</span></a>
+</span><span id="Item-105"><a href="#Item-105"><span class="linenos">105</span></a><span class="sd">        This method takes in a location, checks if the item can</span>
+</span><span id="Item-106"><a href="#Item-106"><span class="linenos">106</span></a><span class="sd">        be used there, and applies the Item&#39;s effect.</span>
+</span><span id="Item-107"><a href="#Item-107"><span class="linenos">107</span></a>
+</span><span id="Item-108"><a href="#Item-108"><span class="linenos">108</span></a><span class="sd">        Arguments:</span>
+</span><span id="Item-109"><a href="#Item-109"><span class="linenos">109</span></a><span class="sd">            current_location (Location): The caller&#39;s current Location</span>
+</span><span id="Item-110"><a href="#Item-110"><span class="linenos">110</span></a>
+</span><span id="Item-111"><a href="#Item-111"><span class="linenos">111</span></a><span class="sd">        Returns:</span>
+</span><span id="Item-112"><a href="#Item-112"><span class="linenos">112</span></a><span class="sd">            True if the item was successfully used, False if not.</span>
+</span><span id="Item-113"><a href="#Item-113"><span class="linenos">113</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Item-114"><a href="#Item-114"><span class="linenos">114</span></a>        <span class="c1"># Check if the item requires a specific location to be used</span>
+</span><span id="Item-115"><a href="#Item-115"><span class="linenos">115</span></a>        <span class="k">if</span> <span class="n">current_location</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__required_location</span><span class="p">:</span>
+</span><span id="Item-116"><a href="#Item-116"><span class="linenos">116</span></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2"> can&#39;t be used here.&quot;</span><span class="p">)</span>
+</span><span id="Item-117"><a href="#Item-117"><span class="linenos">117</span></a>            <span class="k">return</span> <span class="kc">False</span>
+</span><span id="Item-118"><a href="#Item-118"><span class="linenos">118</span></a>
+</span><span id="Item-119"><a href="#Item-119"><span class="linenos">119</span></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You used the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="Item-120"><a href="#Item-120"><span class="linenos">120</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__apply_effect</span><span class="p">(</span><span class="n">current_location</span><span class="p">)</span>
+</span><span id="Item-121"><a href="#Item-121"><span class="linenos">121</span></a>        <span class="k">return</span> <span class="kc">True</span>
+</span><span id="Item-122"><a href="#Item-122"><span class="linenos">122</span></a>
+</span><span id="Item-123"><a href="#Item-123"><span class="linenos">123</span></a>    <span class="k">def</span> <span class="nf">__apply_effect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_location</span><span class="p">):</span>
+</span><span id="Item-124"><a href="#Item-124"><span class="linenos">124</span></a>        <span class="c1"># Helper method to apply an item&#39;s effect</span>
+</span><span id="Item-125"><a href="#Item-125"><span class="linenos">125</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__effect_type</span> <span class="o">==</span> <span class="s2">&quot;unblock&quot;</span><span class="p">:</span>
+</span><span id="Item-126"><a href="#Item-126"><span class="linenos">126</span></a>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__target_exit</span><span class="p">:</span>
+</span><span id="Item-127"><a href="#Item-127"><span class="linenos">127</span></a>                <span class="c1"># 1 represents the &quot;unblocked&quot; state in the Location class</span>
+</span><span id="Item-128"><a href="#Item-128"><span class="linenos">128</span></a>                <span class="n">current_location</span><span class="o">.</span><span class="n">set_exit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__target_exit</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="Item-129"><a href="#Item-129"><span class="linenos">129</span></a>                <span class="c1"># Exits are blocked both ways by default, so we must unblock both sides</span>
+</span><span id="Item-130"><a href="#Item-130"><span class="linenos">130</span></a>                <span class="bp">self</span><span class="o">.</span><span class="n">__target_exit</span><span class="o">.</span><span class="n">set_exit</span><span class="p">(</span><span class="n">current_location</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="Item-131"><a href="#Item-131"><span class="linenos">131</span></a>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The way to the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__target_exit</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="si">}</span><span class="s2"> has been unblocked!&quot;</span><span class="p">)</span>
+</span><span id="Item-132"><a href="#Item-132"><span class="linenos">132</span></a>        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">__effect_type</span> <span class="o">==</span> <span class="s2">&quot;distract&quot;</span><span class="p">:</span>
+</span><span id="Item-133"><a href="#Item-133"><span class="linenos">133</span></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You used the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2"> to create a distraction.&quot;</span><span class="p">)</span>
+</span><span id="Item-134"><a href="#Item-134"><span class="linenos">134</span></a>        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">__effect_type</span> <span class="o">==</span> <span class="s2">&quot;disguise&quot;</span><span class="p">:</span>
+</span><span id="Item-135"><a href="#Item-135"><span class="linenos">135</span></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You put on the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2">. You look less suspicious.&quot;</span><span class="p">)</span>
+</span><span id="Item-136"><a href="#Item-136"><span class="linenos">136</span></a>
+</span><span id="Item-137"><a href="#Item-137"><span class="linenos">137</span></a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Item-138"><a href="#Item-138"><span class="linenos">138</span></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__description</span><span class="si">}</span><span class="s2">&quot;</span>
 </span></pre></div>
 
 
@@ -427,23 +431,26 @@ name and the item's description.</p>
             <div class="pdoc-code codehilite"><pre><span></span><span id="Item.__init__-40"><a href="#Item.__init__-40"><span class="linenos">40</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">can_be_taken</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">evidence</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 </span><span id="Item.__init__-41"><a href="#Item.__init__-41"><span class="linenos">41</span></a>                 <span class="n">required_location</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">target_exit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">consumable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 </span><span id="Item.__init__-42"><a href="#Item.__init__-42"><span class="linenos">42</span></a>                 <span class="n">effect_type</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">container</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">block_msg</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">unblock_item</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-</span><span id="Item.__init__-43"><a href="#Item.__init__-43"><span class="linenos">43</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__name</span> <span class="o">=</span> <span class="n">name</span>
-</span><span id="Item.__init__-44"><a href="#Item.__init__-44"><span class="linenos">44</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__description</span> <span class="o">=</span> <span class="n">description</span>
-</span><span id="Item.__init__-45"><a href="#Item.__init__-45"><span class="linenos">45</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__location</span> <span class="o">=</span> <span class="n">location</span>
-</span><span id="Item.__init__-46"><a href="#Item.__init__-46"><span class="linenos">46</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__can_be_taken</span> <span class="o">=</span> <span class="n">can_be_taken</span>
-</span><span id="Item.__init__-47"><a href="#Item.__init__-47"><span class="linenos">47</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__evidence</span> <span class="o">=</span> <span class="n">evidence</span>
-</span><span id="Item.__init__-48"><a href="#Item.__init__-48"><span class="linenos">48</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__required_location</span> <span class="o">=</span> <span class="n">required_location</span>
-</span><span id="Item.__init__-49"><a href="#Item.__init__-49"><span class="linenos">49</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__container</span> <span class="o">=</span> <span class="n">container</span>
-</span><span id="Item.__init__-50"><a href="#Item.__init__-50"><span class="linenos">50</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__block_msg</span> <span class="o">=</span> <span class="n">block_msg</span>
-</span><span id="Item.__init__-51"><a href="#Item.__init__-51"><span class="linenos">51</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__unblock_item</span> <span class="o">=</span> <span class="n">unblock_item</span>
-</span><span id="Item.__init__-52"><a href="#Item.__init__-52"><span class="linenos">52</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__target_exit</span> <span class="o">=</span> <span class="n">target_exit</span>
-</span><span id="Item.__init__-53"><a href="#Item.__init__-53"><span class="linenos">53</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__is_barred</span> <span class="o">=</span> <span class="kc">False</span>
-</span><span id="Item.__init__-54"><a href="#Item.__init__-54"><span class="linenos">54</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__consumable</span> <span class="o">=</span> <span class="n">consumable</span>
-</span><span id="Item.__init__-55"><a href="#Item.__init__-55"><span class="linenos">55</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__effect_type</span> <span class="o">=</span> <span class="n">effect_type</span>
+</span><span id="Item.__init__-43"><a href="#Item.__init__-43"><span class="linenos">43</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialization function for the item class&quot;&quot;&quot;</span>
+</span><span id="Item.__init__-44"><a href="#Item.__init__-44"><span class="linenos">44</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__name</span> <span class="o">=</span> <span class="n">name</span>
+</span><span id="Item.__init__-45"><a href="#Item.__init__-45"><span class="linenos">45</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__description</span> <span class="o">=</span> <span class="n">description</span>
+</span><span id="Item.__init__-46"><a href="#Item.__init__-46"><span class="linenos">46</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__location</span> <span class="o">=</span> <span class="n">location</span>
+</span><span id="Item.__init__-47"><a href="#Item.__init__-47"><span class="linenos">47</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__can_be_taken</span> <span class="o">=</span> <span class="n">can_be_taken</span>
+</span><span id="Item.__init__-48"><a href="#Item.__init__-48"><span class="linenos">48</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__evidence</span> <span class="o">=</span> <span class="n">evidence</span>
+</span><span id="Item.__init__-49"><a href="#Item.__init__-49"><span class="linenos">49</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__required_location</span> <span class="o">=</span> <span class="n">required_location</span>
+</span><span id="Item.__init__-50"><a href="#Item.__init__-50"><span class="linenos">50</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__container</span> <span class="o">=</span> <span class="n">container</span>
+</span><span id="Item.__init__-51"><a href="#Item.__init__-51"><span class="linenos">51</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__block_msg</span> <span class="o">=</span> <span class="n">block_msg</span>
+</span><span id="Item.__init__-52"><a href="#Item.__init__-52"><span class="linenos">52</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__unblock_item</span> <span class="o">=</span> <span class="n">unblock_item</span>
+</span><span id="Item.__init__-53"><a href="#Item.__init__-53"><span class="linenos">53</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__target_exit</span> <span class="o">=</span> <span class="n">target_exit</span>
+</span><span id="Item.__init__-54"><a href="#Item.__init__-54"><span class="linenos">54</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__is_barred</span> <span class="o">=</span> <span class="kc">False</span>
+</span><span id="Item.__init__-55"><a href="#Item.__init__-55"><span class="linenos">55</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__consumable</span> <span class="o">=</span> <span class="n">consumable</span>
+</span><span id="Item.__init__-56"><a href="#Item.__init__-56"><span class="linenos">56</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__effect_type</span> <span class="o">=</span> <span class="n">effect_type</span>
 </span></pre></div>
 
 
-    
+            <div class="docstring"><p>Initialization function for the item class</p>
+</div>
+
 
                             </div>
                             <div id="Item.is_consumable" class="classattr">
@@ -457,9 +464,9 @@ name and the item's description.</p>
 
     </div>
     <a class="headerlink" href="#Item.is_consumable"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Item.is_consumable-57"><a href="#Item.is_consumable-57"><span class="linenos">57</span></a>    <span class="k">def</span> <span class="nf">is_consumable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Item.is_consumable-58"><a href="#Item.is_consumable-58"><span class="linenos">58</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to check if the item will remain in the player&#39;s inventory after usage&quot;&quot;&quot;</span>
-</span><span id="Item.is_consumable-59"><a href="#Item.is_consumable-59"><span class="linenos">59</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__consumable</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Item.is_consumable-58"><a href="#Item.is_consumable-58"><span class="linenos">58</span></a>    <span class="k">def</span> <span class="nf">is_consumable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Item.is_consumable-59"><a href="#Item.is_consumable-59"><span class="linenos">59</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to check if the item will remain in the player&#39;s inventory after usage&quot;&quot;&quot;</span>
+</span><span id="Item.is_consumable-60"><a href="#Item.is_consumable-60"><span class="linenos">60</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__consumable</span>
 </span></pre></div>
 
 
@@ -479,9 +486,9 @@ name and the item's description.</p>
 
     </div>
     <a class="headerlink" href="#Item.get_container"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Item.get_container-61"><a href="#Item.get_container-61"><span class="linenos">61</span></a>    <span class="k">def</span> <span class="nf">get_container</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Item.get_container-62"><a href="#Item.get_container-62"><span class="linenos">62</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the Item&#39;s container&quot;&quot;&quot;</span>
-</span><span id="Item.get_container-63"><a href="#Item.get_container-63"><span class="linenos">63</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__container</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Item.get_container-62"><a href="#Item.get_container-62"><span class="linenos">62</span></a>    <span class="k">def</span> <span class="nf">get_container</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Item.get_container-63"><a href="#Item.get_container-63"><span class="linenos">63</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the Item&#39;s container&quot;&quot;&quot;</span>
+</span><span id="Item.get_container-64"><a href="#Item.get_container-64"><span class="linenos">64</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__container</span>
 </span></pre></div>
 
 
@@ -501,9 +508,9 @@ name and the item's description.</p>
 
     </div>
     <a class="headerlink" href="#Item.get_unblock_item"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Item.get_unblock_item-65"><a href="#Item.get_unblock_item-65"><span class="linenos">65</span></a>    <span class="k">def</span> <span class="nf">get_unblock_item</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Item.get_unblock_item-66"><a href="#Item.get_unblock_item-66"><span class="linenos">66</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the Item&#39;s unblock item&quot;&quot;&quot;</span>
-</span><span id="Item.get_unblock_item-67"><a href="#Item.get_unblock_item-67"><span class="linenos">67</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__unblock_item</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Item.get_unblock_item-66"><a href="#Item.get_unblock_item-66"><span class="linenos">66</span></a>    <span class="k">def</span> <span class="nf">get_unblock_item</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Item.get_unblock_item-67"><a href="#Item.get_unblock_item-67"><span class="linenos">67</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the Item&#39;s unblock item&quot;&quot;&quot;</span>
+</span><span id="Item.get_unblock_item-68"><a href="#Item.get_unblock_item-68"><span class="linenos">68</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__unblock_item</span>
 </span></pre></div>
 
 
@@ -523,9 +530,9 @@ name and the item's description.</p>
 
     </div>
     <a class="headerlink" href="#Item.get_block_msg"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Item.get_block_msg-69"><a href="#Item.get_block_msg-69"><span class="linenos">69</span></a>    <span class="k">def</span> <span class="nf">get_block_msg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Item.get_block_msg-70"><a href="#Item.get_block_msg-70"><span class="linenos">70</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter for the Item&#39;s block message&quot;&quot;&quot;</span>
-</span><span id="Item.get_block_msg-71"><a href="#Item.get_block_msg-71"><span class="linenos">71</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__block_msg</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Item.get_block_msg-70"><a href="#Item.get_block_msg-70"><span class="linenos">70</span></a>    <span class="k">def</span> <span class="nf">get_block_msg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Item.get_block_msg-71"><a href="#Item.get_block_msg-71"><span class="linenos">71</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter for the Item&#39;s block message&quot;&quot;&quot;</span>
+</span><span id="Item.get_block_msg-72"><a href="#Item.get_block_msg-72"><span class="linenos">72</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__block_msg</span>
 </span></pre></div>
 
 
@@ -545,9 +552,9 @@ name and the item's description.</p>
 
     </div>
     <a class="headerlink" href="#Item.get_name"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Item.get_name-73"><a href="#Item.get_name-73"><span class="linenos">73</span></a>    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Item.get_name-74"><a href="#Item.get_name-74"><span class="linenos">74</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the Item&#39;s name&quot;&quot;&quot;</span>
-</span><span id="Item.get_name-75"><a href="#Item.get_name-75"><span class="linenos">75</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__name</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Item.get_name-74"><a href="#Item.get_name-74"><span class="linenos">74</span></a>    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Item.get_name-75"><a href="#Item.get_name-75"><span class="linenos">75</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the Item&#39;s name&quot;&quot;&quot;</span>
+</span><span id="Item.get_name-76"><a href="#Item.get_name-76"><span class="linenos">76</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__name</span>
 </span></pre></div>
 
 
@@ -567,9 +574,9 @@ name and the item's description.</p>
 
     </div>
     <a class="headerlink" href="#Item.can_be_taken"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Item.can_be_taken-77"><a href="#Item.can_be_taken-77"><span class="linenos">77</span></a>    <span class="k">def</span> <span class="nf">can_be_taken</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Item.can_be_taken-78"><a href="#Item.can_be_taken-78"><span class="linenos">78</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to check if an item can be picked up&quot;&quot;&quot;</span>
-</span><span id="Item.can_be_taken-79"><a href="#Item.can_be_taken-79"><span class="linenos">79</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__can_be_taken</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Item.can_be_taken-78"><a href="#Item.can_be_taken-78"><span class="linenos">78</span></a>    <span class="k">def</span> <span class="nf">can_be_taken</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Item.can_be_taken-79"><a href="#Item.can_be_taken-79"><span class="linenos">79</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to check if an item can be picked up&quot;&quot;&quot;</span>
+</span><span id="Item.can_be_taken-80"><a href="#Item.can_be_taken-80"><span class="linenos">80</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__can_be_taken</span>
 </span></pre></div>
 
 
@@ -589,9 +596,9 @@ name and the item's description.</p>
 
     </div>
     <a class="headerlink" href="#Item.is_barred"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Item.is_barred-81"><a href="#Item.is_barred-81"><span class="linenos">81</span></a>    <span class="k">def</span> <span class="nf">is_barred</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Item.is_barred-82"><a href="#Item.is_barred-82"><span class="linenos">82</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to check if the item is blocked from being picked up&quot;&quot;&quot;</span>
-</span><span id="Item.is_barred-83"><a href="#Item.is_barred-83"><span class="linenos">83</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__is_barred</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Item.is_barred-82"><a href="#Item.is_barred-82"><span class="linenos">82</span></a>    <span class="k">def</span> <span class="nf">is_barred</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Item.is_barred-83"><a href="#Item.is_barred-83"><span class="linenos">83</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to check if the item is blocked from being picked up&quot;&quot;&quot;</span>
+</span><span id="Item.is_barred-84"><a href="#Item.is_barred-84"><span class="linenos">84</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__is_barred</span>
 </span></pre></div>
 
 
@@ -611,9 +618,9 @@ name and the item's description.</p>
 
     </div>
     <a class="headerlink" href="#Item.is_evidence"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Item.is_evidence-85"><a href="#Item.is_evidence-85"><span class="linenos">85</span></a>    <span class="k">def</span> <span class="nf">is_evidence</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Item.is_evidence-86"><a href="#Item.is_evidence-86"><span class="linenos">86</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to check if an item is a key item&quot;&quot;&quot;</span>
-</span><span id="Item.is_evidence-87"><a href="#Item.is_evidence-87"><span class="linenos">87</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__evidence</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Item.is_evidence-86"><a href="#Item.is_evidence-86"><span class="linenos">86</span></a>    <span class="k">def</span> <span class="nf">is_evidence</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Item.is_evidence-87"><a href="#Item.is_evidence-87"><span class="linenos">87</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to check if an item is a key item&quot;&quot;&quot;</span>
+</span><span id="Item.is_evidence-88"><a href="#Item.is_evidence-88"><span class="linenos">88</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__evidence</span>
 </span></pre></div>
 
 
@@ -633,9 +640,9 @@ name and the item's description.</p>
 
     </div>
     <a class="headerlink" href="#Item.get_location"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Item.get_location-89"><a href="#Item.get_location-89"><span class="linenos">89</span></a>    <span class="k">def</span> <span class="nf">get_location</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Item.get_location-90"><a href="#Item.get_location-90"><span class="linenos">90</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the item&#39;s current location&quot;&quot;&quot;</span>
-</span><span id="Item.get_location-91"><a href="#Item.get_location-91"><span class="linenos">91</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__location</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Item.get_location-90"><a href="#Item.get_location-90"><span class="linenos">90</span></a>    <span class="k">def</span> <span class="nf">get_location</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Item.get_location-91"><a href="#Item.get_location-91"><span class="linenos">91</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Getter method for the item&#39;s current location&quot;&quot;&quot;</span>
+</span><span id="Item.get_location-92"><a href="#Item.get_location-92"><span class="linenos">92</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__location</span>
 </span></pre></div>
 
 
@@ -655,9 +662,9 @@ name and the item's description.</p>
 
     </div>
     <a class="headerlink" href="#Item.set_unblock_item"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Item.set_unblock_item-93"><a href="#Item.set_unblock_item-93"><span class="linenos">93</span></a>    <span class="k">def</span> <span class="nf">set_unblock_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unblock_item</span><span class="p">):</span>
-</span><span id="Item.set_unblock_item-94"><a href="#Item.set_unblock_item-94"><span class="linenos">94</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Setter method for the Item&#39;s unblock Item&quot;&quot;&quot;</span>
-</span><span id="Item.set_unblock_item-95"><a href="#Item.set_unblock_item-95"><span class="linenos">95</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__unblock_item</span> <span class="o">=</span> <span class="n">unblock_item</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Item.set_unblock_item-94"><a href="#Item.set_unblock_item-94"><span class="linenos">94</span></a>    <span class="k">def</span> <span class="nf">set_unblock_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unblock_item</span><span class="p">):</span>
+</span><span id="Item.set_unblock_item-95"><a href="#Item.set_unblock_item-95"><span class="linenos">95</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Setter method for the Item&#39;s unblock Item&quot;&quot;&quot;</span>
+</span><span id="Item.set_unblock_item-96"><a href="#Item.set_unblock_item-96"><span class="linenos">96</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__unblock_item</span> <span class="o">=</span> <span class="n">unblock_item</span>
 </span></pre></div>
 
 
@@ -677,9 +684,9 @@ name and the item's description.</p>
 
     </div>
     <a class="headerlink" href="#Item.set_target_exit"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Item.set_target_exit-97"><a href="#Item.set_target_exit-97"><span class="linenos">97</span></a>    <span class="k">def</span> <span class="nf">set_target_exit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_exit</span><span class="p">):</span>
-</span><span id="Item.set_target_exit-98"><a href="#Item.set_target_exit-98"><span class="linenos">98</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Setter method for the exit this item unblocks&quot;&quot;&quot;</span>
-</span><span id="Item.set_target_exit-99"><a href="#Item.set_target_exit-99"><span class="linenos">99</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__target_exit</span> <span class="o">=</span> <span class="n">target_exit</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Item.set_target_exit-98"><a href="#Item.set_target_exit-98"><span class="linenos"> 98</span></a>    <span class="k">def</span> <span class="nf">set_target_exit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_exit</span><span class="p">):</span>
+</span><span id="Item.set_target_exit-99"><a href="#Item.set_target_exit-99"><span class="linenos"> 99</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Setter method for the exit this item unblocks&quot;&quot;&quot;</span>
+</span><span id="Item.set_target_exit-100"><a href="#Item.set_target_exit-100"><span class="linenos">100</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__target_exit</span> <span class="o">=</span> <span class="n">target_exit</span>
 </span></pre></div>
 
 
@@ -699,26 +706,26 @@ name and the item's description.</p>
 
     </div>
     <a class="headerlink" href="#Item.use"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Item.use-101"><a href="#Item.use-101"><span class="linenos">101</span></a>    <span class="k">def</span> <span class="nf">use</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_location</span><span class="p">):</span>
-</span><span id="Item.use-102"><a href="#Item.use-102"><span class="linenos">102</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A method to allow the caller to use an item.</span>
-</span><span id="Item.use-103"><a href="#Item.use-103"><span class="linenos">103</span></a>
-</span><span id="Item.use-104"><a href="#Item.use-104"><span class="linenos">104</span></a><span class="sd">        This method takes in a location, checks if the item can</span>
-</span><span id="Item.use-105"><a href="#Item.use-105"><span class="linenos">105</span></a><span class="sd">        be used there, and applies the Item&#39;s effect.</span>
-</span><span id="Item.use-106"><a href="#Item.use-106"><span class="linenos">106</span></a>
-</span><span id="Item.use-107"><a href="#Item.use-107"><span class="linenos">107</span></a><span class="sd">        Arguments:</span>
-</span><span id="Item.use-108"><a href="#Item.use-108"><span class="linenos">108</span></a><span class="sd">            current_location (Location): The caller&#39;s current Location</span>
-</span><span id="Item.use-109"><a href="#Item.use-109"><span class="linenos">109</span></a>
-</span><span id="Item.use-110"><a href="#Item.use-110"><span class="linenos">110</span></a><span class="sd">        Returns:</span>
-</span><span id="Item.use-111"><a href="#Item.use-111"><span class="linenos">111</span></a><span class="sd">            True if the item was successfully used, False if not.</span>
-</span><span id="Item.use-112"><a href="#Item.use-112"><span class="linenos">112</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Item.use-113"><a href="#Item.use-113"><span class="linenos">113</span></a>        <span class="c1"># Check if the item requires a specific location to be used</span>
-</span><span id="Item.use-114"><a href="#Item.use-114"><span class="linenos">114</span></a>        <span class="k">if</span> <span class="n">current_location</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__required_location</span><span class="p">:</span>
-</span><span id="Item.use-115"><a href="#Item.use-115"><span class="linenos">115</span></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2"> can&#39;t be used here.&quot;</span><span class="p">)</span>
-</span><span id="Item.use-116"><a href="#Item.use-116"><span class="linenos">116</span></a>            <span class="k">return</span> <span class="kc">False</span>
-</span><span id="Item.use-117"><a href="#Item.use-117"><span class="linenos">117</span></a>
-</span><span id="Item.use-118"><a href="#Item.use-118"><span class="linenos">118</span></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You used the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="Item.use-119"><a href="#Item.use-119"><span class="linenos">119</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__apply_effect</span><span class="p">(</span><span class="n">current_location</span><span class="p">)</span>
-</span><span id="Item.use-120"><a href="#Item.use-120"><span class="linenos">120</span></a>        <span class="k">return</span> <span class="kc">True</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Item.use-102"><a href="#Item.use-102"><span class="linenos">102</span></a>    <span class="k">def</span> <span class="nf">use</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_location</span><span class="p">):</span>
+</span><span id="Item.use-103"><a href="#Item.use-103"><span class="linenos">103</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;A method to allow the caller to use an item.</span>
+</span><span id="Item.use-104"><a href="#Item.use-104"><span class="linenos">104</span></a>
+</span><span id="Item.use-105"><a href="#Item.use-105"><span class="linenos">105</span></a><span class="sd">        This method takes in a location, checks if the item can</span>
+</span><span id="Item.use-106"><a href="#Item.use-106"><span class="linenos">106</span></a><span class="sd">        be used there, and applies the Item&#39;s effect.</span>
+</span><span id="Item.use-107"><a href="#Item.use-107"><span class="linenos">107</span></a>
+</span><span id="Item.use-108"><a href="#Item.use-108"><span class="linenos">108</span></a><span class="sd">        Arguments:</span>
+</span><span id="Item.use-109"><a href="#Item.use-109"><span class="linenos">109</span></a><span class="sd">            current_location (Location): The caller&#39;s current Location</span>
+</span><span id="Item.use-110"><a href="#Item.use-110"><span class="linenos">110</span></a>
+</span><span id="Item.use-111"><a href="#Item.use-111"><span class="linenos">111</span></a><span class="sd">        Returns:</span>
+</span><span id="Item.use-112"><a href="#Item.use-112"><span class="linenos">112</span></a><span class="sd">            True if the item was successfully used, False if not.</span>
+</span><span id="Item.use-113"><a href="#Item.use-113"><span class="linenos">113</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Item.use-114"><a href="#Item.use-114"><span class="linenos">114</span></a>        <span class="c1"># Check if the item requires a specific location to be used</span>
+</span><span id="Item.use-115"><a href="#Item.use-115"><span class="linenos">115</span></a>        <span class="k">if</span> <span class="n">current_location</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__required_location</span><span class="p">:</span>
+</span><span id="Item.use-116"><a href="#Item.use-116"><span class="linenos">116</span></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2"> can&#39;t be used here.&quot;</span><span class="p">)</span>
+</span><span id="Item.use-117"><a href="#Item.use-117"><span class="linenos">117</span></a>            <span class="k">return</span> <span class="kc">False</span>
+</span><span id="Item.use-118"><a href="#Item.use-118"><span class="linenos">118</span></a>
+</span><span id="Item.use-119"><a href="#Item.use-119"><span class="linenos">119</span></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You used the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="Item.use-120"><a href="#Item.use-120"><span class="linenos">120</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__apply_effect</span><span class="p">(</span><span class="n">current_location</span><span class="p">)</span>
+</span><span id="Item.use-121"><a href="#Item.use-121"><span class="linenos">121</span></a>        <span class="k">return</span> <span class="kc">True</span>
 </span></pre></div>
 
 
