@@ -21,9 +21,6 @@ class GameUnitTests(unittest.TestCase):
         
         self.player = Player(self.hall)
         self.evidence = Item("Evidence", "Dirty GLove", self.closet, evidence=True)
-    
-    def setUp(self):
-        self.ai = AiAgent({'move': 1, 'search': 2, 'talk': 2})
         
     def test_ai_suspicion(self):
         """Tests if the AI suspicion meter works."""
