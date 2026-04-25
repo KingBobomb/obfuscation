@@ -148,9 +148,10 @@ class AiAgent:
             if item is not None and item.is_evidence() and item not in self.__items_found:
                 # Store the item in our list of incriminating items
                 self.__incriminating_item_loc_dict[item] = item.get_location()
-                print(f"{chosen_npc.get_name()} has informed the AI of an incriminating item!")
+                print(f"{chosen_npc.get_name()} has informed the Investigator of an"
+                      "incriminating item!")
             else:
-                print(f"AI spoke to {chosen_npc.get_name()}.")
+                print(f"The Investigator spoke to {chosen_npc.get_name()}.")
 
     def __search_room(self, search_choice):
         # Function to have an AI acknowledge an item like it's searching for it.
@@ -165,9 +166,9 @@ class AiAgent:
                 self.__incriminating_item_found_dict[search_choice] = 1
                 self.__incriminating_item_loc_dict[search_choice] = None
                 self.__incriminating_item_path_dict[search_choice] = None
-                print("The AI found an Incriminating Item")
+                print("The Investigator found an Incriminating Item")
 
-            print(f"AI has found the item: {search_choice.get_name()}")
+            print(f"The Investigator has found the item: {search_choice.get_name()}")
 
     def __move_self(self, new_loc):
         # Function to move the AI to a valid location specified by new_loc.
@@ -185,7 +186,7 @@ class AiAgent:
             self.__prev_3_loc.append(self.__curr_loc)
             # Move the AI to the new location.
             self.__curr_loc = new_loc
-            print(f"AI has moved to {self.__curr_loc.get_name()}")
+            print(f"The Investigator has moved to {self.__curr_loc.get_name()}")
 
     def __update_room_knowledge(self):
         # Function to update the AI's knowledge of the room it's in.
