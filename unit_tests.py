@@ -99,7 +99,7 @@ class PlayerUnitTests(unittest.TestCase):
 
     def test_use_consumable(self):
         """Test if using a consumable consumes it"""
-        temp_item = Item("dummyItem","",self.loc, consumable=True, required_location=self.loc) 
+        temp_item = Item("dummyItem","",self.loc, consumable=True, required_location=self.loc)
         self.player.take_item(temp_item)
         self.player.use_item(temp_item)
         self.assertNotIn(temp_item, self.player.get_inventory())
@@ -163,7 +163,7 @@ class ItemLocationIntegrationTests(unittest.TestCase):
 
     def test_unblock(self):
         """Tests if an item can be used to unblock a location"""
-        key = Item("Key", "Key", self.room_a, required_location=self.room_a, 
+        key = Item("Key", "Key", self.room_a, required_location=self.room_a,
                    target_exit=self.room_b, effect_type="unblock")
 
         # This checks to see if key makes a door unblocked
