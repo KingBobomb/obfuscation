@@ -8,26 +8,27 @@ from location import Location
 from item import Item
 from ai import AiAgent
 
+
 class LocationUnitTests(unittest.TestCase):
     """A class to hold unit tests for the location class"""
     def setUp(self):
-        self.loc = Location("Loc","")
+        self.loc = Location("Loc", "")
 
     def test_remove_item_not_present(self):
         """Test to verify locations can't remove items that aren't
         present"""
-        temp_itm = Item("dummy Item", "",None)
+        temp_itm = Item("dummy Item", "", None)
         self.assertFalse(self.loc.remove_item(temp_itm))
 
     def test_add_npc(self):
         """Test to make sure a location can add npcs"""
-        temp_npc = NPC("T",None)
+        temp_npc = NPC("T", None)
         self.loc.add_npc(temp_npc)
         self.assertIn(temp_npc, self.loc.get_npcs())
 
     def test_remove_npc(self):
         """Test to make sure a location can remove npcs"""
-        temp_npc = NPC("T",None)
+        temp_npc = NPC("T", None)
         self.loc.add_npc(temp_npc)
         self.loc.remove_npc(temp_npc)
         self.assertNotIn(temp_npc, self.loc.get_npcs())
@@ -35,7 +36,7 @@ class LocationUnitTests(unittest.TestCase):
     def test_remove_npc_not_present(self):
         """Test to make sure a location is prevented from removing
         an npc who isn't there"""
-        temp_npc = NPC("T",None)
+        temp_npc = NPC("T", None)
         self.assertFalse(self.loc.remove_npc(temp_npc))
 
     def test_set_block_not_present(self):
@@ -43,11 +44,12 @@ class LocationUnitTests(unittest.TestCase):
         their list of exits"""
         self.assertFalse(self.loc.set_exit('S', None))
 
+
 class NpcUnitTests(unittest.TestCase):
     """A class to hold unit tests for the npc class"""
     def setUp(self):
         self.loc = Location("Dummy loc", "")
-        self.npc = NPC("A",self.loc)
+        self.npc = NPC("A", self.loc)
 
     def test_location_getter(self):
         """Test to verify the location getter is functional"""
@@ -57,13 +59,14 @@ class NpcUnitTests(unittest.TestCase):
         """Test to verify the trust getter is functional"""
         self.assertEqual(self.npc.trust_level(), 50)
 
+
 class AiUnitTests(unittest.TestCase):
     """A class to hold unit tests for the AI class"""
     def setUp(self):
-        temp_location= Location("Dummy location","")
+        temp_location = Location("Dummy location", "")
         temp_item = Item("dummyItem", "", location=temp_location)
         self.ai = AiAgent(incriminating_items_list=[temp_item],
-                          start_location=Location("Dummy Location2",""))
+                          start_location=Location("Dummy Location2", ""))
 
     def test_ai_get_suspicion(self):
         """Tests if getter for AI suspicion meter works."""
@@ -84,14 +87,15 @@ class AiUnitTests(unittest.TestCase):
     def test_ai_items_end_game(self):
         """Test if the AI will return false when there are no more incriminating items to find"""
         temp_ai = AiAgent(incriminating_items_list=[],
-                          start_location=Location("Dummy Location2",""))
+                          start_location=Location("Dummy Location2", ""))
         self.assertFalse(temp_ai.take_turn())
+
 
 class PlayerUnitTests(unittest.TestCase):
     """A class to hold player unit tests"""
     def setUp(self):
         self.loc = Location("Dummy Loc", "")
-        self.player= Player(self.loc)
+        self.player = Player(self.loc)
 
     def test_get_sus_meter(self):
         """Test to see if the player's suspicion meter getter is functional"""
@@ -99,7 +103,7 @@ class PlayerUnitTests(unittest.TestCase):
 
     def test_use_consumable(self):
         """Test if using a consumable consumes it"""
-        temp_item = Item("dummyItem","",self.loc, consumable=True, required_location=self.loc)
+        temp_item = Item("dummyItem", "", self.loc, consumable=True, required_location=self.loc)
         self.player.take_item(temp_item)
         self.player.use_item(temp_item)
         self.assertNotIn(temp_item, self.player.get_inventory())
@@ -114,11 +118,12 @@ class PlayerUnitTests(unittest.TestCase):
         temp_item = Item("dummyItem", "", self.loc)
         self.assertFalse(self.player.dispose_of_item(temp_item))
 
+
 class PlayerLocationIntegrationTests(unittest.TestCase):
     """ A class to hold player/location integration tests"""
     def setUp(self):
-        self.loc= Location("Dummy location","")
-        self.loc2=Location("Dummy location 2","",exits={self.loc: 1})
+        self.loc = Location("Dummy location", "")
+        self.loc2 = Location("Dummy location 2", "", exits={self.loc: 1})
         self.loc.add_exit(self.loc2, 1)
         self.item = Item("dummyItem", "", location=self.loc)
         self.player = Player(self.loc)
@@ -142,7 +147,7 @@ class PlayerLocationIntegrationTests(unittest.TestCase):
 
     def test_player_blocked(self):
         """Tests if a player is prevented from moving between blocked locations"""
-        temp_loc = Location("Dummy Loc","",exits={self.loc : 0})
+        temp_loc = Location("Dummy Loc", "", exits={self.loc: 0})
         self.loc.add_exit(temp_loc, 0)
         failure = self.player.move_to(temp_loc)
         self.assertFalse(failure)
@@ -158,8 +163,8 @@ class ItemLocationIntegrationTests(unittest.TestCase):
     def setUp(self):
         self.room_a = Location("Room1", "Start")
         self.room_b = Location("Room2", "End")
-        self.room_a.add_exit(self.room_b, 0)# blocked
-        self.room_b.add_exit(self.room_a, 0)# blocked
+        self.room_a.add_exit(self.room_b, 0)
+        self.room_b.add_exit(self.room_a, 0)
 
     def test_unblock(self):
         """Tests if an item can be used to unblock a location"""
@@ -169,6 +174,7 @@ class ItemLocationIntegrationTests(unittest.TestCase):
         # This checks to see if key makes a door unblocked
         key.use(self.room_a)
         self.assertFalse(self.room_a.is_blocked(self.room_b))
+
 
 if __name__ == '__main__':
     unittest.main()
