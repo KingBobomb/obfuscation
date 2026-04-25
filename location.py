@@ -127,8 +127,8 @@ class Location:
 
         This method takes in a location specified by exit_to_alter and checks if it
         is an exit to the current location. If it is, we set the block state of
-        the exit to the int passed in by block_state. If it isn't, we print a
-        message indicating that the set attempt failed.
+        the exit to the int passed in by block_state and return true. If it isn't,
+        we print a message indicating that the set attempt failed and return false.
 
         Arguments:
             exit_to_alter (Location): An exit of the current location to alter
@@ -140,8 +140,10 @@ class Location:
 
         if exit_to_alter in self.__exits:
             self.__exits[exit_to_alter] = block_state
+            return True
         else:
             print(f"Error: {self.__name} has no exit named {exit_to_alter}")
+            return False
 
     def __str__(self):
         return f"{self.__name}: {self.__description}"
