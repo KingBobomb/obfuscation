@@ -44,17 +44,10 @@ class NPC:
 
     def __get_responses(self, evidence_items):
         # Helper function to return a list of responses based on passed in item/items
-        if evidence_items:
-            return [
-                f"I noticed something strange: {', '.join(evidence_items)} was here!",
-                f"There seems to be {', '.join(evidence_items)} around.",
-                f"I think {', '.join(evidence_items)} is important!"
-            ]
-
         return [
-            "I didn't notice anything unusual.",
-            "Someone passed by earlier.",
-            "I heard a strange noise."
+            f"I noticed something strange: {', '.join(evidence_items)} was here!",
+            f"There seems to be {', '.join(evidence_items)} around.",
+            f"I think {', '.join(evidence_items)} is important!"
         ]
 
     def has_talked_to(self, inventory, dialogue_choice):
