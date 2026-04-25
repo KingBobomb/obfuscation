@@ -60,7 +60,7 @@ class Location:
             True if the movement is invalid, False if the movement is valid.
 
         """
-        # Check if the destination is an exit of this room, if not return false.
+        # Check if the destination is an exit of this room, if not return True.
         if destination in self.__exits:
             # If the exit to the user's destination is blocked
             # return true. Otherwise return false
