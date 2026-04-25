@@ -38,8 +38,6 @@ class AiUnitTests(unittest.TestCase):
                           start_location=Location("Dummy Location2",""))
         self.assertFalse(temp_ai.take_turn())
 
-
-
 class PlayerLocationIntegrationTests(unittest.TestCase):
     """ A class to hold player/location integration tests"""
     def setUp(self):
@@ -85,8 +83,6 @@ class ItemLocationIntegrationTests(unittest.TestCase):
         # This checks to see if key makes a door unblocked
         key.use(self.room_a)
         self.assertFalse(self.room_a.is_blocked(self.room_b))
-
-
 
 if __name__ == '__main__':
     unittest.main()
